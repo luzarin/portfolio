@@ -307,4 +307,41 @@ body {
     .skill_col {
         grid-template-columns: 1fr;
     }
+
+    .experiencecol,
+    .skill_col,
+    .projectgrid .row {
+        flex-direction: column !important;
+        display: flex !important;
+        gap: 20px !important;
+        max-width: 100% !important;
+        padding: 10px !important;
+    }
+
+    .exp,
+    .exp.eduexp,
+    .skill_col > div,
+    .col {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .company_logo {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .expbox {
+        padding: 18px !important;
+    }
+
+    .myP {
+        font-size: 2em !important;
+        padding: 40px 0 0px !important;
+    }
+
+    .card-img-top {
+        height: 180px !important;
+    }
 }
