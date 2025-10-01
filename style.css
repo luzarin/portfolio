@@ -268,6 +268,9 @@ body {
 }
 
 .learnmore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
 
@@ -277,15 +280,10 @@ body {
     border: none;
     padding: 10px 25px;
     font-size: 1em;
-    border-radius: 25px;
+    border-radius: 8px; /* Menos redondeado */
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold;
-}
-
-.shrink-border:hover {
-    background: #fff;
-    transform: scale(1.05);
 }
 
 /* FOOTER */
