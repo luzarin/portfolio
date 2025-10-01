@@ -8,328 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Tu Nombre - Portafolio GIS</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #fff;
-            overflow-x: hidden;
-            background: #2c3e50;
-        }
-
-        /* NAVBAR */
-        .nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 20px 0;
-            transition: all 0.3s ease;
-            background: rgba(30, 40, 50, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .nav.affix {
-            background: rgba(20, 30, 40, 0.95);
-            padding: 10px 0;
-        }
-
-        .nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo a {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #00d4ff;
-            text-decoration: none;
-        }
-
-        .navlinks {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .navlinks a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1em;
-            transition: color 0.3s;
-        }
-
-        .navlinks a:hover {
-            color: #00d4ff;
-        }
-
-        /* HERO SECTION */
-        .home {
-            display: none;
-        }
-
-
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* SECTIONS */
-        .myP {
-            text-align: center;
-            font-size: 3em;
-            color: #fff;
-            padding: 80px 0 40px;
-            font-weight: 700;
-        }
-
-        .photoback {
-            display: flex;
-            justify-content: center;
-            padding: 40px 0;
-        }
-
-        .photo {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .aboutMe {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px 80px;
-            font-size: 1.2em;
-            line-height: 1.8;
-            text-align: center;
-            color: #ddd;
-        }
-
-        /* SKILLS */
-        .skill_col {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px 80px;
-        }
-
-        .skill_col > div {
-            text-align: center;
-            background: rgba(30, 40, 50, 0.8);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .coll {
-            font-size: 1.5em;
-            color: #00d4ff;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-
-        .skills-bar-container {
-            list-style: none;
-            padding: 0;
-            display: inline-block;
-            text-align: left;
-        }
-
-        .skills-bar-container li {
-            margin-bottom: 10px;
-        }
-
-        .skills-bar-container h3 {
-            font-size: 1em;
-            color: #fff;
-            margin: 0;
-            font-weight: 700;
-        }
-
-        /* EDUCATION & EXPERIENCE */
-        .experiencecol {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px 80px;
-        }
-
-        .exp {
-            margin-bottom: 40px;
-        }
-
-        .expbox {
-            background: #1a1a2e;
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid #00d4ff;
-            margin-bottom: 20px;
-        }
-
-        .company_logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-
-        .exptitle {
-            font-size: 1.5em;
-            color: #00d4ff;
-            font-weight: bold;
-        }
-
-        .schoolname {
-            color: #4facfe;
-        }
-
-        .expnote {
-            color: #ccc;
-            font-size: 1em;
-            line-height: 1.6;
-        }
-
-        .deg {
-            display: inline-block;
-            font-weight: bold;
-            color: rgba(234, 252, 156, 0.979);
-            background-color: rgba(73, 84, 90, 0.5);
-            border-radius: 25px;
-            padding: 10px 20px;
-            margin: 10px 0;
-        }
-
-        .expskill {
-            display: inline-block;
-            background: #00d4ff;
-            color: #000;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-
-        .expdes {
-            color: #ddd;
-            margin-top: 15px;
-            line-height: 1.8;
-        }
-
-        /* PROJECTS */
-        .projectgrid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 20px 80px;
-        }
-
-        .card {
-            transition: transform 0.3s ease;
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
-        }
-
-        .card-img-top {
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .card-title {
-            margin-bottom: 15px;
-        }
-
-        .card-text {
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        .learnmore {
-            margin-top: 20px;
-        }
-
-        .shrink-border {
-            background: #00d4ff;
-            color: #000;
-            border: none;
-            padding: 10px 25px;
-            font-size: 1em;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .shrink-border:hover {
-            background: #fff;
-            transform: scale(1.05);
-        }
-
-        /* FOOTER */
-        .thank {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .box {
-                font-size: 3em;
-            }
-            
-            .navlinks {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .skill_col {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 <body>
     <nav class="nav">
         <div class="container">
             <div class="logo">
-                <a href="#">Home</a>
+                <a href="#">Inicio</a>
             </div>
             <div class="main_list">
                 <ul class="navlinks">
@@ -347,7 +33,6 @@
         <div class="name">
             <h1 class="box">Tu Nombre</h1>
             <p class="box2">Especialista GIS</p>
-
         </div>
     </section>
 
@@ -359,17 +44,13 @@
     </div>
     <div>
         <p class="aboutMe">
-            ¡Hola a todos! Soy [Tu Nombre], un profesional GIS altamente motivado con base en Santiago, Chile. 
-            Con formación en Sistemas de Información Geográfica y una sólida experiencia en análisis espacial y desarrollo 
-            de aplicaciones geoespaciales, me apasiona aprovechar los datos espaciales para descubrir conocimientos y 
-            impulsar la toma de decisiones informadas. Mi experiencia en herramientas de vanguardia me permite realizar 
-            análisis de datos geoespaciales efectivos. ¡Exploremos el mundo a través de datos y mapas juntos!
+            Soy La Mosca, un entusiasta de los Sistemas de Información Geográfica (GIS) con experiencia en análisis espacial, cartografía digital y teledetección. Me apasiona utilizar herramientas GIS para resolver problemas complejos y tomar decisiones informadas basadas en datos geoespaciales. Mi objetivo es contribuir al desarrollo sostenible y a la gestión eficiente de recursos mediante el uso innovador de tecnologías geoespaciales.
         </p>
     </div>
 
     <!-- SKILLS -->
     <div>
-        <p class="myP" id="about">Sobre Mí</p>
+        <p class="myP" id="about">Habilidades</p>
     </div>
     <div class="skill_col">
         <div class="skill_col_1">
@@ -409,63 +90,80 @@
         </div>
     </div>
 
-    <!-- EDUCATION -->
-    <div>
-        <p class="myP">Educación</p>
+ <!-- EDUCATION -->
+<div>
+    <p class="myP">Educación</p>
+</div>
+<div class="experiencecol" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+    <!-- Universidad Catolica 1 -->
+    <div class="exp eduexp" style="flex:1; min-width:320px; max-width:750px;">
+        <p class="expbox" style="text-align:center;">
+            <a href="https://geografia.uc.cl/licenciatura-y-titulo-profesional-del-geografo//" target="_blank">
+                <img class="company_logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_la_Pontificia_Universidad_Cat%C3%B3lica_de_Chile.svg" alt="Logo Universidad de Chile"; padding:10px;">
+            </a>
+            <br>
+            <span class="exptitle schoolname" style="font-size:2rem; color:#ffffff;">Pontificia Universidad Católica de Chile</span>
+            <br>
+            <span class="deg" style="background:#333; color:#71d1ee; font-size:1.25em; margin:15px 0 20px;">Licenciatura</span>
+            <br>
+            <span style="color:#ffffff; font-size:1.15em;">Licenciado en Geografía</span>
+            <br>
+            <span style="color:#71d1ee; font-size:1.1em">2020 - 2025</span>
+            <br>
+            <span style="color:#ffffff; font-size:1.1em">Santiago, Chile</span>
+        </p>
     </div>
-    <div class="experiencecol">
-        <div class="exp eduexp">
-            <p class="expbox">
-                <img class="company_logo" src="https://via.placeholder.com/80" alt="Logo Universidad">
-                <br>
-                <span class="exptitle schoolname">Universidad de Chile</span>
-                <span class="expnote"><br>
-                    <span class="deg">Magíster</span><br>
-                    <strong style="color:rgba(255, 174, 205, 0.979);">Magíster en Geomática</strong><br>
-                    2021 - 2023<br>
-                    Santiago, Chile
-                </span>
-            </p>
-            <p class="expbox">
-                <img class="company_logo" src="https://via.placeholder.com/80" alt="Logo Universidad">
-                <br>
-                <span class="exptitle schoolname">Universidad Católica</span>
-                <span class="expnote"><br>
-                    <span class="deg">Licenciatura</span><br>
-                    <strong style="color:rgba(255, 174, 205, 0.979);">Geografía y Geomática</strong><br>
-                    2017 - 2021<br>
-                    Santiago, Chile
-                </span>
-            </p>
-        </div>
+    <!-- Universidad Católica 2 -->
+    <div class="exp eduexp" style="flex:1; min-width:320px; max-width:750px;">
+        <p class="expbox" style="text-align:center;">
+            <a href="https://www.uc.cl/" target="_blank">
+                <img class="company_logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_la_Pontificia_Universidad_Cat%C3%B3lica_de_Chile.svg" alt="Logo Universidad Católica"; padding:10px;">
+            </a>
+            <br>
+            <span class="exptitle schoolname" style="font-size:2rem; color:#ffffff;">Pontificia Universidad Católica de Chile</span>
+            <br>
+            <span class="deg" style="background:#333; color:#71d1ee; font-size:1.25em; margin:15px 0 20px;">Certificado Académico</span>
+            <br>
+            <span style="color:#eeeeee; font-size:1.15em;">Certificado Académico en Estudios Urbano-Regionales </span>
+            <br>
+            <span style="color:#71d1ee; font-size:1.1em">2021 - 2023</span>
+            <br>
+            <span style="color:#ffffff; font-size:1.1em">Santiago, Chile</span>
+        </p>
     </div>
+</div>
 
     <!-- EXPERIENCE -->
     <div>
         <p class="myP">Experiencia Laboral</p>
     </div>
-    <div class="experiencecol">
-        <div class="exp">
-            <p class="expbox">
-                <img class="company_logo" src="https://via.placeholder.com/80" alt="Logo Empresa">
-                <br>
-                <span class="exptitle">Nombre de la Empresa</span>
-                <span class="expnote"><br>
-                    <strong style="color:rgba(234, 252, 156, 0.979)">Analista GIS</strong><br>
-                    2023 - Presente<br>
-                    Santiago, Chile
-                </span><br>
-                <span class="expskill">ArcGIS Pro, QGIS, Python, SQL</span>
-                <p class="expdes">
-                    • Realicé análisis espacial complejos para proyectos de planificación urbana.<br>
-                    • Desarrollé modelos predictivos utilizando machine learning en Python.<br>
-                    • Creé dashboards interactivos con visualizaciones de datos geoespaciales.
-                </p>
+    <div class="experiencecol" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: stretch;">
+        <!-- Columna izquierda: datos principales -->
+        <div class="exp" style="flex:1; min-width:320px; max-width:500px; text-align:center; display: flex; flex-direction: column; justify-content: center;">
+            <p class="expbox" style="background: none; border-left: none; box-shadow: none; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                <a href="https://igm.cl/" target="_blank">
+                    <img class="company_logo" src="https://datos.gob.cl/uploads/group/2024-10-11-121420.792059LOGO-IGM-2023-CIAN.png" alt="Logo Instituto Geográfico Militar" style="margin-bottom:0px; width:350px; height:220px;">
+                </a>
+                <span class="exptitle" style="font-size:1.7rem; color:#ffffff; font-weight:700; display:block; margin-bottom:0px;">
+                    Instituto Geográfico Militar
+                </span>
+                <strong style="color:#eafc9c; font-size:1.3em; display:block; margin:10px 0 8px 0;">Analista GIS</strong>
+                <span style="color:#aaffc3; font-size:1.15em; display:block; margin-bottom:4px;">2023 - Presente</span>
+                <span style="color:#aaffc3; font-size:1.15em; display:block; margin-bottom:8px;">Santiago, Chile</span>
+                <span style="color:#ccc; font-size:1em; display:block; margin-top:8px;">ArcGIS Pro, QGIS, Python, SQL</span>
             </p>
+        </div>
+        <!-- Columna derecha: descripción -->
+        <div class="exp" style="flex:1; min-width:700px; max-width:700px; display: flex; flex-direction: column; justify-content: center;">
+            <div class="expbox" style="background:rgba(30, 40, 50, 0.8); border-radius:25px; color:#ffffff; font-size:1.15em; padding:30px; height: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.25); font-family: inherit;">
+                Realicé análisis espacial complejos para proyectos de planificación urbana.<br>
+                Desarrollé modelos predictivos utilizando machine learning en Python.<br>
+                Creé dashboards interactivos con visualizaciones de datos geoespaciales.
+            </div>
         </div>
     </div>
 
-    <!-- PROJECTS -->
+     <!-- PROJECTS -->
     <div>
         <p class="myP" id="projects">Proyectos</p>
     </div>
@@ -518,7 +216,12 @@
         </div>
     </div>
 
-
+    <!-- FOOTER -->
+    <footer style="background-color: #2c3e40; padding: 20px 0; text-align: center; margin-top: 40px;">
+        <p style="margin: 0; color: #999; font-size: 0.95em;">
+            Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
+        </p>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
