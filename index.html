@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <title>Tu Nombre - Portafolio GIS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            overflow-x: hidden;
+            background: #2c3e50;
+        }
+
+        /* NAVBAR */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            background: rgba(30, 40, 50, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .nav.affix {
+            background: rgba(20, 30, 40, 0.95);
+            padding: 10px 0;
+        }
+
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        .navlinks {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .navlinks a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .navlinks a:hover {
+            color: #00d4ff;
+        }
+
+        /* HERO SECTION */
+        .home {
+            display: none;
+        }
+
+
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTIONS */
+        .myP {
+            text-align: center;
+            font-size: 3em;
+            color: #fff;
+            padding: 80px 0 40px;
+            font-weight: 700;
+        }
+
+        .photoback {
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #00d4ff;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .aboutMe {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: center;
+            color: #ddd;
+        }
+
+        /* SKILLS */
+        .skill_col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        .skill_col > div {
+            text-align: center;
+        }
+
+        .coll {
+            font-size: 1.5em;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .skills-bar-container {
+            list-style: none;
+            padding: 0;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .skills-bar-container li {
+            margin-bottom: 10px;
+        }
+
+        .skills-bar-container h3 {
+            font-size: 1em;
+            color: #fff;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        /* EDUCATION & EXPERIENCE */
+        .experiencecol {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        .exp {
+            margin-bottom: 40px;
+        }
+
+        .expbox {
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .company_logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .exptitle {
+            font-size: 1.5em;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .schoolname {
+            color: #4facfe;
+        }
+
+        .expnote {
+            color: #ccc;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .deg {
+            display: inline-block;
+            font-weight: bold;
+            color: rgba(234, 252, 156, 0.979);
+            background-color: rgba(73, 84, 90, 0.5);
+            border-radius: 25px;
+            padding: 10px 20px;
+            margin: 10px 0;
+        }
+
+        .expskill {
+            display: inline-block;
+            background: #00d4ff;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .expdes {
+            color: #ddd;
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        /* PROJECTS */
+        .projectgrid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        .card {
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .learnmore {
+            margin-top: 20px;
+        }
+
+        .shrink-border {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .shrink-border:hover {
+            background: #fff;
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .thank {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .box {
+                font-size: 3em;
+            }
+            
+            .navlinks {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .skill_col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="#">Home</a>
+            </div>
+            <div class="main_list">
+                <ul class="navlinks">
+                    <li><a href="#about">Sobre Mí</a></li>
+                    <li><a href="#skills">Habilidades</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="https://github.com/luzarin">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/tu-perfil/">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+        <div class="name">
+            <h1 class="box">Tu Nombre</h1>
+            <p class="box2">Especialista GIS</p>
+
+        </div>
+    </section>
+
+    <div>
+        <p class="myP" id="about">Sobre Mí</p>
+    </div>
+    <div class="photoback">
+        <img class="photo" src="https://via.placeholder.com/250" alt="Tu foto">
+    </div>
+    <div>
+        <p class="aboutMe">
+            ¡Hola a todos! Soy [Tu Nombre], un profesional GIS altamente motivado con base en Santiago, Chile. 
+            Con formación en Sistemas de Información Geográfica y una sólida experiencia en análisis espacial y desarrollo 
+            de aplicaciones geoespaciales, me apasiona aprovechar los datos espaciales para descubrir conocimientos y 
+            impulsar la toma de decisiones informadas. Mi experiencia en herramientas de vanguardia me permite realizar 
+            análisis de datos geoespaciales efectivos. ¡Exploremos el mundo a través de datos y mapas juntos!
+        </p>
+    </div>
+
+    <!-- SKILLS -->
+    <div>
+        <p class="myP" id="about">Sobre Mí</p>
+    </div>
+    <div class="skill_col">
+        <div class="skill_col_1">
+            <p class="coll">Software</p>
+            <ul class="skills-bar-container">
+                <li><h3>ArcGIS Pro</h3></li>
+                <li><h3>QGIS</h3></li>
+                <li><h3>Python (GeoPandas, Shapely)</h3></li>
+                <li><h3>R (sf, tmap)</h3></li>
+                <li><h3>SQL / PostGIS</h3></li>
+                <li><h3>Google Earth Engine</h3></li>
+            </ul>
+        </div>
+
+        <div class="skill_col_2">
+            <p class="coll">Análisis</p>
+            <ul class="skills-bar-container">
+                <li><h3>Análisis Espacial</h3></li>
+                <li><h3>Cartografía Digital</h3></li>
+                <li><h3>Teledetección</h3></li>
+                <li><h3>Análisis de Redes</h3></li>
+                <li><h3>Geoestadística</h3></li>
+                <li><h3>Modelado Predictivo</h3></li>
+            </ul>
+        </div>
+
+        <div class="skill_col_3">
+            <p class="coll">Otro</p>
+            <ul class="skills-bar-container">
+                <li><h3>HTML5 / CSS / JavaScript</h3></li>
+                <li><h3>Leaflet / Mapbox</h3></li>
+                <li><h3>Git / GitHub</h3></li>
+                <li><h3>Bases de Datos Espaciales</h3></li>
+                <li><h3>Web GIS Development</h3></li>
+                <li><h3>GeoServer</h3></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div>
+        <p class="myP">Educación</p>
+    </div>
+    <div class="experiencecol">
+        <div class="exp eduexp">
+            <p class="expbox">
+                <img class="company_logo" src="https://via.placeholder.com/80" alt="Logo Universidad">
+                <br>
+                <span class="exptitle schoolname">Universidad de Chile</span>
+                <span class="expnote"><br>
+                    <span class="deg">Magíster</span><br>
+                    <strong style="color:rgba(255, 174, 205, 0.979);">Magíster en Geomática</strong><br>
+                    2021 - 2023<br>
+                    Santiago, Chile
+                </span>
+            </p>
+            <p class="expbox">
+                <img class="company_logo" src="https://via.placeholder.com/80" alt="Logo Universidad">
+                <br>
+                <span class="exptitle schoolname">Universidad Católica</span>
+                <span class="expnote"><br>
+                    <span class="deg">Licenciatura</span><br>
+                    <strong style="color:rgba(255, 174, 205, 0.979);">Geografía y Geomática</strong><br>
+                    2017 - 2021<br>
+                    Santiago, Chile
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div>
+        <p class="myP">Experiencia Laboral</p>
+    </div>
+    <div class="experiencecol">
+        <div class="exp">
+            <p class="expbox">
+                <img class="company_logo" src="https://via.placeholder.com/80" alt="Logo Empresa">
+                <br>
+                <span class="exptitle">Nombre de la Empresa</span>
+                <span class="expnote"><br>
+                    <strong style="color:rgba(234, 252, 156, 0.979)">Analista GIS</strong><br>
+                    2023 - Presente<br>
+                    Santiago, Chile
+                </span><br>
+                <span class="expskill">ArcGIS Pro, QGIS, Python, SQL</span>
+                <p class="expdes">
+                    • Realicé análisis espacial complejos para proyectos de planificación urbana.<br>
+                    • Desarrollé modelos predictivos utilizando machine learning en Python.<br>
+                    • Creé dashboards interactivos con visualizaciones de datos geoespaciales.
+                </p>
+            </p>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div>
+        <p class="myP" id="projects">Proyectos</p>
+    </div>
+    <div class="projectgrid">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <h5 class="card-title" style="color:beige;font-size:2rem">Análisis GIS</h5>
+                <h5 class="card-title" style="color:aqua;font-size:1.5rem">2023</h5>
+                <div class="card border-light text-light bg-dark">
+                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Proyecto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Análisis de Cobertura Forestal</h5>
+                        <p class="card-text">Proyecto de análisis y monitoreo de cambios en la cobertura forestal utilizando imágenes satelitales Landsat y Google Earth Engine. Se implementaron técnicas de clasificación supervisada para detectar áreas de deforestación.</p>
+                        <div class="learnmore">
+                            <button class="shrink-border">Ver Más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h5 class="card-title" style="color:beige;font-size:2rem">Web GIS</h5>
+                <h5 class="card-title" style="color:aqua;font-size:1.5rem">2023</h5>
+                <div class="card border-light text-light bg-dark">
+                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Proyecto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Mapa Interactivo de Recursos</h5>
+                        <p class="card-text">Aplicación web interactiva desarrollada con Leaflet y JavaScript para la visualización de recursos naturales. Incluye funcionalidades de búsqueda, filtrado y análisis espacial en tiempo real.</p>
+                        <div class="learnmore">
+                            <button class="shrink-border">Ver Más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <h5 class="card-title" style="color:beige;font-size:2rem">Cartografía</h5>
+                <h5 class="card-title" style="color:aqua;font-size:1.5rem">2023</h5>
+                <div class="card border-light text-light bg-dark">
+                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Proyecto 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Atlas Temático Regional</h5>
+                        <p class="card-text">Desarrollo de un atlas temático con mapas de alta calidad utilizando ArcGIS Pro. El proyecto incluye mapas topográficos, temáticos y 3D con diseño cartográfico profesional.</p>
+                        <div class="learnmore">
+                            <button class="shrink-border">Ver Más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+</body>
+</html>
