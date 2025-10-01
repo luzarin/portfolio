@@ -94,7 +94,7 @@ body {
     text-align: center;
     font-size: 3em;
     color: #fff;
-    padding: 125px 0 0px;
+    padding: 100px 0 0px;
     font-weight: 700;
 }
 
@@ -248,8 +248,9 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(93, 177, 194, 0.26);
+
 }
 
 .card-img-top {
