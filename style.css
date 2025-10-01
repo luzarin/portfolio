@@ -5,8 +5,24 @@
 }
 
 html, body {
-  overflow-x: hidden;
+  overflow-x: hidden;     
+  max-width: 100%;
+  touch-action: pan-y;       
+  -ms-touch-action: pan-y;
   box-sizing: border-box;
+}
+
+/* asegurar que ningún elemento fuerce ancho mayor que la pantalla */
+* {
+  box-sizing: border-box;
+}
+img, .card, .projectgrid, .experiencecol, .skill_col {
+  max-width: 100%;
+}
+
+/* si hay contenedores con overflow, limitar en X */
+.container, .projectgrid, .experiencecol {
+  overflow-x: hidden;
 }
 
 body {
@@ -25,13 +41,13 @@ body {
     z-index: 1000;
     padding: 7.5px 0;
     transition: all 0.3s ease;
-    background: rgba(30, 40, 50, 0.95);
+    background: #21303f; /*COLOR BOX BARRA SUPERIOR*/
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .nav.affix {
-    background: rgba(20, 30, 40, 0.95);
-    padding: 10px 0;
+    background: rgb(30, 32, 34);
+    padding: 5px 0;
 }
 
 .nav .container {
@@ -40,7 +56,7 @@ body {
     align-items: center;
     max-width: 1200px;
     margin: 10 auto;
-    padding: 0 10px; /* Puedes aumentar este valor para más separación */
+    padding: 0 10px;
     height: 48px;
 }
 
@@ -55,7 +71,7 @@ body {
 .navlinks a {
     font-size: 1.2em;
     font-weight: 700;
-    color: #fff;
+    color: #fff; /*COLOR TEXTO BARRA SUPERIOR*/
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -118,7 +134,7 @@ body {
 .myP {
     text-align: center;
     font-size: 3em;
-    color: #fff;
+    color: #fff; /*COLOR TEXTO TITULOS*/
     padding: 100px 0 0px;
     font-weight: 700;
 }
@@ -145,7 +161,7 @@ body {
     font-size: 1.2em;
     line-height: 1.8;
     text-align: center;
-    color: #ddd;
+    color: #ffffff; /*COLOR TEXTO SOBRE MI*/
 }
 
 /* SKILLS */
@@ -160,7 +176,7 @@ body {
 
 .skill_col > div {
     text-align: center;
-    background: rgba(30, 40, 50, 0.8);
+    background: rgba(30, 40, 50, 0.8); /*COLOR BOX HABILIDADES*/
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
@@ -168,7 +184,7 @@ body {
 
 .coll {
     font-size: 1.75em;
-    color: #00d4ff;
+    color: #99dfec;
     margin-bottom: 25px;
     font-weight: bold;
 }
@@ -203,7 +219,7 @@ body {
 }
 
 .expbox {
-    background: rgba(30, 40, 50, 0.8);
+    background: rgba(30, 40, 50, 0.8); /*COLOR BOX EDUCACIÓN*/
    padding: 25px 5px 25px 5px;
     border-radius: 10px;
     border-left: 5px solid #99dfec;
@@ -239,7 +255,7 @@ body {
     font-weight: bold;
     color: rgba(234, 252, 156, 0.979);
     background-color: rgba(73, 84, 90, 0.5);
-    border-radius: 25px;
+    border-radius: 12px; 
     padding: 10px 20px;
     margin: 10px 0;
 }
@@ -264,19 +280,20 @@ body {
 .projectgrid {
     max-width: 1500px;
     margin: 0 auto;
-    padding: 15px 20px 80px;
+    padding: 15px 20px 160px; /* aumentado desde 80px para separar del footer */
 }
 
 .card {
-    transition: transform 0.4s ease;
+    /* transición más completa para evitar saltos visibles */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
     height: 100%;
     border-radius: 15px; /* Más curvas en las esquinas */
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(93, 177, 194, 0.26);
-
+    transform: translateY(2px) scale(1.005); /* casi sin zoom */
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35); /* sombra más suave/oscura (menos "iluminación") */
+    filter: brightness(1); /* reduce ligeramente la luminosidad */
 }
 
 .card-img-top {
@@ -301,10 +318,10 @@ body {
 }
 
 .shrink-border {
-    background: #5d6b6e;
+    background: #6c7172; /*COLOR BOX VER MÁS*/
     color: #ffffff;
     border: none;
-    padding: 10px 25px;
+    padding: 10px 35px;
     font-size: 1em;
     border-radius: 8px; /* Menos redondeado */
     cursor: pointer;
@@ -346,10 +363,23 @@ body {
     box-sizing: border-box;
 }
 
+/* Centrar títulos de la sección de proyectos (TEMA, año) y títulos dentro de las cards */
+.projectgrid h5.card-title {
+    text-align: center;
+    margin-left: 0;    /* asegurar que no haya desplazamientos laterales */
+    margin-right: 0;
+}
+
+/* Título principal dentro de la card (mantener espaciado visual) */
+.projectgrid .card .card-body .card-title {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
 /* FOOTER */
 .thank {
     text-align: center;
-    padding: 40px 20px;
+    padding: 60px 20px 40px; /* aumentar padding-top para más separación visual */
     color: #999;
 }
 
@@ -408,7 +438,7 @@ body {
 
   /* centrar "Ver Más" y hacerlo cuadrado en móvil (si no está ya) */
   .learnmore { display:flex; justify-content:center; }
-  .shrink-border { border-radius:6px; }
+  .shrink-border { border-radius:12px; }
 
   /* Modal proyecto (full screen overlay) */
   .project-modal {
@@ -446,7 +476,9 @@ body {
 
   /* título de sección menos espaciado en móvil */
   .myP {
-    padding-top: 18px;
+    padding-top: calc(56px + 45px) !important; /* 56px = altura navbar móvil, ajusta si cambiasla */
+    margin-bottom: 8px !important;
+    scroll-margin-top: 80px; /* para anclas */
   }
 
   /* navbar: mayor altura y tamaños en móvil */
@@ -471,6 +503,7 @@ body {
   .mobile-menu a {
     font-size: 1.05rem;     /* items del menú más grandes */
     padding: 10px 12px;
+    font-weight: 700; /* negritas en menú móvil */
   }
 
   /* ocultar navlinks desktop (ya lo haces), asegurar altura */
@@ -558,9 +591,52 @@ body {
     word-break: break-word;
     overflow-wrap: anywhere;
   }
+
+  /* asegurar espacio extra también en móvil */
+  .projectgrid {
+    padding-bottom: 125px !important;
+  }
 }
 
 /* Desktop: asegúrate que mobile elements estén ocultos */
 @media (min-width: 769px) {
   .mobile-menu-btn, .mobile-menu, .project-modal { display: none !important; }
 }
+
+/* ---- Overrides de color: fondo y boxes ---- */
+:root{
+  --bg-color: rgb(46, 46, 46);        /* fondo general */
+  --skill-box: #3C3C3C;   /* boxes habilidades */
+  --edu-box: #3C3C3C;     /* boxes educación */
+  --exp-box: #3C3C3C;     /* boxes experiencia laboral */
+  --project-box: #3C3C3C; /* boxes proyectos */
+}
+
+/* fondo general */
+body {
+  background: var(--bg-color) !important;
+}
+
+/* cajas habilidades */
+.skill_col > div {
+  background: var(--skill-box) !important;
+}
+
+/* cajas educación */
+.expbox {
+  background: var(--edu-box) !important;
+}
+
+/* cajas experiencia laboral (expbox dentro de experiencecol) */
+.experiencecol .expbox,
+.expbox.exp-laboral {
+  background: var(--exp-box) !important;
+}
+
+/* cajas proyectos */
+.projectgrid .card,
+.card {
+  background: var(--project-box) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
