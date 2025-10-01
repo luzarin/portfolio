@@ -18,7 +18,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 20px 0;
+    padding: 7.5px 0;
     transition: all 0.3s ease;
     background: rgba(30, 40, 50, 0.95);
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
@@ -31,35 +31,55 @@ body {
 
 .nav .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Esto separa los extremos */
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    margin: 10 auto;
+    padding: 0 10px; /* Puedes aumentar este valor para más separación */
+    height: 48px;
 }
 
-.logo a {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #ffffff;
+.logo,
+.main_list {
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+
+.logo a,
+.navlinks a {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    line-height: 48px;
+    margin: 0;
+    padding: 0;
 }
 
 .navlinks {
     display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.navlinks a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1em;
-    transition: color 0.3s;
+    align-items: center;
+    gap: 50px;
+    height: 48px;
+    list-style: none; 
+    margin: 0;
+    padding: 0;
 }
 
 .navlinks a:hover {
     color: #e6e6e6;
+}
+
+.main_list {
+    margin-left: 40px; /* Ajusta el valor según lo que prefieras */
+}
+
+.logo {
+    margin-right: 40px; /* Ajusta el valor según lo que prefieras */
 }
 
 /* HERO SECTION */
@@ -128,21 +148,21 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    max-width: 1200px;
+    max-width: 1350px; /* ANCHO BOX HABILIDADES */
     margin: 0 auto;
-    padding: 15px 20px 20px;
+    padding: 15px 20px 0px;
 }
 
 .skill_col > div {
     text-align: center;
     background: rgba(30, 40, 50, 0.8);
-    padding: 30px;
+    padding: 40px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 .coll {
-    font-size: 1.5em;
+    font-size: 1.75em;
     color: #00d4ff;
     margin-bottom: 25px;
     font-weight: bold;
@@ -156,11 +176,11 @@ body {
 }
 
 .skills-bar-container li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .skills-bar-container h3 {
-    font-size: 1em;
+    font-size: 1.25em;
     color: #fff;
     margin: 0;
     font-weight: 700;
@@ -168,7 +188,7 @@ body {
 
 /* EDUCATION & EXPERIENCE */
 .experiencecol {
-    max-width: 1200px;
+    max-width: 1350px; /* ANCHO BOX EDUCACIÓN */
     margin: 0 auto;
     padding: 15px 20px 0px;
 }
@@ -179,7 +199,7 @@ body {
 
 .expbox {
     background: rgba(30, 40, 50, 0.8);
-    padding: 30px;
+   padding: 25px 5px 25px 5px;
     border-radius: 10px;
     border-left: 5px solid #99dfec;
     margin-bottom: 15px;
@@ -237,14 +257,15 @@ body {
 
 /* PROJECTS */
 .projectgrid {
-    max-width: 1400px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 15px 20px 80px;
 }
 
 .card {
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
     height: 100%;
+    border-radius: 15px; /* Más curvas en las esquinas */
 }
 
 .card:hover {
@@ -275,8 +296,8 @@ body {
 }
 
 .shrink-border {
-    background: #00d4ff;
-    color: #000;
+    background: #5d6b6e;
+    color: #ffffff;
     border: none;
     padding: 10px 25px;
     font-size: 1em;
