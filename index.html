@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
@@ -24,8 +24,8 @@
                     <li><a href="https://github.com/luzarin">GitHub</a></li>
                 </ul>
             </div>
-            <button id="mobileMenuButton" class="mobile-menu-btn" aria-label="Abrir menú" style="display:none;">☰</button>
-            <div id="mobileMenu" class="mobile-menu" style="display:none;">
+                        <button id="mobileMenuButton" class="mobile-menu-btn" aria-label="Abrir menú">☰</button>
+                        <div id="mobileMenu" class="mobile-menu">
               <ul>
                 <li><a href="#cv">CV</a></li>
                 <li><a href="https://www.linkedin.com/in/tu-perfil/">LinkedIn</a></li>
@@ -50,7 +50,7 @@
 
     <!-- SKILLS -->
     <div>
-        <p class="myP" id="about">Habilidades</p>
+        <p class="myP" id="skills">Habilidades</p>
     </div>
     <div class="skill_col">
         <div class="skill_col_1">
@@ -98,10 +98,10 @@
 </div>
 <div class="experiencecol" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
     <!-- Universidad Catolica 1 -->
-    <div class="exp eduexp" style="flex:1; min-width:320px; max-width:750px;">
+    <div class="exp eduexp" style="flex:1; min-width:20px; max-width:750px;">
         <p class="expbox" style="text-align:center;">
-            <a href="https://geografia.uc.cl/licenciatura-y-titulo-profesional-del-geografo/" target="_blank">
-                <img class="company_logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_la_Pontificia_Universidad_Cat%C3%B3lica_de_Chile.svg" alt="Logo Universidad de Chile"; padding:10px;">
+                <a href="https://geografia.uc.cl/licenciatura-y-titulo-profesional-del-geografo/" target="_blank">
+                <img class="company_logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_la_Pontificia_Universidad_Cat%C3%B3lica_de_Chile.svg" alt="Logo UC">
             </a>
             <br>
             <span class="exptitle schoolname" style="font-size:1.75rem; color:#ffffff;">Pontificia Universidad Católica de Chile</span>
@@ -118,8 +118,8 @@
     <!-- Universidad Católica 2 -->
     <div class="exp eduexp" style="flex:1; min-width:320px; max-width:750px;">
         <p class="expbox" style="text-align:center;">
-            <a href="https://www.uc.cl/" target="_blank">
-                <img class="company_logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_la_Pontificia_Universidad_Cat%C3%B3lica_de_Chile.svg" alt="Logo Universidad Católica"; padding:10px;">
+                <a href="https://www.uc.cl/" target="_blank">
+                <img class="company_logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_la_Pontificia_Universidad_Cat%C3%B3lica_de_Chile.svg" alt="Logo Universidad Católica">
             </a>
             <br>
             <span class="exptitle schoolname" style="font-size:1.75rem; color:#ffffff;">Pontificia Universidad Católica de Chile</span>
@@ -144,7 +144,7 @@
         <div class="exp" style="flex:1; min-width:320px; max-width:600px; text-align:center; display: flex; flex-direction: column; justify-content: center;">
             <p class="expbox" style="background: none; border-left: none; box-shadow: none; height: 100%; display: flex; flex-direction: column; justify-content: center;">
                 <a href="https://igm.cl/" target="_blank">
-                    <img class="company_logo" src="https://datos.gob.cl/uploads/group/2024-10-11-121420.792059LOGO-IGM-2023-CIAN.png" alt="Logo Instituto Geográfico Militar" style="margin-bottom:0px; width:350px; height:220px;">
+                    <img class="company_logo" src="https://datos.gob.cl/uploads/group/2024-10-11-121420.792059LOGO-IGM-2023-CIAN.png" alt="Logo Instituto Geográfico Militar">
                 </a>
                 <span class="exptitle" style="font-size:1.7rem; color:#ffffff; font-weight:700; display:block; margin-bottom:0px;">
                     Instituto Geográfico Militar
@@ -219,30 +219,19 @@
     </div>
 
     <!-- FOOTER -->
-    <footer style="background-color: #2c3e40; padding: 20px 0; text-align: center; margin-top: 40px;">
-        <p style="margin: 0; color: #999; font-size: 0.95em;">
+    <footer style="background-color: rgb(31, 40, 49); padding: 20px 0; text-align: center; margin-top: 40px;">
+        <p style="margin: 0; color: #dbdbdb; font-size: 0.95em;">
             Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
         </p>
     </footer>
 
-    <div id="projectModal" class="project-modal" style="display:none;">
+    <div id="projectModal" class="project-modal">
       <div class="project-modal-content">
         <button id="modalClose" aria-label="Cerrar" class="modal-close">×</button>
         <div id="modalBody"></div>
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-    <script>
-        $(window).scroll(function() {
-            if ($(document).scrollTop() > 50) {
-                $('.nav').addClass('affix');
-            } else {
-                $('.nav').removeClass('affix');
-            }
-        });
-    </script>
+    <script src="main.js" defer></script>
 </body>
 </html>

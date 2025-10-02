@@ -1,26 +1,40 @@
-document.querySelectorAll('.navlinks a, .logo a').forEach(function(link) {
-    link.addEventListener('mouseenter', function() {
-        link.style.color = '#86c4ebff'; // Color al pasar el mouse
-    });
-    link.addEventListener('mouseleave', function() {
-        link.style.color = ''; // Vuelve al color original (usa el CSS)
-    });
-});
+document.addEventListener('DOMContentLoaded', () => {
+  // nav link hover tint (simple, non-intrusive)
+  document.querySelectorAll('.navlinks a, .logo a').forEach(link => {
+    link.addEventListener('mouseenter', () => link.style.color = '#9accfd');
+    link.addEventListener('mouseleave', () => link.style.color = '');
+  });
 
-// mobile menu toggle
-const mobileBtn = document.getElementById('mobileMenuButton');
-const mobileMenu = document.getElementById('mobileMenu');
-if (mobileBtn && mobileMenu) {
-  mobileBtn.addEventListener('click', () => {
-    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
-  });
-  // close if click outside
-  document.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && e.target !== mobileBtn) {
-      mobileMenu.style.display = 'none';
-    }
-  });
-}
+  // mobile menu toggle
+  const mobileBtn = document.getElementById('mobileMenuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (mobileBtn && mobileMenu) {
+    // ensure hidden initially (CSS handles it, but keep JS-safe)
+    mobileMenu.style.display = 'none';
+    mobileBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+    });
+    // close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && e.target !== mobileBtn) {
+        mobileMenu.style.display = 'none';
+      }
+    });
+  }
+
+  // scroll handler: toggle .affix when scrolled
+  const nav = document.querySelector('.nav');
+  const onScroll = () => {
+    if (!nav) return;
+    if (document.documentElement.scrollTop > 50 || window.scrollY > 50) nav.classList.add('affix');
+    else nav.classList.remove('affix');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // project modal opener/closer handled below (delegated)
+});
 
 // project modal: open project content on "Ver Más" click only on small screens
 const modal = document.getElementById('projectModal');
@@ -28,10 +42,8 @@ const modalBody = document.getElementById('modalBody');
 const modalClose = document.getElementById('modalClose');
 
 function openProjectModal(cardElement) {
-  if (!modal || !modalBody) return;
-  // clone card content (title, image, body) into modalBody
+  if (!modal || !modalBody || !cardElement) return;
   const clone = cardElement.cloneNode(true);
-  // remove button inside to avoid double actions
   const btn = clone.querySelector('.shrink-border');
   if (btn) btn.remove();
   modalBody.innerHTML = '';
@@ -46,13 +58,11 @@ if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) moda
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.shrink-border');
   if (!btn) return;
-  // only on small screens open modal
   if (window.innerWidth <= 768) {
-    // find closest .card element
     const card = btn.closest('.card');
     if (card) {
       openProjectModal(card);
       e.preventDefault();
     }
   }
-}); 
+});
