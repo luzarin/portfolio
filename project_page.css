@@ -1,13 +1,16 @@
 * {
     box-sizing: border-box;
-  }
-  body, html{
-    /* overflow-y: scroll; */
-    margin:0;
-    height:100%
-    /* margin-right:10px */
 }
-  .nav{
+
+body, html{
+    margin:0;
+    /* forzar que no aparezca barra vertical externa */
+    height:100vh;
+    overflow-x: hidden;
+    overflow-y: hidden; /* <-- evitar scroll global */
+}
+
+.nav{
     position: fixed;
     top: 0;
     width: 100%;
@@ -16,232 +19,214 @@
     transition: all 0.3s ease;
     background: #1b2530; /* COLOR BOX BARRA SUPERIOR */
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
-  html{
-    background-color:#27333a;
-    /* height:fit-content;
-    min-width: fit-content; */
-  }
-  body{
-    background-color:#27333a;
-    height:fit-content;
-    font-size:1rem;
-    /* min-width: fit-content; */
-  }
-  /* Position the image container (needed to position the left and right arrows) */
-  .imageContainer {
-    margin: 0;
-    /* position: absolute;
-    top: 50%;
-    /* left: 30%;* */
-    /* transform: scale(0.5);  */
-    width:100%;
-    height:100%;
-    max-height:800px;
-    max-width:500px;
-    margin-top:150px;
-    margin-left:10%;
-    margin-right:10%;
+}
 
-    
-  }
-  .imageContainer-large{
-    width:100vw;
+/* NAVBAR: reglas añadidas para igualar spacing/posición con index (style.css) */
+.nav.affix {
+    background: rgb(21, 24, 27);
+    padding: 5px 0;
+}
+
+.nav .container {
+    display: flex;
+    justify-content: space-between; /* Esto separa los extremos */
+    align-items: center;
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 0 10px;
+    height: 48px;
+}
+
+.logo,
+.main_list {
+    display: flex;
+    align-items: center;
+    height: 48px;
+}
+
+.logo a,
+.navlinks a {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff; /*COLOR TEXTO BARRA SUPERIOR*/
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    line-height: 48px;
+    margin: 0;
+    padding: 0;
+}
+
+.navlinks {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* controla la distancia entre Inicio, CV, LinkedIn, GitHub */
+    height: 48px;
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+}
+
+/* asegurar que los items no añadan padding/márgenes inesperados */
+.navlinks li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navlinks li a {
+    display: block; /* ocupar la altura definida y facilitar el centrado vertical */
+    height: 48px;
+    line-height: 48px;
+    padding: 0 6px; /* pequeño padding horizontal si se desea */
+}
+
+.navlinks a:hover {
+    color: #e6e6e6;
+}
+
+.mobile-menu { display: none; }
+
+/* Ocultar navTrigger (el span de 3 barras) en pantallas de escritorio para evitar desalineos */
+.navTrigger {
+    display: none;
+}
+
+.main_list {
+    margin-left: 40px; /* Ajusta para centrar/posicionar a la derecha del logo */
+}
+
+.logo {
+    margin-right: 40px; /* Ajusta para separar logo del resto del menú */
+}
+
+/* El contenedor principal ocupa la altura restante y centra el contenido */
+.imageContainer-large{
+    width:100%;
     display:flex;
     justify-content: center;
-    margin-bottom:50vh;
-    max-width: 100%;
-  }
-  
-  /* Hide the images by default */
-  .mySlides {
+    /* usar la altura disponible teniendo en cuenta la navbar de 100px */
+    min-height: calc(100vh - 100px);
+    align-items: start; /* alinear al inicio para que thumbnails queden debajo de la main image */
+    gap: 4rem;               /* increased gap to separate gallery and text */
+    padding-top: 6rem;      /* más separación del navbar */
+    padding-left: 2rem;     /* margen lateral para que las imágenes no toquen el borde */
+    padding-right: 2rem;
+    padding-bottom: 1.5rem; /* espacio inferior razonable */
+    box-sizing: border-box;
+    margin-bottom: 0;       /* quitar margin-bottom grande */
+}
+
+/* reducir ancho de la imagen principal para que no ocupe toda la pantalla */
+:root {
+    /* ancho objetivo para la imagen principal y la fila de miniaturas */
+    --main-image-w: 360px;
+}
+
+.imageContainer {
+    margin: 0;
+    width:100%;
+    height:auto;
+    max-height: calc(100vh - 260px);
+    max-width: var(--main-image-w); /* <-- achicar aquí */
+    margin-top: 1.25rem;
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+}
+
+/* Mantener las slides visibles y con un max-height relativo */
+.mySlides {
     display: none;
-  }
-  
-  /* Add a pointer when hovering over the thumbnail images */
-  .cursor {
-    cursor: pointer;
-  }
-  
-  /* Next & previous buttons */
-  .prev,
-  .next {
-    cursor: pointer;
-    position: absolute;
-    top: 40%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  /* Number text (1/3 etc) */
-  .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-  }
-  
-  /* Container for image text */
-  .caption-container {
+    margin-top:0;
+}
+.mySlides img {
+    width:100%;
+    height:auto;
+    max-height: calc(100vh - 360px);
+    object-fit: cover;
+    display: block;
+    border-radius: 6px;
+    /* opcional: limitar ancho por si se usa fuera del contenedor */
+    max-width: var(--main-image-w);
+}
+
+/* Espacio entre miniaturas y borde */
+.images{
+    width:100%;
+    max-width: var(--main-image-w); /* <-- asegura ancho igual que la imagen principal */
+    margin: 10px auto 0;           /* <-- centro horizontal */
+    display:block;
+    box-sizing: border-box;
+    padding: 0; /* quitar padding lateral si existía */
+}
+
+/* Row: quitar márgenes negativos que movían elementos fuera del flujo */
+.row{
+    margin:0;
+    text-align: center;
+    align-items: center;
+    padding: 0;
+    display: flex;
+    justify-content: space-between; /* reparten el espacio dentro del ancho fijado */
+    gap: 6px;
+}
+
+/* Column: mantener proporción y asegurar object-fit */
+.column {
+    flex: 1 1 0;
+    max-width: calc((var(--main-image-w) - 18px) / 4); /* ajustar por gaps */
+    box-sizing: border-box;
+}
+.column img {
+    width: 100%;
+    height: 100px;          /* <-- aumentado: miniaturas un poco más altas */
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+}
+
+/* Caption más pequeño y compacto */
+.caption-container {
+    margin-top: 10px;
     text-align: center;
     background-color: #222222;
-    padding: 2px 16px;
+    padding: 6px 12px;
     color: white;
-    height:50px auto;
     display:flex;
     justify-content: center;
-    font-size:clamp(0.5rem, 2vw, 2rem);
-  }
-  .row{
-    margin:auto;
-    text-align: center;
-    align-items: center;
-    margin-right: -50%;
+    font-size: clamp(0.6rem, 0.9vw, 0.95rem);
+    max-width: var(--main-image-w);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
-  
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 
-  
-  /* Six columns side by side */
-  .column {
-    float: left;
-    width: 16.66%;
-  }
-  
-  /* Add a transparency effect for thumnbail images */
-  .demo {
-    opacity: 0.6;
-  }
-  
-  .active,
-  .demo:hover {
-    opacity: 1;
-  }
-  .images{
-    width:100%;
-    display:flex;
-    align-items: center;
-    text-align: center;
-  }
-  .mySlides{
-    margin-top:50px
-  }
-
-
-
-
-  /* Style the Image Used to Trigger the Modal */
-#myImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  #myImg:hover {opacity: 0.7;}
-  
-  /* The Modal (background) */
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-  }
-  
-  /* Modal Content (Image) */
-  .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-  }
-  
-  /* Caption of Modal Image (Image Text) - Same Width as the Image */
-  #caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-  }
-  
-  /* Add Animation - Zoom in the Modal */
-  .modal-content, #caption {
-    animation-name: zoom;
-    animation-duration: 0.6s;
-  }
-  
-  @keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
-  }
-  
-  /* The Close Button */
-  .close {
-    position: absolute;
-    top: 3%;
-    right: 3%;
-    color: #f1f1f1;
-    font-size: 100px;
-    font-weight: bold;
-    transition: 0.3s;
-    z-index:1
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  /* 100% Image Width on Smaller Screens */
-  @media only screen and (max-width: 700px){
-    .modal-content {
-      width: 100%;
+/* Responsive: reducir tamaño de miniaturas y main-image en pantallas pequeñas */
+@media screen and (max-width:800px) {
+    :root { --main-image-w: 90vw; } /* main image ocupa 90% en móvil */
+    .column img { height: 68px; }   /* <-- aumentado en móvil */
+    .row { gap: 4px; }
+    .imageContainer-large {
+        min-height: auto;
     }
-    .close{
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1000;
-      color:#ffffff
+    .imageContainer{
+        width: 90%;
+        max-width: 480px;
+        margin-top: 12px;
     }
-    
-  }
-  .project-text{
+    .project-text{
+        width: 90%;
+        max-width: 900px;
+        padding-top: 1rem;
+        font-size: clamp(0.7rem, 1.6vw, 0.95rem);
+    }
+    .column { width: 25%; }
+}
+
+/* push the project text a bit to the right so it visually separates from the images */
+.project-text{
     margin: 0;
     position: relative;
     width:800px;
@@ -253,46 +238,42 @@
     min-width:390px;
     margin-top:170px;
     margin-right:5%;
-    /* background-color:rgba(73, 84, 90, 0.274); */
-
-    /* font-size:1vw; */
     text-align: justify;
-    /* text-align:center */
-  }
-  .indent{
+    margin-left: 2rem;      /* added: moves text to the right */
+}
+
+.indent{
     padding-left: 2em;
-    margin-right:20px
-  }
-  /* make the text responsive */
-  @media screen and (max-width:800px) {
+    margin-right:20px;
+}
+
+/* Responsive design */
+@media screen and (max-width:800px) {
     .imageContainer-large{
-        display:block
+        display:block;
     }
     
     .imageContainer{
-      width:80%;
-        height:70%
-    }
-    .project-text{
-      width:80%;
+        width:80%;
         height:70%;
-        margin:0
-      
-  }
+    }
+    
+    .project-text{
+        width:80%;
+        height:70%;
+        margin:0;
+        margin-left: 0;
+    }
 }
 
-
-
-/* HOVER */
-  /* Tooltip container */
-  .tooltip {
+/* Tooltip styling */
+.tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-  }
-  
-  /* Tooltip text */
-  .tooltip .tooltiptext {
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -300,24 +281,61 @@
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-   
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
+}
 
-  .logos{
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.logos{
     padding:10px 5px;
     transition: 1s;
     color:rgb(222, 226, 230);
-  }
-  .logos:hover{
+}
+
+.logos:hover{
     background-color: #2f4c58;
     color:rgb(166, 169, 172);
     border-radius: 25px; 
-  }
+}
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.logos{
+    padding:10px 5px;
+    transition: 1s;
+    color:rgb(222, 226, 230);
+}
+
+.logos:hover{
+    background-color: #2f4c58;
+    color:rgb(166, 169, 172);
+    border-radius: 25px; 
+}
