@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Proyecto 1</title>
+    <!-- Link to Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- link to style sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../skill.css">
+    <link rel="stylesheet" href="../learnmorebtn.css">
+    <link rel="stylesheet" href="css/project_page.css">
+    <!-- GOOGLE fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300&display=swap" rel="stylesheet">
+    <!-- Link to Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">Home</a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <!-- &lt;li&gt;&lt;a href="#"&gt;Gallery&lt;/a&gt;&lt;/li&gt; -->
+                    <li><a href="./files/JiaYu_Wu_Resume_GIS.pdf">Resume</a></li>
+                    <li><a href="https://github.com/Alanrocks?tab=repositories">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/jiayu0601alan/">Linkedin</a></li>
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Container for the image gallery -->
+    <div class="imageContainer-large">
+        
+        <div class="imageContainer">
+            <!-- Full-width images with number text -->
+            <div class="mySlides">
+                <img id="myImg" src="../imagenes/proyecto2.png" style="width:100%">
+            </div>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <!-- The Close Button -->
+                <span class="close">&times;</span>
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" id="img01">
+            </div>
+          
+            <div class="mySlides">
+                <img id="myImg" src="../imagenes/proyecto2.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <img id="myImg" src="../imagenes/proyecto2.png" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <img id="myImg" src="../imagenes/proyecto2.png" style="width:100%">
+            </div>
+
+            <!-- Image text -->
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+          
+            <!-- Thumbnail images -->
+            <div class="images">
+                <div class="row">
+                    <div class="column">
+                        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(1)" alt="Mapa de Clasificación Completa de Nueve Subtipos de Manglares en las Bahías Tsimipaika-Ampasindava-Ambaro (TAB) en el Noroeste de Madagascar en 2022">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(2)" alt="Mapa de Clasificación Binaria de Coberturas de Manglares en TAB en 2022">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(3)" alt="Dinámica de la Extensión de Manglares basada en el Mapa de Clasificación Binaria de Coberturas de Manglares en TAB de 2020 a 2022">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(4)" alt="Izquierda - Mapa de Clasificación Completa de TAB en 2020 basado en datos de Planet; Centro - Mapa de Clasificación Completa de TAB en 2020 generado por GEM; Derecha - imágenes satelitales de alta resolución espacial accesibles en Google Earth Pro">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="card-text project-text">
+            <span class="coll projdes">Resumen del Proyecto</span><br>
+            <span class="indent">En respuesta a las crecientes preocupaciones sobre la deforestación de manglares, estudios recientes han utilizado diversas tecnologías de teledetección, como imágenes satelitales, para medir la extensión de los manglares. En este trabajo, investigamos la distribución de los manglares en el noroeste de Madagascar utilizando imágenes espaciales detalladas con un tamaño de píxel de hasta 3 m y lo comparamos con el resultado del método tradicional basado en datos de Landsat relativamente más gruesos.</span>
+            <br>
+            <span class="indent">
+            Los manglares son un ecosistema costero biodiverso esencial que se encuentra a lo largo de playas intermareales tropicales y subtropicales, proporcionando bienes y servicios críticos a las comunidades costeras y apoyando organismos diversos. Sin embargo, las actividades antropogénicas han causado la pérdida de manglares en Madagascar, lo que requiere un nuevo enfoque de mapeo que utilice el mapa de alta resolución espacial de los datos de Planet para crear un mapa con un detalle avanzado.
+            </span>
+            <br>
+            <span class="indent">
+            Los mapas de clasificación se basan en los algoritmos de Random Forest y Maximum Likelihood, y todos ellos tienen una precisión general de más del 85%. Se cuantifican las dinámicas de los bosques de manglares de 2020 a 2022, con una pérdida del 12.6% en los manglares de dosel cerrado y una pérdida del 24.1% en los manglares de dosel abierto.
+            </span>
+            <br><br>
+            <span class="coll projdes">Más Información</span>
+            <br><br>
+            <a href="https://arcg.is/19fm1q">
+                <span class="logos">🌍 StoryMap</span>
+            </a>
+            <a href="files/Final_report_mangrove_planet_JiaYu_Wu.pdf">
+                <span class="logos">📄 Reporte Completo</span>
+            </a>
+            <a href="https://github.com/Alanrocks/Mangrove-Classification">
+                <span class="logos">🔗 GitHub</span>
+            </a>
+        </p>
+    </div>
+
+    <!-- JAVASCRIPT FOR SLIDESHOW -->
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+        
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("demo");
+            let captionText = document.getElementById("caption");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+            captionText.innerHTML = dots[slideIndex-1].alt;
+        }
+    </script>
+
+    <!-- ...existing code scripts... -->
+</body>
+</html>

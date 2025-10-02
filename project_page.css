@@ -1,0 +1,269 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html{
+    margin:0;
+    height:100%;
+}
+
+.nav{
+    top:0;
+    left:0;
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(20, 20, 20),rgb(37, 37, 37));
+    height:100px;
+}
+
+html{
+    background-color:#27333a;
+}
+
+body{
+    background-color:#27333a;
+    height:fit-content;
+    font-size:1rem;
+}
+
+/* Position the image container */
+.imageContainer {
+    margin: 0;
+    width:100%;
+    height:100%;
+    max-height:800px;
+    max-width:500px;
+    margin-top:150px;
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.imageContainer-large{
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    margin-bottom:50vh;
+    max-width: 100%;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+    margin-top:50px;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer;
+}
+
+/* Container for image text */
+.caption-container {
+    text-align: center;
+    background-color: #222222;
+    padding: 2px 16px;
+    color: white;
+    height:50px auto;
+    display:flex;
+    justify-content: center;
+    font-size:clamp(0.5rem, 2vw, 2rem);
+}
+
+.row{
+    margin:auto;
+    text-align: center;
+    align-items: center;
+    margin-right: -50%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Four columns side by side */
+.column {
+    float: left;
+    width: 25%;
+}
+
+/* Add a transparency effect for thumbnail images */
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+.images{
+    width:100%;
+    display:flex;
+    align-items: center;
+    text-align: center;
+}
+
+/* Style the Image Used to Trigger the Modal */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    color: #f1f1f1;
+    font-size: 100px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index:1;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Project text styling */
+.project-text{
+    margin: 0;
+    position: relative;
+    width:800px;
+    height:1000px auto;
+    color:#bbb;
+    padding:25px;
+    max-height:800px;
+    max-width:1000px;
+    min-width:390px;
+    margin-top:170px;
+    margin-right:5%;
+    text-align: justify;
+}
+
+.indent{
+    padding-left: 2em;
+    margin-right:20px;
+}
+
+/* Responsive design */
+@media screen and (max-width:800px) {
+    .imageContainer-large{
+        display:block;
+    }
+    
+    .imageContainer{
+        width:80%;
+        height:70%;
+    }
+    
+    .project-text{
+        width:80%;
+        height:70%;
+        margin:0;
+    }
+    
+    .column {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+    
+    .close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        color:#ffffff;
+    }
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.logos{
+    padding:10px 5px;
+    transition: 1s;
+    color:rgb(222, 226, 230);
+}
+
+.logos:hover{
+    background-color: #2f4c58;
+    color:rgb(166, 169, 172);
+    border-radius: 25px; 
+}
