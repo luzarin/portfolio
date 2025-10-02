@@ -14,8 +14,8 @@ body, html{
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
-    padding: 0px 0;
+    z-index: 4000;
+    padding: 7.5px 0; /* mantener padding fijo para evitar saltos al hacer affix */
     transition: all 0.3s ease;
     background: #1b2530; /* COLOR BOX BARRA SUPERIOR */
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
@@ -24,7 +24,7 @@ body, html{
 /* NAVBAR: reglas añadidas para igualar spacing/posición con index (style.css) */
 .nav.affix {
     background: rgb(21, 24, 27);
-    padding: 5px 0;
+    padding: 7.5px 0; /* mismo padding que .nav para evitar cambio de altura */
 }
 
 .nav .container {
@@ -207,54 +207,69 @@ body, html{
 /* Responsive: reducir tamaño de miniaturas y main-image en pantallas pequeñas */
 @media screen and (max-width:800px) {
     :root { --main-image-w: 90vw; } /* main image ocupa 90% en móvil */
-    .column img { height: 68px; }   /* <-- aumentado en móvil */
-    .row { gap: 4px; }
+    .column img { height: 68px; }   /* miniaturas más pequeñas en móvil */
+    .row { gap: 6px; }
+
+    /* Apilar: imágenes primero, luego texto */
     .imageContainer-large {
         min-height: auto;
         display: block; /* apilar imágenes antes del texto */
+        text-align: center; /* centrar contenido */
+        padding-top: 1.25rem; /* reducir espacio superior en móvil */
     }
+
+    /* Centrar la imagen grande dentro del contenedor */
     .imageContainer{
-        width: 90%;
-        max-width: 480px;
-        margin-top: 12px;
+        width: 92%;
+        max-width: 520px;
+        margin: 12px auto 6px auto; /* centro horizontal */
+        padding-top: 0.75rem; /* un poco de espacio arriba */
     }
-    .project-text{
-        width: 90%;
-        max-width: 900px;
-        padding-top: 1rem;
-        font-size: clamp(0.7rem, 1.6vw, 0.95rem);
-    }
-    .column { width: 25%; }
+    .imageContainer img { display: block; margin: 0 auto; }
 
-    /* Mobile: permitir scroll vertical (anular overflow:hidden global) */
-    body, html {
-        height: auto;
-        overflow-y: auto;
-    }
+    /* Miniaturas centradas en fila */
+    .images { display:flex; justify-content:center; gap:8px; max-width:92%; margin: 8px auto 0; }
+    .column { width: 22%; max-width: 22%; }
 
-    /* Mostrar botón de menú móvil y estilo del menú (igual que en style.css) */
+    /* permitir scroll vertical en móvil */
+    body, html { height: auto; overflow-y: auto; }
+
+    /* Menu móvil: mostrar botón y menú (copiado de style.css) */
     .navlinks { display: none !important; }
     .mobile-menu-btn { display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.2rem; background: transparent; border: none; color: #fff; padding: 6px 10px; cursor: pointer; }
-    .mobile-menu {
-        position: fixed;
-        top: 56px;
-        right: 12px;
-        background: rgba(33,48,63,0.98);
-        border-radius: 8px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-        padding: 10px;
-        z-index: 2000;
-        min-width: 160px;
-    }
+    .mobile-menu { position: fixed; top: 56px; right: 12px; background: rgba(33,48,63,0.98); border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding: 10px; z-index: 2000; min-width: 160px; }
     .mobile-menu ul { list-style: none; margin:0; padding:0; }
     .mobile-menu li { padding: 8px 6px; }
     .mobile-menu a { color: #fff; text-decoration: none; display: block; }
 
-    /* Ajustes: apilar proyecto (imagenes) antes del texto y mantener separación */
-    .imageContainer-large + .project-text, /* si el texto viene después */
-    .project-text {
+    /* Texto: reducir tamaños y ajustar márgenes para que encaje en pantalla */
+    .project-text{
+        width: 94%;
+        max-width: 900px;
+        padding-top: 0.75rem;
+        font-size: clamp(0.85rem, 2.6vw, 1rem);
+        margin-top: 50px; /* más separación de las miniaturas */
+        padding-left: 12px;
+        padding-right: 12px;
+        text-align: left;
+        min-width: 0; /* permitir que el texto se ajuste en pantallas pequeñas */
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+    }
+
+    /* Título dentro del project-text (ej. .coll.projdes) más pequeño y con separación */
+    .project-text .coll {
         display: block;
-        margin-top: 16px;
+        font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+        margin: 8px 0 12px 0;
+        text-align: center; /* centrar el título en móvil */
+        line-height: 1.15;
+    }
+
+    /* Asegurar que el resto del contenido dentro del bloque tenga flujo normal y no provoque overflow */
+    .project-text, .project-text * {
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
 }
 
@@ -281,23 +296,50 @@ body, html{
     margin-right:20px;
 }
 
-/* Responsive design */
+/* Final consolidated mobile rules (override earlier desktop rules) */
 @media screen and (max-width:800px) {
-    .imageContainer-large{
-        display:block;
-    }
-    
-    .imageContainer{
-        width:80%;
-        height:70%;
-    }
-    
-    .project-text{
-        width:80%;
-        height:70%;
-        margin:0;
-        margin-left: 0;
-    }
+    :root { --main-image-w: 90vw; }
+
+    /* Ensure page can scroll on mobile */
+    body, html { height: auto; overflow-y: auto; }
+
+    /* Layout: images first, centered */
+    /* gallery spacing: more bottom space so title and text are not so close */
+    .imageContainer-large { display: block !important; text-align: center !important; padding-top: 1.25rem !important; padding-bottom: 2.5rem !important; }
+    .imageContainer { width: 92% !important; max-width: 520px !important; margin: 12px auto 12px auto !important; padding-top: 0.75rem !important; margin-bottom: 12px !important; }
+    .imageContainer img { display: block; margin: 0 auto; }
+    /* increase gap under thumbnails to separate title */
+    .images { display:flex !important; justify-content:center; gap:8px; max-width:92%; margin: 8px auto 28px; }
+    .column { width: 22%; max-width: 22%; }
+
+    /* Mobile menu show/hide */
+    .navlinks { display: none !important; }
+    .mobile-menu-btn { display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.2rem; background: transparent; border: none; color: #fff; padding: 6px 10px; cursor: pointer; }
+    .mobile-menu { position: fixed; top: 56px; right: 12px; background: rgba(33,48,63,0.98); border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding: 10px; z-index: 2000; min-width: 160px; }
+    .mobile-menu ul { list-style: none; margin:0; padding:0; }
+    .mobile-menu li { padding: 8px 6px; }
+    .mobile-menu a { color: #fff; text-decoration: none; display: block; }
+
+    /* Text block: ensure it wraps and fits the viewport */
+    /* ensure content isn't hidden behind fixed navbar on mobile */
+    body { padding-top: 56px; }
+
+    /* Center the container so links/title are centered; paragraphs remain left-aligned inside */
+    .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 48px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 34px auto !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; }
+
+    /* reduce gap below title so links are closer */
+    .project-text .coll { display: block; font-size: clamp(1.1rem, 4.2vw, 1.5rem) !important; margin: 2px 0 4px 0 !important; text-align: center !important; line-height: 1.15 !important; }
+
+    /* Paragraph blocks: keep left-aligned but constrained so they don't touch edges */
+    .project-text .indent { display:block; text-align: left !important; margin: 6px auto 0 !important; max-width: 92%; padding-left: 0.5rem; padding-right: 0.5rem; }
+
+    /* Links: center and tighten vertical spacing. Nudge them slightly up to counter existing <br><br> */
+    .project-text a, .project-text .logos { display: inline-block; margin: 0 8px; vertical-align: middle; transform: translateY(-6px); }
+
+    .project-text, .project-text * { word-break: break-word !important; overflow-wrap: anywhere !important; }
+
+    /* Reduce large desktop-only min-width that can force overflow */
+    .project-text { min-width: 0 !important; }
 }
 
 /* Tooltip styling */
