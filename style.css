@@ -1,10 +1,10 @@
 :root{
   --nav-height-mobile: 56px;
-  --bg-color: rgb(47, 47, 47);
-  --skill-box: #3C3C3C;
-  --edu-box: #3C3C3C;
-  --exp-box: #3C3C3C;
-  --project-box: #3C3C3C;
+  --bg-color: #2b2b2b;
+  --skill-box: #3a3a3a;
+  --edu-box: #3a3a3a;
+  --exp-box: #3a3a3a;
+  --project-box: #3a3a3a;
   --section-title-top: 64px; /* reduced from 100px */
   --section-content-gap: 12px; /* vertical gap below content boxes */
 }
@@ -28,12 +28,12 @@ body {
     z-index: 1000;
     padding: 7.5px 0;
     transition: all 0.3s ease;
-    background: #21303f; /*COLOR BOX BARRA SUPERIOR*/
+    background: #1b2530; /*COLOR BOX BARRA SUPERIOR*/
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .nav.affix {
-    background: rgb(31, 40, 49);
+    background: rgb(21, 24, 27);
     padding: 5px 0;
 }
 
@@ -154,7 +154,7 @@ body {
   margin-bottom: var(--section-content-gap);
 }
 
-/* SKILLS */
+/* HABILIDADES */
 .skill_col {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -197,7 +197,7 @@ body {
     font-weight: 700;
 }
 
-/* EDUCATION & EXPERIENCE */
+/* EDUCACION Y EXPERIENCIA */
 .experiencecol {
   max-width: 1350px; /* ANCHO BOX EDUCACIÓN */
   margin: 0 auto;
@@ -210,7 +210,7 @@ body {
 
 .expbox {
   background: rgba(30, 40, 50, 0.8); /*COLOR BOX EDUCACIÓN*/
-  padding: 16px 8px; /* reduced padding */
+  padding: 16px 8px; 
   border-radius: 10px;
   border-left: 5px solid #99dfec;
   margin-bottom: 12px;
@@ -226,14 +226,14 @@ body {
 
 /* Experience-specific: larger boxes and logos (desktop). Mobile rules below keep responsive behavior. */
 .experiencecol .company_logo {
-  width: 100px; /* Reduced logo size for education boxes */
+  width: 100px;
   height: auto;
   max-width: 100%;
   margin-bottom: 12px;
 }
 
 .experiencecol .expbox {
-  padding: 24px; /* restore bigger box padding for experience content */
+  padding: 24px;
   margin-bottom: 18px;
 }
 
@@ -242,6 +242,11 @@ body {
   width: 550px !important;
   height: auto !important;
   max-width: 350px !important; 
+}
+
+/* Remove color bar from education boxes only */
+.eduexp .expbox {
+  border-left: none !important;
 }
 
 .exptitle {
@@ -286,24 +291,23 @@ body {
     line-height: 1.8;
 }
 
-/* PROJECTS */
+/* PROYECTOS */
 .projectgrid {
     max-width: 1500px;
     margin: 0 auto;
-  padding: 12px 20px 160px; /* standardized smaller top padding */
+  padding: 12px 20px 160px;
 }
 
 .card {
-    /* transición más completa para evitar saltos visibles */
     transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
     height: 100%;
-    border-radius: 15px; /* Más curvas en las esquinas */
+    border-radius: 15px; /* CURVATURA PROYECTOS */
 }
 
 .card:hover {
-    transform: translateY(2px) scale(1.005); /* casi sin zoom */
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35); /* sombra más suave/oscura (menos "iluminación") */
-    filter: brightness(1); /* reduce ligeramente la luminosidad */
+    transform: translateY(2px) scale(1.005); 
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    filter: brightness(1);
 }
 
 .card-img-top {
@@ -333,7 +337,7 @@ body {
     border: none;
     padding: 10px 35px;
     font-size: 1em;
-    border-radius: 8px; /* Menos redondeado */
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold;
@@ -341,15 +345,15 @@ body {
 
 /* Asegurar altura mayor y uniforme para las cards de proyecto */
 .projectgrid .card {
-    min-height: 420px;        /* aumentar si quieres más alto */
+    min-height: 420px;      
     display: flex;
     flex-direction: column;
-    border-radius: 15px;      /* esquinas más redondeadas si quieres */
+    border-radius: 15px;      
 }
 
 /* Forzar que la imagen mantenga proporción y la body ocupe el resto */
 .projectgrid .card-img-top {
-    height: 340px;            /* ajustar según prefieras */
+    height: 340px;          
     object-fit: cover;
 }
 
@@ -357,7 +361,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* mantiene botón abajo */
+    justify-content: space-between; 
     padding: 22px;
 }
 
@@ -365,18 +369,18 @@ body {
 .projectgrid .card-img-top,
 .card .card-img-top {
     display: block;
-    width: calc(100% - 18px); /* deja 12px a cada lado */
-    margin: 9px auto 0;      /* margen superior y laterales */
+    width: calc(100% - 18px); 
+    margin: 9px auto 0;      
     height: auto;
     object-fit: contain;
-    border-radius: 8px;       /* esquinas suaves en la imagen */
+    border-radius: 8px;       
     box-sizing: border-box;
 }
 
 /* Centrar títulos de la sección de proyectos (TEMA, año) y títulos dentro de las cards */
 .projectgrid h5.card-title {
     text-align: center;
-    margin-left: 0;    /* asegurar que no haya desplazamientos laterales */
+    margin-left: 0;    
     margin-right: 0;
 }
 
@@ -389,11 +393,11 @@ body {
 /* FOOTER */
 .thank {
     text-align: center;
-    padding: 60px 20px 40px; /* aumentar padding-top para más separación visual */
+    padding: 60px 20px 40px; 
     color: #ebd4d4;
 }
 
-/* ---------- MOBILE & RESPONSIVE ADJUSTMENTS ---------- */
+/* ---------- AJUSTES MOVILES Y RESPONSIVOS ---------- */
 
 /* general responsive images/cards */
 .card-img-top, .company_logo, img {
@@ -404,7 +408,6 @@ body {
 
 /* Projects: en mobile apilar verticalmente y ocupar ancho */
 @media (max-width: 768px) {
-  /* apilar filas/columnas de bootstrap */
   .projectgrid .row {
     display: flex !important;
     flex-direction: column !important;
@@ -418,7 +421,7 @@ body {
   }
   .card {
     width: 100%;
-    border-radius: 18px; /* esquinas más curvas si quieres */
+    border-radius: 18px;
     margin: 0 auto 18px auto;
   }
   .card-body {
@@ -455,7 +458,7 @@ body {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    display: none; /* hidden by default; JS shows it */
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 3000;
@@ -479,16 +482,15 @@ body {
   }
 
   /* ----- Mobile fixes: evitar overlay del navbar, agrandar inicio/menu y apilar proyectos ----- */
-  /* evitar que el navbar fijo tape el contenido */
   body {
-    padding-top: calc(var(--nav-height-mobile) + 8px); /* ajusta si cambias altura */
+    padding-top: calc(var(--nav-height-mobile) + 8px); 
   }
 
   /* título de sección menos espaciado en móvil */
   .myP {
-    padding-top: calc(56px + 45px) !important; /* 56px = altura navbar móvil, ajusta si cambiasla */
+    padding-top: calc(56px + 45px) !important; 
     margin-bottom: 8px !important;
-    scroll-margin-top: 80px; /* para anclas */
+    scroll-margin-top: 80px;
   }
 
   /* navbar: mayor altura y tamaños en móvil */
@@ -511,7 +513,7 @@ body {
     height: 56px;
   }
   .mobile-menu a {
-    font-size: 1.05rem;     /* items del menú más grandes */
+    font-size: 1.2rem;     /* items del menú más grandes */
     padding: 10px 12px;
     font-weight: 700; /* negritas en menú móvil */
   }
@@ -521,7 +523,7 @@ body {
 
   /* Proyectos: apilar correctamente (usar flujo en bloque, no flex column que estaba generando solapamiento) */
   .projectgrid .row {
-    display: block !important;       /* dejar que las columnas ocupen su flujo vertical */
+    display: block !important;      
   }
   .projectgrid .col {
     width: 100% !important;
@@ -535,7 +537,7 @@ body {
   .projectgrid .card {
     width: calc(100% - 24px);
     margin: 0 12px 20px;
-    min-height: 360px; /* opcional, ajusta según prefieras */
+    min-height: 360px; 
     border-radius: 18px;
     overflow: hidden;
   }
