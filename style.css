@@ -217,8 +217,8 @@ body {
 }
 
 .company_logo {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 10px;
     object-fit: contain;
     margin-bottom: 15px;
@@ -226,7 +226,7 @@ body {
 
 /* Experience-specific: larger boxes and logos (desktop). Mobile rules below keep responsive behavior. */
 .experiencecol .company_logo {
-  width: 350px; /* TAMAÑO
+  width: 100px; /* Reduced logo size for education boxes */
   height: auto;
   max-width: 100%;
   margin-bottom: 12px;
@@ -235,6 +235,13 @@ body {
 .experiencecol .expbox {
   padding: 24px; /* restore bigger box padding for experience content */
   margin-bottom: 18px;
+}
+
+/* LOGO EXPERIENCIA */
+.company_logo_large {
+  width: 550px !important;
+  height: auto !important;
+  max-width: 350px !important; 
 }
 
 .exptitle {
