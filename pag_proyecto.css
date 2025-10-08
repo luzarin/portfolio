@@ -4,10 +4,11 @@
 
 body, html{
     margin:0;
-    /* forzar que no aparezca barra vertical externa */
-    height:100vh;
+    /* permitir scroll vertical normal en móviles para evitar "doble scroll" y saltos */
+    height:auto;
     overflow-x: hidden;
-    overflow-y: hidden; /* <-- evitar scroll global */
+    overflow-y: auto;
+    overscroll-behavior-y: none; /* evitar cadenas de desplazamiento raras en contenedores internos */
 }
 
 .nav{
@@ -32,7 +33,7 @@ body, html{
     justify-content: space-between; /* Esto separa los extremos */
     align-items: center;
     max-width: 1200px;
-    margin: 10px auto;
+    margin: 0 auto; /* evitar doble altura visual en la barra */
     padding: 0 10px;
     height: 48px;
 }
@@ -209,13 +210,21 @@ body, html{
     :root { --main-image-w: 90vw; } /* main image ocupa 90% en móvil */
     .column img { height: 68px; }   /* miniaturas más pequeñas en móvil */
     .row { gap: 6px; }
+    /* Asegurar espacio bajo navbar fijo solo en páginas de proyecto */
+    body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
+
+    /* Alinear altura del contenedor del navbar con el padding superior del body */
+    .nav .container { height: 56px; padding: 0 12px; }
+    .logo a { font-size: 1.4rem; line-height: 56px; height: 56px; display: flex; align-items: center; }
+    .mobile-menu-btn { height: 56px; }
 
     /* Apilar: imágenes primero, luego texto */
     .imageContainer-large {
         min-height: auto;
         display: block; /* apilar imágenes antes del texto */
         text-align: center; /* centrar contenido */
-        padding-top: 1.25rem; /* reducir espacio superior en móvil */
+        padding-top: 0; /* el espacio superior lo aporta body { padding-top: 56px } */
+        padding-bottom: 2rem;
     }
 
     /* Centrar la imagen grande dentro del contenedor */
@@ -231,10 +240,7 @@ body, html{
     .images { display:flex; justify-content:center; gap:8px; max-width:92%; margin: 8px auto 0; }
     .column { width: 22%; max-width: 22%; }
 
-    /* permitir scroll vertical en móvil */
-    body, html { height: auto; overflow-y: auto; }
-
-    /* Menu móvil: mostrar botón y menú (copiado de style.css) */
+    /* Menu móvil: mostrar botón y menú (coherente con style.css) */
     .navlinks { display: none !important; }
     .mobile-menu-btn { display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.2rem; background: transparent; border: none; color: #fff; padding: 6px 10px; cursor: pointer; }
     .mobile-menu { position: fixed; top: 56px; right: 12px; background: rgba(33,48,63,0.98); border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding: 10px; z-index: 2000; min-width: 160px; }
@@ -302,10 +308,12 @@ body, html{
 
     /* Ensure page can scroll on mobile */
     body, html { height: auto; overflow-y: auto; }
+    /* Asegurar espacio bajo navbar fijo solo aquí (override del global) */
+    body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
 
     /* Layout: images first, centered */
-    /* gallery spacing: more bottom space so title and text are not so close */
-    .imageContainer-large { display: block !important; text-align: center !important; padding-top: 1.25rem !important; padding-bottom: 2.5rem !important; }
+    /* gallery spacing: remove extra top padding to avoid double navbar space */
+    .imageContainer-large { display: block !important; text-align: center !important; padding-top: 0 !important; padding-bottom: 2.5rem !important; }
     .imageContainer { width: 92% !important; max-width: 520px !important; margin: 12px auto 12px auto !important; padding-top: 0.75rem !important; margin-bottom: 12px !important; }
     .imageContainer img { display: block; margin: 0 auto; }
     /* increase gap under thumbnails to separate title */
@@ -321,8 +329,7 @@ body, html{
     .mobile-menu a { color: #fff; text-decoration: none; display: block; }
 
     /* Text block: ensure it wraps and fits the viewport */
-    /* ensure content isn't hidden behind fixed navbar on mobile */
-    body { padding-top: 56px; }
+    /* body top space is handled by index/style; don't add more here */
 
     /* Center the container so links/title are centered; paragraphs remain left-aligned inside */
     .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 48px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 34px auto !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; }
