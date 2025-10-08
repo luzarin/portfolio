@@ -34,7 +34,7 @@ body, html{
     align-items: center;
     max-width: 1200px;
     margin: 0 auto; /* evitar doble altura visual en la barra */
-    padding: 0 10px;
+    padding: 0 0px;
     height: 48px;
 }
 
@@ -216,7 +216,7 @@ body, html{
     body { padding-bottom: max(24px, env(safe-area-inset-bottom)) !important; }
 
     /* Alinear altura del contenedor del navbar con el padding superior del body */
-    .nav .container { height: 56px; padding: 0 12px; }
+    .nav .container { height: 56px; padding: 0 65px; }
     .logo a { font-size: 1.4rem; line-height: 56px; height: 56px; display: flex; align-items: center; }
     .mobile-menu-btn { height: 56px; }
 
