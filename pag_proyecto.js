@@ -1,6 +1,14 @@
 // pag_proyecto.js
 // Mobile menu toggle and navbar affix for project pages
 document.addEventListener('DOMContentLoaded', () => {
+  // nav link hover tint (simple, non-intrusive) — parity with main.js
+  try {
+    document.querySelectorAll('.navlinks a, .logo a').forEach(link => {
+      link.addEventListener('mouseenter', () => link.style.color = '#ddddddff');
+      link.addEventListener('mouseleave', () => link.style.color = '');
+    });
+  } catch (e) {}
+
   // Prefer explicit IDs used in index.html, fall back to legacy classes if present
   const mobileBtn = document.getElementById('mobileMenuButton') || document.querySelector('.navTrigger');
   const mobileMenu = document.getElementById('mobileMenu') || document.querySelector('.mobile-menu');

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // nav link hover tint (simple, non-intrusive)
   document.querySelectorAll('.navlinks a, .logo a').forEach(link => {
-    link.addEventListener('mouseenter', () => link.style.color = '#9accfd');
+    link.addEventListener('mouseenter', () => link.style.color = '#ddddddff');
     link.addEventListener('mouseleave', () => link.style.color = '');
   });
 

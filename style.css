@@ -1,23 +1,26 @@
 :root{
   --nav-height-mobile: 56px;
-  --bg-color: #2b2b2b;
-  --skill-box: #3a3a3a;
-  --edu-box: #3a3a3a;
-  --exp-box: #3a3a3a;
-  --project-box: #3a3a3a;
+  --bg-color: #ffffff; /* fondo principal blanco */
+  --skill-box: #ffffff; /* boxes blancas */
+  --edu-box: #ffffff;   /* boxes blancas */
+  --exp-box: #ffffff;   /* boxes blancas */
+  --project-box: #ffffff; /* boxes blancas */
   --section-title-top: 64px; /* reduced from 100px */
   --section-content-gap: 12px; /* vertical gap below content boxes */
+  --box-shadow-card: 0 8px 24px rgba(0,0,0,0.08); /* sombra unificada */
 }
 
 *{ box-sizing: border-box; margin:0; padding:0 }
 html, body { overflow-x: hidden; max-width:100%; touch-action: pan-y; -ms-touch-action: pan-y }
+/* Reservar el espacio del scroll para evitar micro-desplazamientos horizontales entre páginas */
+html { scrollbar-gutter: stable both-edges; }
 img, .card, .projectgrid, .experiencecol, .skill_col { max-width:100% }
 .container, .projectgrid, .experiencecol { overflow-x:hidden }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  color: #fff;
+  color: #111; /* textos en negro */
 }
 
 /* NAVBAR */
@@ -25,26 +28,23 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 4000;
     padding: 7.5px 0;
     transition: all 0.3s ease;
-    background: #1b2530; /*COLOR BOX BARRA SUPERIOR*/
+  background: #171717; /* barra superior oscura */
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-.nav.affix {
-    background: rgb(21, 24, 27);
-    padding: 5px 0;
-}
+.nav.affix { background: rgb(21, 24, 27); padding: 7.5px 0; }
 
 .nav .container {
-    display: flex;
-    justify-content: space-between; /* Esto separa los extremos */
-    align-items: center;
-    max-width: 1200px;
-    margin: 10 auto;
-    padding: 0 10px;
-    height: 48px;
+  display: flex;
+  justify-content: space-between; /* extremos: Inicio a la izquierda, enlaces a la derecha */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto; /* centrar el bloque dentro del ancho máximo */
+  padding: 0 0px; /* exactamente igual a pag_proyecto.css */
+  height: 48px;
 }
 
 .logo,
@@ -58,7 +58,7 @@ body {
 .navlinks a {
     font-size: 1.2em;
     font-weight: 700;
-    color: #fff; /*COLOR TEXTO BARRA SUPERIOR*/
+  color: #fff; /* texto blanco en navbar oscuro */
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -71,25 +71,36 @@ body {
 .navlinks {
     display: flex;
     align-items: center;
-    gap: 50px;
+  gap: 50px; /* igual que pag_proyecto.css */
     height: 48px;
     list-style: none; 
     margin: 0;
     padding: 0;
 }
 
-.navlinks a:hover {
-    color: #e6e6e6;
-}
+/* Igual que en pag_proyecto.css: limpiar li y dar padding interno a los anchors */
+.navlinks li { list-style: none; margin: 0; padding: 0; }
+.navlinks li a { display: block; height: 48px; line-height: 48px; padding: 0 6px; }
+
+.navlinks a:hover { color: #e6e6e6; }
 
 .mobile-menu { display: none; }
 
-.main_list {
-    margin-left: 40px; /* Ajusta el valor según lo que prefieras */
-}
+/* Ocultar navTrigger en escritorio (paridad con pag_proyecto.css) */
+.navTrigger { display: none; }
 
-.logo {
-    margin-right: 40px; /* Ajusta el valor según lo que prefieras */
+/* Igualar separación interna a la de pag_proyecto.css */
+.main_list { margin-left: 40px; }
+.logo { margin-right: 40px; }
+
+/* --- Navbar parity overrides (desktop) --- */
+@media (min-width: 769px) {
+  .nav .container { max-width: 1200px !important; margin: 0 auto !important; padding: 0 0px !important; height: 48px !important; }
+  .navlinks { gap: 50px !important; height: 48px !important; margin: 0 !important; padding: 0 !important; }
+  .navlinks li { margin: 0 !important; padding: 0 !important; }
+  .navlinks li a { height: 48px !important; line-height: 48px !important; padding: 0 6px !important; }
+  .logo { margin-right: 40px !important; }
+  .main_list { margin-left: 40px !important; }
 }
 
 /* HERO SECTION */
@@ -123,7 +134,7 @@ body {
 .myP {
   text-align: center;
   font-size: 3em;
-  color: #fff; /*COLOR TEXTO TITULOS*/
+  color: #000; /* títulos negros */
   padding: var(--section-title-top) 0 0px;
   font-weight: 700;
 }
@@ -139,7 +150,7 @@ body {
     height: 250px;
     border-radius: 50%;
     object-fit: cover;
-    border: 0px solid rgba(255, 255, 255, 0.1);
+    border: 0px solid rgba(255, 255, 255, 0.041);
     box-shadow: 0 20px 65px rgba(0, 0, 0, 0.5);
 }
 
@@ -150,7 +161,7 @@ body {
   font-size: 1.2em;
   line-height: 1.8;
   text-align: center;
-  color: #ffffff; /*COLOR TEXTO SOBRE MI*/
+  color: #000000; /*COLOR TEXTO SOBRE MI*/
   margin-bottom: var(--section-content-gap);
 }
 
@@ -166,10 +177,10 @@ body {
 
 .skill_col > div {
   text-align: center;
-  background: rgba(30, 40, 50, 0.8); /*COLOR BOX HABILIDADES*/
+  background: #ffffff;
   padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+  border-radius: 0;
+  box-shadow: var(--box-shadow-card);
 }
 
 .coll {
@@ -191,10 +202,10 @@ body {
 }
 
 .skills-bar-container h3 {
-    font-size: 1.25em;
-    color: #fff;
-    margin: 0;
-    font-weight: 700;
+  font-size: 1.25em;
+  color: #000;
+  margin: 0;
+  font-weight: 700;
 }
 
 /* EDUCACION Y EXPERIENCIA */
@@ -209,11 +220,12 @@ body {
 }
 
 .expbox {
-  background: rgba(30, 40, 50, 0.8); /*COLOR BOX EDUCACIÓN*/
+  background: #ffffff; /* caja blanca */
   padding: 16px 8px; 
-  border-radius: 10px;
-  border-left: 5px solid #99dfec;
+  border-radius: 0; /* bordes rectos */
+  border-left: none; /* sin línea celeste */
   margin-bottom: 12px;
+  box-shadow: var(--box-shadow-card);
 }
 
 .company_logo {
@@ -286,9 +298,9 @@ body {
 }
 
 .expdes {
-    color: #ddd;
-    margin-top: 15px;
-    line-height: 1.8;
+  color: #333;
+  margin-top: 15px;
+  line-height: 1.8;
 }
 
 /* PROYECTOS */
@@ -306,7 +318,7 @@ body {
 
 .card:hover {
     transform: translateY(2px) scale(1.005); 
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 22px #111111;
     filter: brightness(1);
 }
 
@@ -324,6 +336,14 @@ body {
     line-height: 1.6;
 }
 
+/* Forzar tipografía negra en las cards de proyectos (sobre text-light/bg-dark) */
+.projectgrid .card { color: #000 !important; }
+.projectgrid .card .card-title,
+.projectgrid .card .card-text { color: #000 !important; }
+/* Mantener el botón "Ver Más" con tipografía blanca, incluso si el enlace hereda color */
+.projectgrid .card .learnmore a,
+.projectgrid .card .shrink-border { color: #fff !important; }
+
 .learnmore {
     display: flex;
     justify-content: center;
@@ -332,7 +352,7 @@ body {
 }
 
 .shrink-border {
-    background: #6c7172; /*COLOR BOX VER MÁS*/
+    background: #1f1f1f; /*COLOR BOX VER MÁS*/
     color: #ffffff;
     border: none;
     padding: 10px 35px;
@@ -348,7 +368,7 @@ body {
     min-height: 420px;      
     display: flex;
     flex-direction: column;
-    border-radius: 15px;      
+  border-radius: 0;      
 }
 
 /* Forzar que la imagen mantenga proporción y la body ocupe el resto */
@@ -373,7 +393,7 @@ body {
     margin: 9px auto 0;      
     height: auto;
     object-fit: contain;
-    border-radius: 8px;       
+  border-radius: 0;       
     box-sizing: border-box;
 }
 
@@ -438,7 +458,7 @@ body {
     position: fixed;
     top: 56px;
     right: 12px;
-    background: rgba(33,48,63,0.98); /* COLOR BOX MENU */
+    background: #171717; /* COLOR BOX MENU */
     border-radius: 8px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.5);
     padding: 10px;
@@ -620,5 +640,138 @@ body { background: var(--bg-color) !important }
 .skill_col > div { background: var(--skill-box) !important }
 .expbox { background: var(--edu-box) !important }
 .experiencecol .expbox, .expbox.exp-laboral { background: var(--exp-box) !important }
-.projectgrid .card, .card { background: var(--project-box) !important; border-color: rgba(255,255,255,0.08) !important }
+.projectgrid .card, .card { background: var(--project-box) !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: var(--box-shadow-card); border-radius: 0 !important }
+
+/* ================= NUEVA SECCIÓN: EDUCACIÓN + HABILIDADES ================= */
+.edu-skill-section { padding: 8px 20px 0 }
+.edu-skill-container {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* columnas iguales para que la línea quede centrada en el gap */
+  gap: 48px; /* más separación respecto a la línea central */
+  align-items: start;
+  position: relative;
+}
+
+/* Línea vertical divisoria al centro (solo desktop) */
+.edu-skill-container::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 4px; /* un poco más delgada para verse menos invasiva */
+  transform: translateX(-50%);
+  background: #2f2a72; /* tono púrpura translúcido */
+  border-radius: 3px;
+}
+
+/* colchón interno para separar aún más del divisor central */
+.edu-col { padding-right: 13px }
+.skills-col { padding-left: 13px }
+
+.subheading { font-size: 2rem; font-weight: 800; color: #000000; margin: 6px 0 14px; text-align: left }
+
+/* Educación: tarjetas en timeline vertical sutil */
+.timeline { position: relative; margin-left: 0 }
+.timeline::before { display: none }
+
+.edu-card {
+  position: relative;
+  margin-left: 0; /* sin línea lateral, sin desplazamiento */
+  background: #ffffff;
+  border-radius: 0;
+  padding: 22px 18px; /* un poco más alta */
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  box-shadow: var(--box-shadow-card);
+}
+.edu-card + .edu-card { margin-top: 100px } /* DISTANCIA BOXES EDUCACIÓN */
+/* Eliminar círculo azul en la línea del timeline */
+.edu-card::before { display: none }
+
+/* Merged education card styles */
+.edu-card.edu-merged { display: block; padding: 22px; border-radius: 0; box-shadow: var(--box-shadow-card) }
+.edu-card.edu-merged .edu-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.edu-card.edu-merged .edu-row + .edu-row { margin-top: 100px; padding-top: 0; border-top: none } /* DISTANCIA EDUCACIÓN  */
+
+/* Caja para Habilidades similar a Educación */
+.skills-card {
+  background: #ffffff;
+  border-radius: 0;
+  padding: 25px;
+  box-shadow: var(--box-shadow-card);
+  max-width: 97%; /* reducir ancho visual para dar más margen derecho */
+}
+
+/* Estilo específico para la caja de descripción de experiencia (derecha) */
+.expbox.exp-laboral { padding: 30px; font-size: 1.25em; }
+
+.edu-logo { width: 90px; height: 90px; object-fit: contain; background: rgba(0,0,0,0.02); border-radius: 10px; padding: 6px }
+.edu-info { display: grid; gap: 4px }
+.edu-school { font-size: 1.15rem; font-weight: 800; color: #000000 }
+.edu-degree { display: none }
+.edu-field { color: #333333 }
+.edu-meta { color: #333333; font-size: 0.95rem }
+
+/* Habilidades con barras*/
+.skills-list { display: grid; gap: 17.5px; width: 99%; margin-left: 0; margin-right: auto; }
+.skill-name { font-weight: 700; color: #000000; margin-bottom: 6px }
+.skill-bar { position: relative; width: 100%; height: 14px; background: #d9d9d9; border-radius: 10px; overflow: hidden }
+.skill-fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: calc(var(--level, 0.75) * 100%);
+  background: #2f2a72;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 8px;
+  color: #fff; font-weight: 500; font-size: 0.7rem; /* TAMAÑO FONT PORCENTAJES*/
+  transition: width 0.8s ease;
+}
+.skill-pct { opacity: 0.95 }
+
+/* Responsive para la nueva sección */
+@media (max-width: 992px) {
+  .edu-skill-container { grid-template-columns: 1fr; gap: 24px }
+  .subheading { text-align: center }
+  .edu-skill-container::after { display: none }
+  .edu-col, .skills-col { padding: 0 }
+}
+
+/* ================= SECCIÓN EXPERIENCIA (alineada y con barra central) ================= */
+.experience-section { padding: 8px 20px 0 }
+.experience-container {
+  max-width: 1350px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  position: relative;
+  align-items: start;
+}
+.experience-container::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: #2f2a72;
+  border-radius: 3px;
+}
+.exp-left { padding-right: 13px }
+.exp-right { padding-left: 13px }
+/* mismo ancho visual que la box de habilidades */
+.exp-right .expbox { max-width: 97%; margin-left: 0 }
+
+@media (max-width: 992px) {
+  .experience-container { grid-template-columns: 1fr; gap: 24px }
+  .experience-container::after { display: none }
+  .exp-left, .exp-right { padding: 0 }
+  .exp-right .expbox { max-width: 100% }
+}
 
