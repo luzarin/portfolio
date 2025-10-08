@@ -288,7 +288,7 @@ body, html{
     width:800px;
     height:auto;
     color:#bbb;
-    padding:25px;
+    padding:25px 25px 12px 25px; /* reducir espacio inferior */
     font-size: 1.1rem; /* aumentado un poco */
     max-height:none;
     max-width:1000px;
@@ -312,8 +312,8 @@ body, html{
     body, html { height: auto; overflow-y: auto; }
     /* Asegurar espacio bajo navbar fijo solo aquí (override del global) */
     body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
-    /* Evitar que el UI inferior del navegador tape el final */
-    body { padding-bottom: max(24px, env(safe-area-inset-bottom)) !important; }
+    /* Evitar que el UI inferior del navegador tape el final (aún menor espacio) */
+    body { padding-bottom: max(6px, env(safe-area-inset-bottom)) !important; }
 
     /* Layout: images first, centered */
     /* gallery spacing: remove extra top padding to avoid double navbar space */
@@ -336,7 +336,7 @@ body, html{
     /* body top space is handled by index/style; don't add more here */
 
     /* Center the container so links/title are centered; paragraphs remain left-aligned inside */
-    .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 48px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 34px auto !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; height: auto !important; max-height: none !important; }
+    .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 8px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 20px auto 8px auto !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; height: auto !important; max-height: none !important; }
 
     /* reduce gap below title so links are closer */
     .project-text .coll { display: block; font-size: clamp(1.1rem, 4.2vw, 1.5rem) !important; margin: 2px 0 4px 0 !important; text-align: center !important; line-height: 1.15 !important; }

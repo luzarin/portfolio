@@ -54,15 +54,18 @@ function openProjectModal(cardElement) {
 if (modalClose) modalClose.addEventListener('click', () => modal.style.display = 'none');
 if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
-// delegate "Ver Más" clicks
+// delegate "Ver Más" clicks: navigate by default; only open modal for explicit modal links
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.shrink-border');
   if (!btn) return;
-  if (window.innerWidth <= 768) {
+  // If it's an anchor pointing to a page, let the browser navigate
+  const href = btn.getAttribute('href');
+  const explicitModal = btn.dataset && btn.dataset.modal === 'true';
+  if (explicitModal || !href || href === '#') {
     const card = btn.closest('.card');
     if (card) {
-      openProjectModal(card);
       e.preventDefault();
+      openProjectModal(card);
     }
   }
 });
