@@ -129,7 +129,7 @@ body, html{
     margin: 0;
     width:100%;
     height:auto;
-    max-height: calc(100vh - 260px);
+    max-height: none;
     max-width: var(--main-image-w); /* <-- achicar aquí */
     margin-top: 2rem;
     padding-top: 1.75rem; /* MARGEN SUPERIOR IMAGEN GRANDE */
@@ -146,7 +146,7 @@ body, html{
 .mySlides img {
     width:100%;
     height:auto;
-    max-height: calc(100vh - 360px);
+    max-height: none;
     object-fit: cover;
     display: block;
     border-radius: 6px;
@@ -284,11 +284,11 @@ body, html{
     margin: 0;
     position: relative;
     width:800px;
-    height:1000px auto;
+    height:auto;
     color:#bbb;
     padding:25px;
     font-size: 1.1rem; /* aumentado un poco */
-    max-height:800px;
+    max-height:none;
     max-width:1000px;
     min-width:390px;
     margin-top:90px;
@@ -332,7 +332,7 @@ body, html{
     /* body top space is handled by index/style; don't add more here */
 
     /* Center the container so links/title are centered; paragraphs remain left-aligned inside */
-    .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 48px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 34px auto !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; }
+    .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 48px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 34px auto !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; height: auto !important; max-height: none !important; }
 
     /* reduce gap below title so links are closer */
     .project-text .coll { display: block; font-size: clamp(1.1rem, 4.2vw, 1.5rem) !important; margin: 2px 0 4px 0 !important; text-align: center !important; line-height: 1.15 !important; }
