@@ -11,6 +11,9 @@ body, html{
     overscroll-behavior-y: none; /* evitar cadenas de desplazamiento raras en contenedores internos */
 }
 
+/* Tipografía global para páginas de proyecto */
+body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+
 .nav{
     position: fixed;
     top: 0;
