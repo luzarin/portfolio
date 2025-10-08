@@ -110,21 +110,22 @@ body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     width:100%;
     display:flex;
     justify-content: center;
-    /* usar la altura disponible teniendo en cuenta la navbar de 100px */
-    min-height: calc(100vh - 100px);
+    /* usar la altura disponible teniendo en cuenta la navbar - ajuste sutil */
+    min-height: calc(100vh - 80px);
+    max-height: 100vh;
     align-items: start; /* alinear al inicio para que thumbnails queden debajo de la main image */
-    gap: 4rem;               /* increased gap to separate gallery and text */
-    padding-top: 6rem;      /* más separación del navbar */
-    padding-left: 2rem;     /* margen lateral para que las imágenes no toquen el borde */
-    padding-right: 2rem;
-    padding-bottom: 1.5rem; /* espacio inferior razonable */
+    gap: 3rem;               /* gap intermedio */
+    padding-top: 5rem;      /* padding intermedio */
+    padding-left: 1.5rem;     /* margen lateral */
+    padding-right: 1.5rem;
+    padding-bottom: 1rem; /* padding inferior menor */
     box-sizing: border-box;
     margin-bottom: 0;       /* quitar margin-bottom grande */
 }
 
 /* reducir ancho de la imagen principal para que no ocupe toda la pantalla */
 :root {
-    /* ancho objetivo para la imagen principal y la fila de miniaturas */
+    /* ancho objetivo para la imagen principal y la fila de miniaturas - tamaño original */
     --main-image-w: 360px;
 }
 
@@ -134,8 +135,8 @@ body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
     height:auto;
     max-height: none;
     max-width: var(--main-image-w); /* <-- achicar aquí */
-    margin-top: 2rem;
-    padding-top: 1.75rem; /* MARGEN SUPERIOR IMAGEN GRANDE */
+    margin-top: 1.5rem;
+    padding-top: 1rem; /* MARGEN SUPERIOR IMAGEN GRANDE - restaurado */
     padding-left: 0;
     padding-right: 0;
     box-sizing: border-box;
@@ -149,8 +150,8 @@ body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 .mySlides img {
     width:100%;
     height:auto;
-    max-height: none;
-    object-fit: cover;
+    max-height: calc(100vh - 200px); /* límite más generoso */
+    object-fit: cover; /* restaurar cover */
     display: block;
     border-radius: 6px;
     /* opcional: limitar ancho por si se usa fuera del contenedor */
@@ -186,7 +187,7 @@ body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 }
 .column img {
     width: 100%;
-    height: 100px;          /* <-- aumentado: miniaturas un poco más altas */
+    height: 90px;          /* <-- tamaño intermedio para miniaturas */
     object-fit: cover;
     display: block;
     border-radius: 4px;
@@ -288,31 +289,38 @@ body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 .project-text{
     margin: 0;
     position: relative;
-    width:800px;
+    width:750px; /* tamaño intermedio */
     height:auto;
     color:#000000;
-    padding:25px 25px 12px 25px; /* reducir espacio inferior */
-    font-size: 1.1rem; /* aumentado un poco */
-    max-height:none;
-    max-width:1000px;
-    min-width:390px;
-    margin-top:90px;
-    margin-right:5%;
+    padding:22px 22px 10px 22px; /* padding intermedio */
+    font-size: 1.05rem; /* tamaño intermedio */
+    max-height: calc(100vh - 120px); /* límite más generoso */
+    max-width:950px;
+    min-width:380px;
+    margin-top:75px; /* margen intermedio */
+    margin-right:4%;
     text-align: justify;
-    margin-left: 2rem;      /* added: moves text to the right */
+    margin-left: 1.5rem;      /* margen intermedio */
+    overflow-y: auto; /* permitir scroll interno solo si es necesario */
+    box-sizing: border-box;
 }
 
 .indent{
-    padding-left: 2em;
-    margin-right:20px;
+    padding-left: 2em; /* restaurar indentación original */
+    margin-right:20px; /* restaurar margen derecho */
 }
 
 /* Final consolidated mobile rules (override earlier desktop rules) */
 @media screen and (max-width:800px) {
     :root { --main-image-w: 90vw; }
 
-    /* Ensure page can scroll on mobile */
-    body, html { height: auto; overflow-y: auto; }
+    /* Ensure page can scroll on mobile - forzar scroll */
+    body, html { 
+        height: auto !important; 
+        overflow-y: auto !important; 
+        overflow-x: hidden !important;
+        max-height: none !important;
+    }
     /* Asegurar espacio bajo navbar fijo solo aquí (override del global) */
     body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
     /* Evitar que el UI inferior del navegador tape el final (aún menor espacio) */
@@ -320,7 +328,15 @@ body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Ro
 
     /* Layout: images first, centered */
     /* gallery spacing: remove extra top padding to avoid double navbar space */
-    .imageContainer-large { display: block !important; text-align: center !important; padding-top: 0 !important; padding-bottom: 2.5rem !important; }
+    .imageContainer-large { 
+        display: block !important; 
+        text-align: center !important; 
+        padding-top: 0 !important; 
+        padding-bottom: 2.5rem !important; 
+        min-height: auto !important;
+        max-height: none !important;
+        height: auto !important;
+    }
     .imageContainer { width: 92% !important; max-width: 520px !important; margin: 12px auto 12px auto !important; padding-top: 0.75rem !important; margin-bottom: 12px !important; }
     .imageContainer img { display: block; margin: 0 auto; }
     /* increase gap under thumbnails to separate title */

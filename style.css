@@ -731,7 +731,7 @@ body { background: var(--bg-color) !important }
 .expbox.exp-laboral { padding: 30px; font-size: 1.25em; }
 
 .edu-logo { width: 90px; height: 90px; object-fit: contain; background: rgba(0,0,0,0.02); border-radius: 10px; padding: 6px }
-.edu-info { display: grid; gap: 4px }
+.edu-info { display: grid; gap: 12px }
 .edu-school { font-size: 1.15rem; font-weight: 800; color: #000000 }
 .edu-degree { display: none }
 .edu-field { color: #333333 }
