@@ -10,15 +10,15 @@
   --box-shadow-card: 0 8px 24px rgba(0,0,0,0.08); /* sombra unificada */
 }
 
-*{ box-sizing: border-box; margin:0; padding:0 }
+*{ box-sizing: border-box; margin:0; padding:0; font-family: 'Noto Sans', sans-serif !important; }
 html, body { overflow-x: hidden; max-width:100%; touch-action: pan-y; -ms-touch-action: pan-y }
-/* Reservar el espacio del scroll para evitar micro-desplazamientos horizontales entre páginas */
-html { scrollbar-gutter: stable both-edges; }
+/* Reservar el espacio del scroll solo en el lado derecho */
+html { scrollbar-gutter: stable; }
 img, .card, .projectgrid, .experiencecol, .skill_col { max-width:100% }
 .container, .projectgrid, .experiencecol { overflow-x:hidden }
 
 body {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Noto Sans', sans-serif; /* Cambiar todo a Noto Sans */
   line-height: 1.6;
   color: #111; /* textos en negro */
 }
@@ -31,7 +31,7 @@ body {
     z-index: 4000;
     padding: 7.5px 0;
     transition: all 0.3s ease;
-  background: #171717; /* barra superior oscura */
+    background: #171717; /* barra superior oscura */
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -43,7 +43,7 @@ body {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto; /* centrar el bloque dentro del ancho máximo */
-  padding: 0 0px; /* exactamente igual a pag_proyecto.css */
+  padding: 0 0px; /* restaurar padding original */
   height: 48px;
 }
 
@@ -58,7 +58,7 @@ body {
 .navlinks a {
     font-size: 1.2em;
     font-weight: 700;
-  color: #fff; /* texto blanco en navbar oscuro */
+    color: #fff; /* texto blanco en navbar oscuro */
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -66,6 +66,7 @@ body {
     line-height: 48px;
     margin: 0;
     padding: 0;
+    font-family: 'Noto Sans', sans-serif !important; /* Forzar Noto Sans en navbar */
 }
 
 .navlinks {
@@ -137,6 +138,7 @@ body {
   color: #000; /* títulos negros */
   padding: var(--section-title-top) 0 0px;
   font-weight: 700;
+  font-family: 'Noto Sans', sans-serif; /* Cambiar a Noto Sans */
 }
 
 .photoback {
@@ -687,7 +689,7 @@ body { background: var(--bg-color) !important }
 .edu-col { padding-right: 13px }
 .skills-col { padding-left: 13px }
 
-.subheading { font-size: 2rem; font-weight: 800; color: #000000; margin: 6px 0 14px; text-align: left }
+.subheading { font-size: 2rem; font-weight: 800; color: #000000; margin: 6px 0 14px; text-align: left; font-family: 'Noto Sans', sans-serif; }
 
 /* Educación: tarjetas en timeline vertical sutil */
 .timeline { position: relative; margin-left: 0 }
@@ -731,7 +733,7 @@ body { background: var(--bg-color) !important }
 .expbox.exp-laboral { padding: 30px; font-size: 1.25em; }
 
 .edu-logo { width: 90px; height: 90px; object-fit: contain; background: rgba(0,0,0,0.02); border-radius: 10px; padding: 6px }
-.edu-info { display: grid; gap: 12px }
+.edu-info { display: grid; gap: 10px }
 .edu-school { font-size: 1.15rem; font-weight: 800; color: #000000 }
 .edu-degree { display: none }
 .edu-field { color: #333333 }
