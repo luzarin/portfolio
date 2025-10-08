@@ -512,6 +512,8 @@ body {
     margin-bottom: 8px !important;
     scroll-margin-top: 80px;
   }
+  /* Reducir un poco el espacio específicamente para "Sobre mí" en móvil */
+  .myP#about { padding-top: calc(56px + 5px) !important; }
 
   /* navbar: mayor altura y tamaños en móvil */
   .nav .container {
@@ -628,6 +630,11 @@ body {
   .projectgrid {
     padding-bottom: 125px !important;
   }
+}
+
+/* Desktop: aumentar un poco la separación para "Sobre mí" únicamente */
+@media (min-width: 769px) {
+  .myP#about { padding-top: 125px; }
 }
 
 /* Desktop: asegúrate que mobile elements estén ocultos */
@@ -748,10 +755,11 @@ body { background: var(--bg-color) !important }
 
 /* Responsive para la nueva sección */
 @media (max-width: 992px) {
-  .edu-skill-container { grid-template-columns: 1fr; gap: 24px }
+  .edu-skill-container { grid-template-columns: 1fr; gap: 24px; padding-top: 50px }
+  /* Ocultar la barra vertical en móvil */
   .edu-skill-container::after { display: none }
-  .edu-skill-container::before { display: none }
-  .edu-skill-container::after { display: none }
+  /* Mostrar la barra horizontal en móvil (misma coloración) */
+  .edu-skill-container::before { display: block; height: 3px; top: 0; left: 0; right: 0; background: #2f2a72; }
   .edu-col, .skills-col { padding: 0 }
 }
 
