@@ -17,16 +17,110 @@
 #deck-container {
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
 #deck-container canvas {
   z-index: 1;
   background: none;
 }
+
+/* Atribuciones del mapa */
+.map-attribution {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #333;
+  border-radius: 3px;
+  z-index: 1000;
+  font-family: 'Noto Sans', sans-serif;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.map-attribution a {
+  color: #0078A8;
+  text-decoration: none;
+}
+
+.map-attribution a:hover {
+  text-decoration: underline;
+}
+
+/* Leyenda del mapa 3D - exactamente igual que Leaflet */
+.legend-3d {
+  position: absolute;
+  bottom: 60px;
+  right: 8px;
+  line-height: 20px;
+  color: #555;
+  background: white;
+  background: rgba(255,255,255,0.95);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font: 13px/16px Arial, Helvetica, sans-serif;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  border: 1px solid #ccc;
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.legend-3d i {
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  opacity: 0.8;
+  border: 1px solid #999;
+  border-radius: 2px;
+}
+
+.legend-3d h6 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+}
+
+.legend-3d .legend-item {
+  display: block;
+  clear: both;
+  margin-bottom: 4px;
+  font-size: 12px;
+  line-height: 20px;
+}
     </style>
   </head>
   <body>
     <div id="deck-container">
+      <!-- Leyenda del mapa 3D -->
+      <div class="legend-3d">
+        <h6><strong>UF/M² Promedio</strong></h6>
+        <div class="legend-item">
+          <i style="background:#fff5f0"></i> 0–16
+        </div>
+        <div class="legend-item">
+          <i style="background:#fcbea5"></i> 16–43
+        </div>
+        <div class="legend-item">
+          <i style="background:#fb7050"></i> 43–68
+        </div>
+        <div class="legend-item">
+          <i style="background:#d32020"></i> 68–126
+        </div>
+        <div class="legend-item">
+          <i style="background:#67000d"></i> 126+
+        </div>
+      </div>
+      
+      <!-- Atribuciones del mapa -->
+      <div class="map-attribution">
+        © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions" target="_blank">CARTO</a>
+      </div>
     </div>
   </body>
   <script>
@@ -36,8 +130,8 @@
     "bearing": -10,
     "latitude": -33.38539853500361,
     "longitude": -70.53762587362414,
-    "pitch": 50,
-    "zoom": 11.5
+    "pitch": 30,
+    "zoom": 11
   },
   "layers": [
     {
@@ -26087,7 +26181,14 @@
   "views": [
     {
       "@@type": "MapView",
-      "controller": true
+      "controller": {
+        "dragRotate": true,
+        "touchRotate": true,
+        "doubleClickZoom": true,
+        "scrollZoom": true,
+        "dragPan": true,
+        "keyboard": true
+      }
     }
   ]
 };

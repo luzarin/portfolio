@@ -107,6 +107,37 @@ body { font-family: 'Noto Sans', sans-serif; } /* Cambiar todo a Noto Sans */
     margin-right: 40px; /* Ajusta para separar logo del resto del menú */
 }
 
+/* Paridad con index.html - asegurar que el navbar móvil esté bien posicionado */
+@media (min-width: 769px) {
+    .nav .container { 
+        max-width: 1200px !important; 
+        margin: 0 auto !important; 
+        padding: 0 0px !important; 
+        height: 48px !important; 
+    }
+    .navlinks { 
+        gap: 50px !important; 
+        height: 48px !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+    }
+    .navlinks li { 
+        margin: 0 !important; 
+        padding: 0 !important; 
+    }
+    .navlinks li a { 
+        height: 48px !important; 
+        line-height: 48px !important; 
+        padding: 0 6px !important; 
+    }
+    .logo { 
+        margin-right: 40px !important; 
+    }
+    .main_list { 
+        margin-left: 40px !important; 
+    }
+}
+
 /* El contenedor principal ocupa la altura restante y centra el contenido */
 .imageContainer-large{
     width:100%;
@@ -326,6 +357,53 @@ body { font-family: 'Noto Sans', sans-serif; } /* Cambiar todo a Noto Sans */
     }
     /* Asegurar espacio bajo navbar fijo solo aquí (override del global) */
     body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
+    
+    /* Paridad con index.html - navbar móvil correctamente posicionado */
+    .nav .container {
+        padding: 0 12px !important; /* Usar padding de style.css */
+        justify-content: space-between !important;
+        height: 56px !important; /* Altura exacta de style.css */
+    }
+    
+    .logo, .main_list {
+        margin: 0 !important; /* Eliminar márgenes en móvil */
+    }
+    
+    /* Tamaños de fuente exactos de style.css */
+    .logo a {
+        font-size: 1.4rem !important;      /* "Inicio" más grande en móvil */
+        line-height: 56px !important;
+        height: 56px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Mobile menu show/hide */
+    .navlinks { display: none !important; }
+    .mobile-menu-btn { 
+        display: inline-flex !important; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 1.6rem !important;      /* icono del menú más grande - igual que style.css */
+        background: transparent; 
+        border: none; 
+        color: #fff; 
+        padding: 6px 10px; 
+        cursor: pointer;
+        height: 56px !important;
+    }
+    .mobile-menu { position: fixed; top: 56px; right: 12px; background: #171717; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding: 10px; z-index: 2000; min-width: 160px; }
+    .mobile-menu ul { list-style: none; margin:0; padding:0; }
+    .mobile-menu li { padding: 8px 6px; }
+    .mobile-menu a { 
+        color: #fff; 
+        text-decoration: none; 
+        display: block; 
+        font-size: 1.2rem !important;     /* items del menú más grandes - igual que style.css */
+        padding: 10px 12px !important;
+        font-weight: 700 !important; /* negritas en menú móvil */
+    }
+
     /* Evitar que el UI inferior del navegador tape el final (aún menor espacio) */
     body { padding-bottom: max(6px, env(safe-area-inset-bottom)) !important; }
 
@@ -345,14 +423,6 @@ body { font-family: 'Noto Sans', sans-serif; } /* Cambiar todo a Noto Sans */
     /* increase gap under thumbnails to separate title */
     .images { display:flex !important; justify-content:center; gap:8px; max-width:92%; margin: 8px auto 28px; }
     .column { width: 22%; max-width: 22%; }
-
-    /* Mobile menu show/hide */
-    .navlinks { display: none !important; }
-    .mobile-menu-btn { display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.2rem; background: transparent; border: none; color: #fff; padding: 6px 10px; cursor: pointer; }
-    .mobile-menu { position: fixed; top: 56px; right: 12px; background: #171717; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); padding: 10px; z-index: 2000; min-width: 160px; }
-    .mobile-menu ul { list-style: none; margin:0; padding:0; }
-    .mobile-menu li { padding: 8px 6px; }
-    .mobile-menu a { color: #fff; text-decoration: none; display: block; }
 
     /* Text block: ensure it wraps and fits the viewport */
     /* body top space is handled by index/style; don't add more here */

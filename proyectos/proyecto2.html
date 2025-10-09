@@ -124,6 +124,68 @@
             line-height: 20px;
         }
         
+        /* Control de opacidad para Leaflet */
+        .opacity-control {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.95);
+            padding: 8px 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            border: 1px solid #ccc;
+            z-index: 1000;
+            font-family: 'Noto Sans', sans-serif;
+            min-width: 120px;
+        }
+        
+        .opacity-control label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+        
+        .opacity-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .opacity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .opacity-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .opacity-value {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+        
         /* Responsive para móviles */
         @media (max-width: 768px) {
             .page-wrapper {
@@ -168,8 +230,14 @@
             <!-- Columna izquierda: Mapa de Leaflet -->
             <div class="map-column">
                 <div class="map-title">Mapa de Análisis Espacial</div>
-                <div class="map-container">
+                <div class="map-container" style="position: relative;">
                     <div id="leafletMap"></div>
+                    <!-- Control de opacidad para Leaflet -->
+                    <div class="opacity-control">
+                        <label for="leaflet-opacity">Cambiar Transparencia</label>
+                        <input type="range" id="leaflet-opacity" class="opacity-slider" min="0" max="100" value="80">
+                        <div class="opacity-value" id="leaflet-opacity-value">80%</div>
+                    </div>
                 </div>
             </div>
             
@@ -388,6 +456,21 @@
         };
         
         legend.addTo(map);
+        
+        // Control de opacidad para Leaflet
+        var opacitySlider = document.getElementById('leaflet-opacity');
+        var opacityValue = document.getElementById('leaflet-opacity-value');
+        
+        opacitySlider.addEventListener('input', function() {
+            var opacity = this.value / 100;
+            opacityValue.textContent = this.value + '%';
+            
+            if (hexagonosLayer) {
+                hexagonosLayer.setStyle({
+                    fillOpacity: opacity
+                });
+            }
+        });
     }
     
     // Función para transformar coordenadas Web Mercator a geográficas
