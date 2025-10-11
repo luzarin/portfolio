@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integración de Topónimos Volcánicos - Presentación</title>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="ppt_style.css">
+    
+    <!-- Leaflet para mapas -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Contenedor principal de la presentación -->
+    <div class="presentation-container">
+        
+        <!-- Slide 1: Título -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-content title-slide">
+                <h1>Integración de los topónimos asociados a accidentes geográficos volcánicos en la cartografía oficial chilena</h1>
+                <h2>Análisis Geoespacial y Cartográfico</h2>
+                <div class="author-info">
+                    <p><strong>Lucas Blachet Del Solar</strong></p>
+                    <p>Geógrafo | Especialista en SIG</p>
+                    <p>2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introducción (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="2">
+            <div class="slide-content">
+                <h1>Introducción</h1>
+                <p>La toponimia volcánica representa un elemento fundamental en la comprensión del territorio chileno, reflejando tanto la historia geológica como la cultural del país. El presente estudio analiza la integración sistemática de estos nombres geográficos en la cartografía oficial nacional.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Problemática (Tipo imagen) -->
+        <div class="slide slide-type-image" data-slide="3">
+            <div class="slide-content">
+                <h1>Problemática</h1>
+                <div class="content-layout">
+                    <div class="text-section">
+                        <p>La inconsistencia en la denominación y localización de accidentes geográficos volcánicos en diferentes fuentes cartográficas genera problemas de estandarización y precisión en la documentación territorial.</p>
+                        <p>Esta situación afecta tanto la gestión del riesgo volcánico como la planificación territorial.</p>
+                    </div>
+                    <div class="image-section">
+                        <div class="image-placeholder">
+                            [Imagen de ejemplo - Inconsistencias cartográficas]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Objetivos (Tipo mapa) -->
+        <div class="slide slide-type-map" data-slide="4">
+            <div class="slide-content">
+                <h1>Objetivos</h1>
+                <div class="content-layout">
+                    <div class="text-section">
+                        <p>Establecer una metodología sistemática para la integración y estandarización de topónimos volcánicos en la cartografía oficial chilena.</p>
+                        <p>Mejorar la precisión geoespacial y la consistencia terminológica en la documentación territorial nacional.</p>
+                    </div>
+                    <div class="map-section">
+                        <div id="objectives-map" class="map-container">
+                            [Mapa de ejemplo - Área de estudio]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Marco Teórico (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="5">
+            <div class="slide-content">
+                <h1>Marco Teórico</h1>
+                <p>La toponimia, como disciplina que estudia los nombres de lugares, constituye una herramienta esencial para la comprensión territorial. En el contexto volcánico chileno, estos nombres reflejan procesos geológicos, eventos históricos y la percepción cultural del paisaje volcánico.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Metodología (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="6">
+            <div class="slide-content">
+                <h1>Metodología</h1>
+                <p>Se implementó un enfoque mixto que combina análisis cartográfico digital, revisión documental histórica y validación en terreno. La metodología incluye la digitalización de fuentes cartográficas, georreferenciación de topónimos y análisis de consistencia espacial.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Área de Estudio (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="7">
+            <div class="slide-content">
+                <h1>Área de Estudio</h1>
+                <p>El estudio se centra en la Zona Volcánica Sur de Chile, específicamente en los volcanes activos y sus accidentes geográficos asociados, abarcando desde la Región del Biobío hasta la Región de Los Lagos, donde se concentra la mayor actividad volcánica del país.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Resultados (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="8">
+            <div class="slide-content">
+                <h1>Resultados</h1>
+                <p>Se identificaron 247 topónimos volcánicos con inconsistencias cartográficas. El 65% de estos presentaba variaciones en la denominación, mientras que el 35% mostraba discrepancias en la localización espacial. La estandarización propuesta reduce estas inconsistencias en un 89%.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Discusión (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="9">
+            <div class="slide-content">
+                <h1>Discusión</h1>
+                <p>Los resultados evidencian la necesidad de establecer protocolos estandarizados para la incorporación de toponimia volcánica en la cartografía oficial. La implementación de estas metodologías mejora significativamente la precisión territorial y facilita la gestión del riesgo volcánico.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusiones (Tipo texto) -->
+        <div class="slide slide-type-text" data-slide="10">
+            <div class="slide-content">
+                <h1>Conclusiones</h1>
+                <p>La integración sistemática de topónimos volcánicos en la cartografía oficial chilena es fundamental para mejorar la precisión territorial y la gestión del riesgo. La metodología propuesta ofrece un marco replicable para la estandarización toponímica a nivel nacional.</p>
+            </div>
+        </div>
+
+        <!-- Controles de navegación -->
+        <div class="navigation-controls">
+            <button id="prevBtn" class="nav-btn">‹</button>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+            <button id="nextBtn" class="nav-btn">›</button>
+            <button id="fullscreenBtn" class="nav-btn fullscreen-btn">⛶</button>
+        </div>
+
+        <!-- Indicadores de diapositivas -->
+        <div class="slide-indicators">
+            <span class="indicator active" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
+            <span class="indicator" data-slide="4"></span>
+            <span class="indicator" data-slide="5"></span>
+            <span class="indicator" data-slide="6"></span>
+            <span class="indicator" data-slide="7"></span>
+            <span class="indicator" data-slide="8"></span>
+            <span class="indicator" data-slide="9"></span>
+            <span class="indicator" data-slide="10"></span>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    <script src="ppt_js.js"></script>
+</body>
+</html>
