@@ -115,6 +115,22 @@ class PowerPointPresentation {
                     break;
             }
         });
+        
+        // Escuchar cambios de fullscreen desde el navegador
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                // Salió de fullscreen
+                this.isFullscreen = false;
+                document.body.classList.remove('fullscreen-mode');
+                // Actualizar transforms de slides para vista normal
+                this.slides.forEach(slide => {
+                    if (slide.classList.contains('active')) {
+                        slide.style.transform = 'translateX(0) scale(0.65)';
+                    }
+                });
+                console.log('Saliendo de modo pantalla completa');
+            }
+        });
     }
     
     setupSwipeControls() {
@@ -150,27 +166,49 @@ class PowerPointPresentation {
         console.log('Mostrando slide:', index, 'desde:', this.currentSlide);
         this.isTransitioning = true;
         
-        // Ocultar diapositiva actual
+        // Determinar dirección de la animación
+        const direction = index > this.currentSlide ? 'next' : 'prev';
+        
+        // Ocultar diapositiva actual con animación lateral
         if (this.slides[this.currentSlide]) {
             this.slides[this.currentSlide].classList.remove('active');
+            if (direction === 'next') {
+                this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
+                    'translateX(-200px) scale(1)' : 'translateX(-200px) scale(0.65)';
+            } else {
+                this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
+                    'translateX(200px) scale(1)' : 'translateX(200px) scale(0.65)';
+            }
+        }
+        
+        // Preparar nueva diapositiva desde el lado opuesto
+        this.currentSlide = index;
+        if (direction === 'next') {
+            this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
+                'translateX(200px) scale(1)' : 'translateX(200px) scale(0.65)';
+        } else {
+            this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
+                'translateX(-200px) scale(1)' : 'translateX(-200px) scale(0.65)';
         }
         
         // Mostrar nueva diapositiva
-        this.currentSlide = index;
-        this.slides[this.currentSlide].classList.add('active');
-        
-        // Actualizar controles
-        this.updateSlideCounter();
-        this.updateIndicators();
-        this.updateNavigationButtons();
-        
-        // Cargar mapa si es necesario
-        this.loadSlideMap(index);
-        
-        // Permitir nueva transición después de un delay
         setTimeout(() => {
-            this.isTransitioning = false;
-        }, 500);
+            this.slides[this.currentSlide].classList.add('active');
+            this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
+                'translateX(0) scale(1)' : 'translateX(0) scale(0.65)';
+            
+            this.updateSlideCounter();
+            this.updateIndicators();
+            this.updateNavigationButtons();
+            
+            // Cargar mapa si es necesario
+            this.loadSlideMap(index);
+            
+            // Permitir nueva transición después de un delay
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 300);
+        }, 50);
     }
     
     nextSlide() {
@@ -234,6 +272,12 @@ class PowerPointPresentation {
             document.documentElement.requestFullscreen().then(() => {
                 this.isFullscreen = true;
                 document.body.classList.add('fullscreen-mode');
+                // Actualizar transforms de slides para fullscreen
+                this.slides.forEach(slide => {
+                    if (slide.classList.contains('active')) {
+                        slide.style.transform = 'translateX(0) scale(1)';
+                    }
+                });
                 console.log('Entrando en modo pantalla completa');
             }).catch(err => {
                 console.error('Error al entrar en pantalla completa:', err);
@@ -242,6 +286,12 @@ class PowerPointPresentation {
             document.exitFullscreen().then(() => {
                 this.isFullscreen = false;
                 document.body.classList.remove('fullscreen-mode');
+                // Actualizar transforms de slides para vista normal
+                this.slides.forEach(slide => {
+                    if (slide.classList.contains('active')) {
+                        slide.style.transform = 'translateX(0) scale(0.65)';
+                    }
+                });
                 console.log('Saliendo de modo pantalla completa');
             }).catch(err => {
                 console.error('Error al salir de pantalla completa:', err);
@@ -254,6 +304,12 @@ class PowerPointPresentation {
             document.exitFullscreen().then(() => {
                 this.isFullscreen = false;
                 document.body.classList.remove('fullscreen-mode');
+                // Actualizar transforms de slides para vista normal
+                this.slides.forEach(slide => {
+                    if (slide.classList.contains('active')) {
+                        slide.style.transform = 'translateX(0) scale(0.65)';
+                    }
+                });
             });
         }
     }
