@@ -724,7 +724,7 @@ body {
 
 .slide-type-map .content-layout {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1.7fr 1.3fr;
     gap: 40px;
     flex: 1;
     align-items: start;
@@ -738,9 +738,10 @@ body {
     text-align: justify;
 }
 
-.slide-type-map .map-section {
+.slide-type-map .map-section {  /* TAMAÑO MAPA 1 */
     height: 450px;
-    min-height: 400px;
+    min-height: 950px;
+    margin-top: -50px;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
