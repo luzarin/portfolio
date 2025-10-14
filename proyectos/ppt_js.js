@@ -5,8 +5,10 @@ class PowerPointPresentation {
         this.totalSlides = 0;
         this.slides = [];
         this.maps = {};
-        this.isTransitioning = false;
-        this.isFullscreen = false;
+    this.isTransitioning = false;
+    this.isFullscreen = false;
+    this.baseScale = 0.65;
+    this.currentScale = this.baseScale;
         
         this.init();
     }
@@ -122,12 +124,9 @@ class PowerPointPresentation {
                 // Salió de fullscreen
                 this.isFullscreen = false;
                 document.body.classList.remove('fullscreen-mode');
-                // Actualizar transforms de slides para vista normal
-                this.slides.forEach(slide => {
-                    if (slide.classList.contains('active')) {
-                        slide.style.transform = 'translateX(0) scale(0.65)';
-                    }
-                });
+                // Restaurar transform base en todas
+                this.currentScale = this.baseScale;
+                this.applyScaleToAllSlides();
                 console.log('Saliendo de modo pantalla completa');
             }
         });
@@ -173,29 +172,24 @@ class PowerPointPresentation {
         if (this.slides[this.currentSlide]) {
             this.slides[this.currentSlide].classList.remove('active');
             if (direction === 'next') {
-                this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
-                    'translateX(-200px) scale(1)' : 'translateX(-200px) scale(0.65)';
+                this.slides[this.currentSlide].style.transform = `translateX(-200px) scale(${this.currentScale})`;
             } else {
-                this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
-                    'translateX(200px) scale(1)' : 'translateX(200px) scale(0.65)';
+                this.slides[this.currentSlide].style.transform = `translateX(200px) scale(${this.currentScale})`;
             }
         }
         
         // Preparar nueva diapositiva desde el lado opuesto
         this.currentSlide = index;
         if (direction === 'next') {
-            this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
-                'translateX(200px) scale(1)' : 'translateX(200px) scale(0.65)';
+            this.slides[this.currentSlide].style.transform = `translateX(200px) scale(${this.currentScale})`;
         } else {
-            this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
-                'translateX(-200px) scale(1)' : 'translateX(-200px) scale(0.65)';
+            this.slides[this.currentSlide].style.transform = `translateX(-200px) scale(${this.currentScale})`;
         }
         
         // Mostrar nueva diapositiva
         setTimeout(() => {
             this.slides[this.currentSlide].classList.add('active');
-            this.slides[this.currentSlide].style.transform = this.isFullscreen ? 
-                'translateX(0) scale(1)' : 'translateX(0) scale(0.65)';
+            this.slides[this.currentSlide].style.transform = `translateX(0) scale(${this.currentScale})`;
             
             this.updateSlideCounter();
             this.updateIndicators();
@@ -267,17 +261,39 @@ class PowerPointPresentation {
         }
     }
     
+    // Calcula y aplica un scale uniforme para encajar 1920x1080 en viewport (sin márgenes)
+    applyFullscreenFit() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const baseW = 1920;
+        const baseH = 1080;
+        this.currentScale = Math.min(vw / baseW, vh / baseH);
+        this.applyScaleToAllSlides();
+    }
+
+    applyScaleToAllSlides() {
+        // Escala uniforme aplicada a todas las slides; la activa queda centrada
+        this.slides.forEach((slide) => {
+            slide.style.transformOrigin = 'center center';
+            if (slide.classList.contains('active')) {
+                slide.style.transform = `translateX(0) scale(${this.currentScale})`;
+            } else {
+                // pre-posicionar fuera de pantalla pero con misma escala
+                slide.style.transform = `translateX(200px) scale(${this.currentScale})`;
+            }
+        });
+    }
+    
     toggleFullscreen() {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen().then(() => {
                 this.isFullscreen = true;
                 document.body.classList.add('fullscreen-mode');
-                // Actualizar transforms de slides para fullscreen
-                this.slides.forEach(slide => {
-                    if (slide.classList.contains('active')) {
-                        slide.style.transform = 'translateX(0) scale(1)';
-                    }
-                });
+                // Ajustar escala para encajar pantalla completa
+                this.applyFullscreenFit();
+                // Recalcular al redimensionar (cambios de barra de tareas, etc.)
+                this._resizeHandler = () => this.applyFullscreenFit();
+                window.addEventListener('resize', this._resizeHandler);
                 console.log('Entrando en modo pantalla completa');
             }).catch(err => {
                 console.error('Error al entrar en pantalla completa:', err);
@@ -286,12 +302,13 @@ class PowerPointPresentation {
             document.exitFullscreen().then(() => {
                 this.isFullscreen = false;
                 document.body.classList.remove('fullscreen-mode');
-                // Actualizar transforms de slides para vista normal
-                this.slides.forEach(slide => {
-                    if (slide.classList.contains('active')) {
-                        slide.style.transform = 'translateX(0) scale(0.65)';
-                    }
-                });
+                // Volver a escala base de visualización normal en todas
+                this.currentScale = this.baseScale;
+                this.applyScaleToAllSlides();
+                if (this._resizeHandler) {
+                    window.removeEventListener('resize', this._resizeHandler);
+                    this._resizeHandler = null;
+                }
                 console.log('Saliendo de modo pantalla completa');
             }).catch(err => {
                 console.error('Error al salir de pantalla completa:', err);
@@ -330,86 +347,78 @@ class PowerPointPresentation {
             return;
         }
         
+        // Limpiar contenedor si ya existe un mapa
+        mapContainer.innerHTML = '';
+        
         try {
-            // Crear mapa centrado en Chile volcánico
+            // Crear mapa NUEVO centrado en Chile volcánico
             const map = L.map('results-map', {
-                center: [-39.5, -72.0],
-                zoom: 6,
+                center: [-25.0, -70.0],
+                zoom: 7,
                 zoomControl: true,
-                scrollWheelZoom: true
+                scrollWheelZoom: true,
+                preferCanvas: true
             });
             
-            // Agregar capa base
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                maxZoom: 18
+            // Agregar capa base CartoDB
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
             }).addTo(map);
             
             // Cargar GeoJSON de accidentes volcánicos
             fetch('ppt/acc_geo.geojson')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar el GeoJSON: ' + response.status);
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    console.log('GeoJSON cargado:', data);
-                    console.log('Número de features:', data.features.length);
+                    console.log('GeoJSON cargado. Features:', data.features.length);
                     
-                    L.geoJSON(data, {
-                        // Usar las coordenadas LAT/LONG del properties en vez del geometry
-                        pointToLayer: function(feature, latlng) {
-                            // Crear punto usando LAT y LONG de properties
-                            const lat = feature.properties.LAT;
-                            const lon = feature.properties.LONG;
-                            const tipoAccid = feature.properties.Tipo_accid;
+                    // Procesar cada feature
+                    data.features.forEach(feature => {
+                        const lat = feature.properties.LAT;
+                        const lon = feature.properties.LONG;
+                        const tipoAccid = feature.properties.Tipo_accid;
+                        
+                        if (lat && lon) {
+                            // Definir color y tamaño
+                            let color, radius;
+                            if (tipoAccid === 'ESTR') {
+                                color = '#fb5a5a';
+                                radius = 3.75;
+                            } else {
+                                color = '#0ed3e4';
+                                radius = 3.5;
+                            }
                             
-                            if (lat && lon) {
-                                const newLatLng = L.latLng(lat, lon);
-                                
-                                // Diferenciar colores y tamaños según tipo de accidente
-                                let color, radius;
-                                if (tipoAccid === 'ESTR') {
-                                    // Estratovolcanes: rojo, más grande
-                                    color = '#fb5a5a';
-                                    radius = 4.5;
-                                } else {
-                                    // Otros: celeste, más pequeño
-                                    color = '#0ed3e4';
-                                    radius = 3;
-                                }
-                                
-                                return L.circleMarker(newLatLng, {
-                                    radius: radius,
-                                    fillColor: color,
-                                    color: '#000',
-                                    weight: 1,
-                                    opacity: 1,
-                                    fillOpacity: 0.8
-                                });
+                            // Crear marcador
+                            const marker = L.circleMarker([lat, lon], {
+                                radius: radius,
+                                fillColor: color,
+                                color: '#000',
+                                weight: 0.5,
+                                opacity: 1,
+                                fillOpacity: 0.9
+                            });
+                            
+                            // Popup
+                            let popupContent = '<div style="font-size: 12px;">';
+                            if (feature.properties.Toponimo) {
+                                popupContent += `<b>${feature.properties.Toponimo}</b><br>`;
                             }
-                            return null;
-                        },
-                        onEachFeature: function(feature, layer) {
-                            if (feature.properties) {
-                                let popupContent = '<div style="font-size: 14px;">';
-                                if (feature.properties.Toponimo) {
-                                    popupContent += `<b>${feature.properties.Toponimo}</b><br>`;
-                                }
-                                if (feature.properties.Tipo_accid) {
-                                    popupContent += `Tipo: ${feature.properties.Tipo_accid}<br>`;
-                                }
-                                if (feature.properties.Actividad) {
-                                    popupContent += `Actividad: ${feature.properties.Actividad}<br>`;
-                                }
-                                popupContent += '</div>';
-                                layer.bindPopup(popupContent);
+                            if (feature.properties.Tipo_accid) {
+                                popupContent += `Tipo: ${feature.properties.Tipo_accid}<br>`;
                             }
+                            if (feature.properties.Actividad) {
+                                popupContent += `Actividad: ${feature.properties.Actividad}`;
+                            }
+                            popupContent += '</div>';
+                            
+                            marker.bindPopup(popupContent);
+                            marker.addTo(map);
                         }
-                    }).addTo(map);
+                    });
                     
-                    console.log('GeoJSON de accidentes añadido al mapa correctamente');
+                    console.log('Todos los marcadores añadidos');
                 })
                 .catch(error => {
                     console.error('Error cargando GeoJSON:', error);
@@ -418,15 +427,10 @@ class PowerPointPresentation {
             // Guardar referencia
             this.maps['results-map'] = map;
             
-            console.log('Mapa de resultados inicializado correctamente');
-            
-            // Forzar recalculo del tamaño del mapa
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 100);
+            console.log('Mapa de resultados creado');
             
         } catch (error) {
-            console.error('Error inicializando mapa de resultados:', error);
+            console.error('Error creando mapa:', error);
         }
     }
     
@@ -631,11 +635,19 @@ class PowerPointPresentation {
                     }, 100);
                 }
                 break;
-            case 3: // Diapositiva de objetivos con mapa
+            case 4: // Diapositiva de objetivos con mapa
                 if (this.maps.objectives) {
                     setTimeout(() => {
                         this.maps.objectives.invalidateSize();
                     }, 100);
+                }
+                break;
+            case 15: // Slide 16 (index 15) - Mapa de resultados
+                if (this.maps['results-map']) {
+                    setTimeout(() => {
+                        this.maps['results-map'].invalidateSize();
+                        console.log('Mapa de resultados reinicializado');
+                    }, 300);
                 }
                 break;
         }

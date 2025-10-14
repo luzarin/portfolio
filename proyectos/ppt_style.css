@@ -774,7 +774,7 @@ body {
 
 .slide-type-image .image-section-full img {
     max-width: 100%;
-    max-height: 700px;
+    max-height: 1000px;
     object-fit: contain;
 }
 
@@ -846,20 +846,20 @@ body {
 
 /* Modo pantalla completa */
 .fullscreen-mode {
-    background: black !important;
+    background: #ffffff !important; /* margen/blanco alrededor */
 }
 
+/* Mantener el mismo layout en fullscreen: no cambiar dimensiones ni escala */
 .fullscreen-mode .presentation-container {
-    padding: 0;
+    padding: 24px; /* margen fino alrededor en fullscreen */
 }
 
 .fullscreen-mode .slide {
-    width: 1920px;
-    height: 1080px;
-    transform: translateX(0) scale(1) !important;
-    border-radius: 0;
-    padding: 60px;
-    box-shadow: none;
+    width: 1920px; /* base fija */
+    height: 1080px; /* base fija */
+    /* Sin forzar transform aquí; JS aplicará scale dinámico para ajustar a pantalla */
+    border-radius: 12px;
+    padding: 60px 90px;
 }
 
 .fullscreen-mode .navigation-controls {
