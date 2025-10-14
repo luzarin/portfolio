@@ -319,6 +319,115 @@ class PowerPointPresentation {
         this.initializeInteractiveMap();
         this.initializeComparisonMaps();
         this.initializeObjectivesMap();
+        this.initializeResultsMap();
+    }
+    
+    initializeResultsMap() {
+        // Mapa para slide 16 de resultados
+        const mapContainer = document.getElementById('results-map');
+        if (!mapContainer) {
+            console.log('Contenedor results-map no encontrado');
+            return;
+        }
+        
+        try {
+            // Crear mapa centrado en Chile volcánico
+            const map = L.map('results-map', {
+                center: [-39.5, -72.0],
+                zoom: 6,
+                zoomControl: true,
+                scrollWheelZoom: true
+            });
+            
+            // Agregar capa base
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18
+            }).addTo(map);
+            
+            // Cargar GeoJSON de accidentes volcánicos
+            fetch('ppt/acc_geo.geojson')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar el GeoJSON: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('GeoJSON cargado:', data);
+                    console.log('Número de features:', data.features.length);
+                    
+                    L.geoJSON(data, {
+                        // Usar las coordenadas LAT/LONG del properties en vez del geometry
+                        pointToLayer: function(feature, latlng) {
+                            // Crear punto usando LAT y LONG de properties
+                            const lat = feature.properties.LAT;
+                            const lon = feature.properties.LONG;
+                            const tipoAccid = feature.properties.Tipo_accid;
+                            
+                            if (lat && lon) {
+                                const newLatLng = L.latLng(lat, lon);
+                                
+                                // Diferenciar colores y tamaños según tipo de accidente
+                                let color, radius;
+                                if (tipoAccid === 'ESTR') {
+                                    // Estratovolcanes: rojo, más grande
+                                    color = '#fb5a5a';
+                                    radius = 4.5;
+                                } else {
+                                    // Otros: celeste, más pequeño
+                                    color = '#0ed3e4';
+                                    radius = 3;
+                                }
+                                
+                                return L.circleMarker(newLatLng, {
+                                    radius: radius,
+                                    fillColor: color,
+                                    color: '#000',
+                                    weight: 1,
+                                    opacity: 1,
+                                    fillOpacity: 0.8
+                                });
+                            }
+                            return null;
+                        },
+                        onEachFeature: function(feature, layer) {
+                            if (feature.properties) {
+                                let popupContent = '<div style="font-size: 14px;">';
+                                if (feature.properties.Toponimo) {
+                                    popupContent += `<b>${feature.properties.Toponimo}</b><br>`;
+                                }
+                                if (feature.properties.Tipo_accid) {
+                                    popupContent += `Tipo: ${feature.properties.Tipo_accid}<br>`;
+                                }
+                                if (feature.properties.Actividad) {
+                                    popupContent += `Actividad: ${feature.properties.Actividad}<br>`;
+                                }
+                                popupContent += '</div>';
+                                layer.bindPopup(popupContent);
+                            }
+                        }
+                    }).addTo(map);
+                    
+                    console.log('GeoJSON de accidentes añadido al mapa correctamente');
+                })
+                .catch(error => {
+                    console.error('Error cargando GeoJSON:', error);
+                });
+            
+            // Guardar referencia
+            this.maps['results-map'] = map;
+            
+            console.log('Mapa de resultados inicializado correctamente');
+            
+            // Forzar recalculo del tamaño del mapa
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+            
+        } catch (error) {
+            console.error('Error inicializando mapa de resultados:', error);
+        }
     }
     
     initializeObjectivesMap() {
