@@ -144,7 +144,7 @@ body {
 .photoback {
     display: flex;
     justify-content: center;
-    padding: 15px 0;
+    padding: 20px 0;
 }
 
 .photo {
@@ -159,11 +159,11 @@ body {
 .aboutMe {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 12px 20px 0px; /* reduced */
+  padding: 25px 20px 0px; /* reduced */
   font-size: 1.2em;
   line-height: 1.8;
   text-align: center;
-  color: #000000; /*COLOR TEXTO SOBRE MI*/
+  color: #000000; /* COLOR TEXTO SOBRE MI */
   margin-bottom: var(--section-content-gap);
 }
 
@@ -354,7 +354,7 @@ body {
 }
 
 .shrink-border {
-    background: #1f1f1f; /*COLOR BOX VER MÁS*/
+  background: #1f1f1f; /* COLOR BOX VER MÁS */
     color: #ffffff;
     border: none;
     padding: 10px 35px;
@@ -734,12 +734,12 @@ body { background: var(--bg-color) !important }
 
 .edu-logo { width: 90px; height: 90px; object-fit: contain; background: rgba(0,0,0,0.02); border-radius: 10px; padding: 6px }
 .edu-info { display: grid; gap: 10px }
-.edu-school { font-size: 1.15rem; font-weight: 800; color: #000000 }
+.edu-school { font-size: 1.20rem; font-weight: 800; color: #000000 }
 .edu-degree { display: none }
-.edu-field { color: #333333 }
-.edu-meta { color: #333333; font-size: 0.95rem }
+.edu-field { color: #333333; font-size: 1.05rem; }
+.edu-meta { color: #333333; font-size: 1.00rem }
 
-/* Habilidades con barras*/
+/* Habilidades con barras */
 .skills-list { display: grid; gap: 17.5px; width: 99%; margin-left: 0; margin-right: auto; }
 .skill-name { font-weight: 700; color: #000000; margin-bottom: 6px }
 .skill-bar { position: relative; width: 100%; height: 14px; background: #d9d9d9; border-radius: 10px; overflow: hidden }
@@ -750,7 +750,7 @@ body { background: var(--bg-color) !important }
   border-radius: 10px;
   display: flex; align-items: center; justify-content: flex-end;
   padding-right: 8px;
-  color: #fff; font-weight: 500; font-size: 0.7rem; /* TAMAÑO FONT PORCENTAJES*/
+  color: #fff; font-weight: 500; font-size: 0.7rem; /* TAMAÑO FONT PORCENTAJES */
   transition: width 0.8s ease;
 }
 .skill-pct { opacity: 0.95 }
@@ -788,7 +788,7 @@ body { background: var(--bg-color) !important }
 .exp-left { padding-right: 13px }
 .exp-right { padding-left: 13px }
 /* mismo ancho visual que la box de habilidades */
-.exp-right .expbox { max-width: 97%; margin-left: 0 }
+.exp-right .expbox { max-width: 97%; margin-left: 0; text-align: justify; text-justify: inter-word; hyphens: auto; }
 
 @media (max-width: 992px) {
   .experience-container { grid-template-columns: 1fr; gap: 24px }

@@ -12,14 +12,15 @@
     <link rel="stylesheet" href="../pag_proyecto.css">
   <!-- GOOGLE fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="anonymous"/>
   
     <title>Proyecto 2</title>
     
@@ -380,44 +381,32 @@
             maxZoom: 19
         }).addTo(map);
         
-        console.log('Mapa inicializado. Intentando cargar hexágonos...');
+        
         
         // Cargar el GeoJSON con hexágonos
         fetch('proyecto 2/hexagonos_uf.geojson')
             .then(response => {
-                console.log('Respuesta del fetch:', response.status, response.statusText);
+                
                 if (!response.ok) {
                     throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('🎯 GeoJSON cargado exitosamente!');
-                console.log('📊 Datos recibidos:', data);
-                console.log('📍 Número de hexágonos:', data.features ? data.features.length : 'Sin features');
-                console.log('🗺️ CRS del archivo:', data.crs);
+                
                 
                 if (data.features && data.features.length > 0) {
-                    console.log('🔍 Primera feature de ejemplo:', data.features[0]);
-                    console.log('📝 Propiedades:', data.features[0].properties);
-                    console.log('🌍 Geometría tipo:', data.features[0].geometry.type);
-                    console.log('📐 Primeras coordenadas:', data.features[0].geometry.coordinates[0][0][0]);
+                    
                     
                     // Verificar si las coordenadas parecen estar en Web Mercator
                     var firstCoord = data.features[0].geometry.coordinates[0][0][0];
-                    console.log('📊 Análisis de coordenadas:');
-                    console.log('   X (longitud):', firstCoord[0]);
-                    console.log('   Y (latitud):', firstCoord[1]);
+                    
                     
                     if (Math.abs(firstCoord[0]) > 1000000) {
-                        console.log('⚠️ ADVERTENCIA: Las coordenadas parecen estar en metros (proyectadas)');
-                        console.log('   Leaflet espera coordenadas geográficas (grados)');
                         
-                        // Intentar transformar coordenadas Web Mercator a geográficas
-                        console.log('🔄 Intentando transformar coordenadas...');
                         transformAndAddLayer(data);
                     } else {
-                        console.log('✅ Las coordenadas parecen estar en grados');
+                        
                         addLayerToMap(data);
                     }
                 } else {
@@ -475,7 +464,7 @@
     
     // Función para transformar coordenadas Web Mercator a geográficas
     function transformAndAddLayer(data) {
-        console.log('🔄 Transformando coordenadas de Web Mercator a geográficas...');
+        
         
         // Función para transformar un punto de Web Mercator a lat/lng
         function webMercatorToLatLng(x, y) {
@@ -501,15 +490,14 @@
             }
         });
         
-        console.log('✅ Coordenadas transformadas');
-        console.log('🔍 Ejemplo de coordenada transformada:', transformedData.features[0].geometry.coordinates[0][0][0]);
+        
         
         addLayerToMap(transformedData);
     }
     
     // Función para agregar la capa al mapa
     function addLayerToMap(data) {
-        console.log('➕ Agregando capa al mapa...');
+        
         
         // Crear la capa de hexágonos
         hexagonosLayer = L.geoJSON(data, {
@@ -517,25 +505,23 @@
             onEachFeature: onEachFeature
         }).addTo(map);
         
-        console.log('✅ Capa agregada al mapa');
+        
         
         // Obtener bounds de los datos
         var bounds = hexagonosLayer.getBounds();
-        console.log('📏 Bounds de los datos:', bounds);
+        
         
         // En lugar de fitBounds, usar un centro personalizado desplazado hacia la izquierda
         // Centrar el mapa en las coordenadas deseadas con zoom reducido
-        setTimeout(function() {
+            setTimeout(function() {
             map.setView([-33.39, -70.53], 12); // Desplazado hacia la izquierda con zoom reducido
-            console.log('🎯 Vista centrada manualmente en coordenadas específicas');
         }, 100);
         
-        console.log('🎉 ¡Hexágonos cargados exitosamente!');
+        
     }
     
     // Inicializar mapas cuando la página esté cargada
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🚀 DOM cargado, inicializando mapas...');
         initLeafletMap();
     });
   </script>
@@ -545,6 +531,6 @@
 <!-- Font awesome -->
 <script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
 <!-- Script to enable mobile menu on project pages -->
-<script src="../pag_proyecto.js" defer></script>
+<script src="../pag_proyecto.js" defer="defer"></script>
 </body>
 </html>

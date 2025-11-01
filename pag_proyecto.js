@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('mouseenter', () => link.style.color = '#ddddddff');
       link.addEventListener('mouseleave', () => link.style.color = '');
     });
-  } catch (e) {}
+  } catch (e) { console.error(e); }
 
   // Prefer explicit IDs used in index.html, fall back to legacy classes if present
   const mobileBtn = document.getElementById('mobileMenuButton') || document.querySelector('.navTrigger');
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mobileMenu) {
     // ensure hidden initially
-    try { mobileMenu.style.display = 'none'; } catch (e) {}
+    try { mobileMenu.style.display = 'none'; } catch (e) { console.error(e); }
   }
 
   if (mobileBtn && mobileMenu) {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // close when a menu link is clicked
     try {
       mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobileMenu.style.display = 'none'; }));
-    } catch (e) {}
+    } catch (e) { console.error(e); }
   }
 
   // Hide menu when resizing to desktop widths
