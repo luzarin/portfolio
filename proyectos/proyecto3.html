@@ -99,25 +99,23 @@
   
 </div>
 
-<p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">En respuesta a las crecientes preocupaciones sobre la deforestación de manglares, estudios recientes han utilizado diversas tecnologías de teledetección, como imágenes satelitales, para medir la extensión de los manglares. En este trabajo, investigamos la distribución de los manglares en el noroeste de Madagascar utilizando imágenes espaciales detalladas con un tamaño de píxel de hasta 3 m y lo comparamos con el resultado del método tradicional basado en datos de Landsat relativamente más gruesos.</span>
+<p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Proyecto diseñado para automatizar un flujo de trabajo LiDAR completo orientado a generar Modelos Digitales del Terreno (DTM) que incluyan edificaciones, a partir de archivos LAZ/LAS clasificados. Consta de dos implementaciones:</span>
     <br>
     <span class="indent">
-    Los manglares son un ecosistema costero biodiverso esencial que se encuentra a lo largo de playas intermareales tropicales y subtropicales, proporcionando bienes y servicios críticos a las comunidades costeras y apoyando organismos diversos. Sin embargo, las actividades antropogénicas han causado la pérdida de manglares en Madagascar, lo que requiere un nuevo enfoque de mapeo que utilice el mapa de alta resolución espacial de los datos de Planet para crear un mapa con un detalle avanzado.
+      <br>
+  <strong>1. dtmbuildings-qgis.py:</strong> pensado como script de procesamiento dentro de QGIS (Processing Toolbox), para ejecutarlo como herramienta.
+    <br>
+    <strong>2. dtmbuildings.py:</strong> versión standalone en Python puro, mismo flujo fuera de QGIS, ideal para batch.
     </span>
-    <br>
+    <br><br>
     <span class="indent">
-    Los mapas de clasificación se basan en los algoritmos de Random Forest y Maximum Likelihood, y todos ellos tienen una precisión general de más del 85%. Se cuantifican las dinámicas de los bosques de manglares de 2020 a 2022, con una pérdida del 12.6% en los manglares de dosel cerrado y una pérdida del 24.1% en los manglares de dosel abierto.
+    El pipeline ejecuta una secuencia fija de procesamiento LiDAR. Primero filtra los puntos de suelo (clase 2) y edificaciones (clase 6) con PDAL, luego fusiona ambas clasificaciones en un único archivo para conservar las elevaciones estructurales. Después rasteriza el conjunto combinado mediante writers.gdal, generando un DTM+edificaciones con resolución configurable (por ejemplo, 0.5 m) y compresión optimizada. Finalmente aplica gdal_fillnodata para rellenar huecos y obtener superficies continuas.  Produce rasters finales coherentes, sin NoData, listos para análisis o para construcción de rásters.
     </span>
     <br><br>
     <span class="coll projdes">Más Información</span>
     <br><br>
-    <a href="https://arcg.is/19fm1q">
-        <span class="logos">🌍 StoryMap</span>
     </a>
-  <a href="#">
-        <span class="logos">📄 Reporte Completo</span>
-    </a>
-    <a href="https://github.com/Alanrocks/Mangrove-Classification">
+    <a href="https://github.com/luzarin/DTM-y-edificaciones">
         <span class="logos">🔗 GitHub</span>
     </a>
 </p>

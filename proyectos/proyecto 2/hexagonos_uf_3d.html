@@ -3,10 +3,14 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>pydeck</title>
-        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
     <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~9.0.*/dist/index.js'></script>
+  <!-- Load Noto Sans to match the Leaflet (2D) map font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
     body {
   margin: 0;
@@ -50,7 +54,7 @@
 }
 
 /* Leyenda del mapa 3D - exactamente igual que Leaflet */
-.legend-3d {
+  .legend-3d {
   position: absolute;
   bottom: 60px;
   right: 8px;
@@ -60,7 +64,9 @@
   background: rgba(255,255,255,0.95);
   border-radius: 8px;
   padding: 12px 16px;
-  font: 13px/16px Arial, Helvetica, sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 13px;
+  line-height: 16px;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
   border: 1px solid #ccc;
   min-width: 160px;

@@ -230,7 +230,7 @@
         <div class="maps-section">
             <!-- Columna izquierda: Mapa de Leaflet -->
             <div class="map-column">
-                <div class="map-title">Mapa de Análisis Espacial</div>
+                <div class="map-title">Visualización 2D</div>
                 <div class="map-container" style="position: relative;">
                     <div id="leafletMap"></div>
                     <!-- Control de opacidad para Leaflet -->
@@ -244,7 +244,7 @@
             
             <!-- Columna derecha: Mapa 3D -->
             <div class="map-column">
-                <div class="map-title">Visualización 3D - Densidad UF/M²</div>
+                <div class="map-title">Visualización 3D</div>
                 <div class="map-container">
                     <iframe src="proyecto 2/hexagonos_uf_3d.html" width="100%" height="650" style="border: none; border-radius: 6px;"></iframe>
                 </div>
@@ -253,25 +253,15 @@
 
         <!-- Content container for project description -->
         <div class="project-content">
-            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Introducción.</span>
+            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Pipeline de extracción y análisis espacial de datos inmobiliarios de Toc Toc Chile. Permite definir una zona (polígono Toc Toc), el tipo de propiedad y la operación, extraer todas las publicaciones reales usando requests con headers autenticados, consolidar múltiples descargas en un único dataset sin duplicados y con una superficie unificada.</span>
     <br>
     <span class="indent">
-    Parrafo 2
-    </span>
-    <br>
-    <span class="indent">
-    Parrafo 3
+    Luego lleva esos datos a una grilla espacial para construir un mapa 3D interactivo en PyDeck donde la altura y el color representan el valor UF/m² promedio de cada celda. Sirve para análisis exploratorio de mercado, detección de zonas con sobreprecio y generación rápida de entregables web a partir de datos scrapeados.
     </span>
     <br><br>
     <span class="coll projdes">Más Información</span>
     <br><br>
-    <a href="https://arcg.is/19fm1q">
-        <span class="logos">🌍 StoryMap</span>
-    </a>
-  <a href="#">
-        <span class="logos">📄 Reporte Completo</span>
-    </a>
-    <a href="https://github.com/Alanrocks/Mangrove-Classification">
+    <a href="https://github.com/luzarin/ScrapingTocToc">
         <span class="logos">🔗 GitHub</span>
     </a>
 </p>

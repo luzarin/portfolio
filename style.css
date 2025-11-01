@@ -338,6 +338,13 @@ body {
     line-height: 1.6;
 }
 
+/* Utility: justified text for specific elements */
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
 /* Forzar tipografía negra en las cards de proyectos (sobre text-light/bg-dark) */
 .projectgrid .card { color: #000 !important; }
 .projectgrid .card .card-title,
