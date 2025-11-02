@@ -12,10 +12,208 @@
     <link rel="stylesheet" href="../pag_proyecto.css">
   <!-- GOOGLE fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="anonymous"/>
+  
     <title>Proyecto 1</title>
+    
+    <style>
+        /* Layout específico para página de mapas */
+        .page-wrapper {
+            padding-top: 100px; /* Espacio entre navbar y mapas */
+            padding-bottom: 20px;
+        }
+        
+        .maps-section {
+            display: flex;
+            gap: 25px;
+            max-width: 1400px; /* Aumentar ancho máximo */
+            margin: 0 auto 25px auto; /* Reducir drásticamente el gap debajo */
+            padding: 0 15px; /* Reducir padding para dar más espacio a los mapas */
+        }
+        
+        .map-column {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .map-container {
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 0.5rem;
+        }
+        
+        #leafletMap {
+            height: 650px; /* Aumentar altura */
+            width: 100%;
+        }
+
+        /* Make extra maps match the main map size */
+        #extraMap1,
+        #extraMap2 {
+            height: 650px; /* same as #leafletMap */
+            width: 100%;
+        }
+        
+        .map-title {
+            text-align: center;
+            font-size: 1.4rem; /* Aumentar tamaño */
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        
+        /* Contenido del proyecto */
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+        }
+        
+        .project-content .project-text {
+            width: 100%;
+            margin: 0; /* Eliminar márgenes automáticos del CSS original */
+            text-align: center; /* Centrar el contenido */
+        }
+        
+        .project-content .project-text .indent {
+            text-align: justify; /* Justificar solo los párrafos de contenido */
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        /* Estilos para la leyenda */
+        .legend {
+            line-height: 20px;
+            color: #555;
+            background: white;
+            background: rgba(255,255,255,0.95);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font: 13px/16px Arial, Helvetica, sans-serif;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            border: 1px solid #ccc;
+            min-width: 160px; /* Aumentar ancho mínimo */
+        }
+        .legend i {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 4px;
+            opacity: 0.8;
+            border: 1px solid #999;
+            border-radius: 2px;
+        }
+        .legend h6 {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            color: #333;
+        }
+        .legend .legend-item {
+            display: block;
+            clear: both;
+            margin-bottom: 4px;
+            font-size: 12px;
+            line-height: 20px;
+        }
+        
+        /* Control de opacidad para Leaflet */
+        .opacity-control {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.95);
+            padding: 8px 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            border: 1px solid #ccc;
+            z-index: 1000;
+            font-family: 'Noto Sans', sans-serif;
+            min-width: 120px;
+        }
+        
+        .opacity-control label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+        
+        .opacity-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .opacity-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .opacity-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .opacity-value {
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+        
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding-top: 70px;
+            }
+            .maps-section {
+                flex-direction: column;
+                gap: 30px;
+                margin-bottom: 5px; /* Reducir también en móviles */
+                padding: 0 10px;
+            }
+        }
+        /* Ensure embedded iframes and extra map containers fill their column */
+        .map-container iframe,
+        #extraMap1,
+        #extraMap2 {
+            width: 100% !important;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <nav class="nav">
@@ -41,119 +239,155 @@
         </div>
     </nav>
 
-<!-- Container for the image gallery -->
-<div class="imageContainer-large">
-    
-<div class="imageContainer">
-     <!-- Next and previous buttons
-     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-     <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
-    <!-- Full-width images with number text -->
-  <div class="mySlides">
-    <img class="myImg" src="../imagenes/proyecto2.png" style="width:100%">
-  </div>
-      <!-- The Modal -->
-      <div id="myModal" class="modal">
+    <div class="page-wrapper">
+        <!-- Container for the maps side by side -->
+        <div class="maps-section">
+            <!-- Columna izquierda: Mapa de Leaflet -->
+            <div class="map-column">
+                <div class="map-title">Red de drenaje de la cuenca</div>
+                <div class="map-container" style="position: relative;">
+                    <div id="leafletMap"></div>
+                    <!-- Leyenda -->
+                    <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
+                        <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
+                        <div style="margin-bottom: 4px;">
+                            <span style="display: inline-block; width: 24px; height: 2px; background: #ff0000; vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Cuenca</span>
+                        </div>
+                        <div style="margin-bottom: 4px;">
+                            <span style="display: inline-block; width: 24px; height: 1px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Strahler 1-2</span>
+                        </div>
+                        <div style="margin-bottom: 4px;">
+                            <span style="display: inline-block; width: 24px; height: 2px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Strahler 3-4</span>
+                        </div>
+                        <div>
+                            <span style="display: inline-block; width: 24px; height: 3px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Strahler 5+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Columna derecha: Hypsometric interactive (embed) -->
+            <div class="map-column">
+                <div class="map-title">Curva Hipsométrica</div>
+                <div class="map-container">
+                    <iframe src="proyecto 1/hypsometric_curve_interactive.html" width="100%" height="650" style="border: none; border-radius: 6px;"></iframe>
+                </div>
+            </div>
+        </div>
 
-        <!-- The Close Button -->
-        <span class="close">&times;</span>
-      
-        <!-- Modal Content (The Image) -->
-        <img class="modal-content" id="img01">
-      </div>
-  
-  <div class="mySlides">
-    <img class="myImg" src="../imagenes/proyecto2.png" style="width:100%">
-</div>
+        <!-- Segunda fila: dos mapas adicionales (vacíos por ahora) -->
+        <div class="maps-section" style="margin-top:20px;">
+            <div class="map-column">
+                <div class="map-title">Clasificación final</div>
+                <div class="map-container" style="position: relative;">
+                        <div id="extraMap1"></div>
+                </div>
+            </div>
+            <div class="map-column">
+                <div class="map-title">Riego crítico</div>
+                <div class="map-container" style="position: relative;">
+                    <div id="extraMap2"></div>
+                </div>
+            </div>
+        </div>
 
-<div class="mySlides">
-  <img class="myImg" src="../imagenes/proyecto2.png" style="width:100%">
-</div>
-
-<div class="mySlides">
-    <img id="myImg" src="../imagenes/proyecto2.png" style="width:100%">
-</div>
-
-    <!-- Image text -->
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-  
-    <!-- Thumbnail images -->
-<div class="images">
-    <div class="row">
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(1)" alt="Descripcion imagen 1">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(2)" alt="Descripcion imagen 2">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(3)" alt="Descripcion imagen 3">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto2.png" style="width:100%" onclick="currentSlide(4)" alt="Descripcion imagen 4">
-      </div>
-    </div>
-  </div>
-  
-</div>
-
-<p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">En respuesta a las crecientes preocupaciones sobre la deforestación de manglares, estudios recientes han utilizado diversas tecnologías de teledetección, como imágenes satelitales, para medir la extensión de los manglares. En este trabajo, investigamos la distribución de los manglares en el noroeste de Madagascar utilizando imágenes espaciales detalladas con un tamaño de píxel de hasta 3 m y lo comparamos con el resultado del método tradicional basado en datos de Landsat relativamente más gruesos.</span>
+        <!-- Content container for project description -->
+        <div class="project-content">
+            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Proyecto de monitoreo estacional de vegetación irrigada en el valle del Aconcagua (2024), enfocado en cuantificar la dependencia del riego en cultivos y áreas productivas mediante imágenes Sentinel-2. Se compararon compuestos estacionales de verano (dic-feb) e invierno (jun-ago), calculando el ΔNDVI para representar la variación del vigor vegetal entre periodos seco y húmedo.</span>
     <br>
     <span class="indent">
-    Los manglares son un ecosistema costero biodiverso esencial que se encuentra a lo largo de playas intermareales tropicales y subtropicales, proporcionando bienes y servicios críticos a las comunidades costeras y apoyando organismos diversos. Sin embargo, las actividades antropogénicas han causado la pérdida de manglares en Madagascar, lo que requiere un nuevo enfoque de mapeo que utilice el mapa de alta resolución espacial de los datos de Planet para crear un mapa con un detalle avanzado.
-    </span>
-    <br>
-    <span class="indent">
-    Los mapas de clasificación se basan en los algoritmos de Random Forest y Maximum Likelihood, y todos ellos tienen una precisión general de más del 85%. Se cuantifican las dinámicas de los bosques de manglares de 2020 a 2022, con una pérdida del 12.6% en los manglares de dosel cerrado y una pérdida del 24.1% en los manglares de dosel abierto.
+    A partir de percentiles estadísticos y del índice de humedad topográfica (TWI), se clasificó la superficie agrícola en cuatro niveles de dependencia hídrica: riego intenso, riego moderado, equilibrio y secano. Los resultados permiten identificar zonas críticas donde el verdor estival depende totalmente del riego y áreas con mayor eficiencia o aporte natural de humedad, aportando una herramienta reproducible para planificación hídrica en valles mediterráneos de Chile central.
     </span>
     <br><br>
     <span class="coll projdes">Más Información</span>
     <br><br>
-    <a href="https://arcg.is/19fm1q">
-        <span class="logos">🌍 StoryMap</span>
-    </a>
-  <a href="#">
-        <span class="logos">📄 Reporte Completo</span>
-    </a>
-    <a href="https://github.com/Alanrocks/Mangrove-Classification">
+    <a href="https://github.com/luzarin/ScrapingTocToc">
         <span class="logos">🔗 GitHub</span>
     </a>
 </p>
-</div>
+        </div>
+    </div>
 
-  <!-- JAVASCRIPT FOR SLIDESHOW -->
-  <script>let slideIndex = 1;
-    showSlides(slideIndex);
-    
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
+    <!-- FOOTER -->
+    <footer style="background-color: #111111; padding: 20px 0; text-align: center; margin-top: 40px;">
+        <p style="margin: 0; color: #ffffff; font-size: 0.95em;">
+            Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
+        </p>
+    </footer>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+  <!-- JAVASCRIPT FOR MAPS -->
+  <script>
+    var map;
+-32.836073, -71.213059
+    function initLeafletMap() {
+        try {
+            map = L.map('leafletMap').setView([-32.80, -71.23], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap contributors © CARTO',
+                maxZoom: 19
+            }).addTo(map);
+            L.control.scale({ imperial: false }).addTo(map);
+
+            // Load basin
+            fetch('proyecto 1/ae_hidro.geojson')
+                .then(function(r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
+                .then(function(data) {
+                    L.geoJSON(data, {
+                        style: { color: '#ff0000', weight: 2, fillColor: 'transparent', fillOpacity: 0 }
+                    }).addTo(map);
+                })
+                .catch(function(e) { console.error('Error loading basin:', e); });
+
+            // Load stream network
+            fetch('proyecto 1/basin_streamnetwork.geojson')
+                .then(function(r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
+                .then(function(data) {
+                    L.geoJSON(data, {
+                        style: function(f) {
+                            var strahler = (f.properties && f.properties.Strahler) || 1;
+                            return { color: '#0066cc', weight: strahler, opacity: 0.8 };
+                        }
+                    }).addTo(map);
+                })
+                .catch(function(e) { console.error('Error loading stream:', e); });
+
+        } catch (e) {
+            console.error('Error initializing main map:', e);
+        }
     }
-    
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
+
+    function initExtraMaps() {
+        try {
+            var extra1 = L.map('extraMap1', { zoomControl: false }).setView([-33.42, -70.55], 13);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19
+            }).addTo(extra1);
+            L.control.scale({ imperial: false }).addTo(extra1);
+
+            var extra2 = L.map('extraMap2', { zoomControl: false }).setView([-33.42, -70.55], 13);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19
+            }).addTo(extra2);
+            L.control.scale({ imperial: false }).addTo(extra2);
+        } catch (e) {
+            console.warn('Error initializing extra maps:', e);
+        }
     }
-    
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("demo");
-      let captionText = document.getElementById("caption");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-      captionText.innerHTML = dots[slideIndex-1].alt;
-    }</script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initLeafletMap();
+        initExtraMaps();
+    });
+  </script>
 
 <!-- Bootstrap 5.3 bundle (unificado) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -161,12 +395,5 @@
 <script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
 <!-- Script to enable mobile menu on project pages -->
 <script src="../pag_proyecto.js" defer="defer"></script>
-
-<!-- Footer -->
-<footer style="background-color: #111111; padding: 20px 0; text-align: center; margin-top: 40px;">
-    <p style="margin: 0; color: #ffffff; font-size: 0.95em;">
-        Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
-    </p>
-</footer>
 </body>
 </html>
