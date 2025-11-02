@@ -282,15 +282,43 @@
         <!-- Segunda fila: dos mapas adicionales (vacíos por ahora) -->
         <div class="maps-section" style="margin-top:20px;">
             <div class="map-column">
-                <div class="map-title">Clasificación final</div>
+                <div class="map-title">Mapa Adicional A</div>
                 <div class="map-container" style="position: relative;">
-                        <div id="extraMap1"></div>
+                    <div id="extraMap1"></div>
+                    <!-- Leyenda Mapa 3 -->
+                    <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
+                        <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
+                        <div style="margin-bottom: 4px;">
+                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 0, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Riego intenso</span>
+                        </div>
+                        <div style="margin-bottom: 4px;">
+                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 165, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Riego moderado</span>
+                        </div>
+                        <div style="margin-bottom: 4px;">
+                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 255, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Equilibrio</span>
+                        </div>
+                        <div>
+                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(0, 255, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Secano</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="map-column">
-                <div class="map-title">Riego crítico</div>
+                <div class="map-title">Mapa Adicional B</div>
                 <div class="map-container" style="position: relative;">
                     <div id="extraMap2"></div>
+                    <!-- Leyenda Mapa 4 -->
+                    <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
+                        <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
+                        <div>
+                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(128, 0, 128); vertical-align: middle; margin-right: 6px;"></span>
+                            <span>Riego crítico</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -323,6 +351,11 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
+  
+  <!-- Georaster libraries for GeoTIFF support -->
+  <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
+  <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
+  <script src="https://unpkg.com/geoblaze@2.8.0/dist/geoblaze.min.js"></script>
 
   <!-- JAVASCRIPT FOR MAPS -->
   <script>
@@ -330,7 +363,7 @@
 -32.836073, -71.213059
     function initLeafletMap() {
         try {
-            map = L.map('leafletMap').setView([-32.80, -71.23], 11);
+            map = L.map('leafletMap').setView([-32.8122, -71.2490], 11);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '© OpenStreetMap contributors © CARTO',
                 maxZoom: 19
@@ -354,7 +387,7 @@
                     L.geoJSON(data, {
                         style: function(f) {
                             var strahler = (f.properties && f.properties.Strahler) || 1;
-                            return { color: '#0066cc', weight: strahler, opacity: 0.8 };
+                            return { color: '#0066cc', weight: strahler * 0.7, opacity: 0.8 };
                         }
                     }).addTo(map);
                 })
@@ -367,17 +400,87 @@
 
     function initExtraMaps() {
         try {
-            var extra1 = L.map('extraMap1', { zoomControl: false }).setView([-33.42, -70.55], 13);
+            var extra1 = L.map('extraMap1').setView([-32.8122, -71.2490], 11);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19
             }).addTo(extra1);
             L.control.scale({ imperial: false }).addTo(extra1);
 
-            var extra2 = L.map('extraMap2', { zoomControl: false }).setView([-33.42, -70.55], 13);
+            // Load GeoTIFF for mapa3 with custom color scale
+            fetch('proyecto 1/mapa3.tif')
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                    parseGeoraster(arrayBuffer).then(georaster => {
+                        var layer = new GeoRasterLayer({
+                            georaster: georaster,
+                            opacity: 0.9,
+                            resolution: 256,
+                            pixelValuesToColorFn: function(values) {
+                                var val = values[0];
+                                if (val === 0 || val === null) return null; // transparent
+                                if (val === 1) return 'rgb(255, 0, 0)';      // rojo
+                                if (val === 2) return 'rgb(255, 165, 0)';    // naranjo
+                                if (val === 3) return 'rgb(255, 255, 0)';    // amarillo
+                                if (val === 4) return 'rgb(0, 255, 0)';      // verde
+                                return null;
+                            }
+                        });
+                        layer.addTo(extra1);
+                        
+                        // Add click event for popup
+                        extra1.on('click', function(e) {
+                            var latlng = e.latlng;
+                            var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+                            if (values && values[0] !== null && values[0] !== undefined) {
+                                L.popup()
+                                    .setLatLng(latlng)
+                                    .setContent('Valor: ' + values[0])
+                                    .openOn(extra1);
+                            }
+                        });
+                    });
+                })
+                .catch(e => console.error('Error loading mapa3.tif:', e));
+
+            var extra2 = L.map('extraMap2').setView([-32.7270, -71.2024], 13);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19
             }).addTo(extra2);
             L.control.scale({ imperial: false }).addTo(extra2);
+
+            // Load GeoTIFF for mapa4 with custom color scale
+            fetch('proyecto 1/mapa4.tif')
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                    parseGeoraster(arrayBuffer).then(georaster => {
+                        var layer = new GeoRasterLayer({
+                            georaster: georaster,
+                            opacity: 0.9,
+                            resolution: 256,
+                            pixelValuesToColorFn: function(values) {
+                                var val = values[0];
+                                if (val === 0 || val === null) return null;  // transparent
+                                if (val === 1) return 'rgb(128, 0, 128)';    // morado fuerte
+                                return null;
+                            }
+                        });
+                        layer.addTo(extra2);
+                        
+                        // Add click event for popup
+                        extra2.on('click', function(e) {
+                            var latlng = e.latlng;
+                            var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+                            if (values && values[0] !== null && values[0] !== undefined) {
+                                L.popup()
+                                    .setLatLng(latlng)
+                                    .setContent('Valor: ' + values[0])
+                                    .openOn(extra2);
+                            }
+                        });
+                    });
+                })
+                .catch(e => console.error('Error loading mapa4.tif:', e));
+
         } catch (e) {
             console.warn('Error initializing extra maps:', e);
         }
