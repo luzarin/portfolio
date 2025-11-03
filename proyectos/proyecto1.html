@@ -279,12 +279,18 @@
             </div>
         </div>
 
-        <!-- Segunda fila: dos mapas adicionales (vacíos por ahora) -->
+        <!-- Segunda fila: dos mapas adicionales -->
         <div class="maps-section" style="margin-top:20px;">
             <div class="map-column">
                 <div class="map-title">Clasificación de Riego</div>
                 <div class="map-container" style="position: relative;">
                     <div id="extraMap1"></div>
+                    <!-- Control de opacidad Mapa 3 -->
+                    <div class="opacity-control">
+                        <label for="extra1-opacity">Cambiar Transparencia</label>
+                        <input type="range" id="extra1-opacity" class="opacity-slider" min="0" max="100" value="90">
+                        <div class="opacity-value" id="extra1-opacity-value">95%</div>
+                    </div>
                     <!-- Leyenda Mapa 3 -->
                     <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
@@ -311,11 +317,17 @@
                 <div class="map-title">Riego Crítico</div>
                 <div class="map-container" style="position: relative;">
                     <div id="extraMap2"></div>
+                    <!-- Control de opacidad Mapa 4 -->
+                    <div class="opacity-control">
+                        <label for="extra2-opacity">Cambiar Transparencia</label>
+                        <input type="range" id="extra2-opacity" class="opacity-slider" min="0" max="100" value="90">
+                        <div class="opacity-value" id="extra2-opacity-value">95%</div>
+                    </div>
                     <!-- Leyenda Mapa 4 -->
                     <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
                         <div>
-                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(128, 0, 128); vertical-align: middle; margin-right: 6px;"></span>
+                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 249, 0); vertical-align: middle; margin-right: 6px;"></span>
                             <span>Riego crítico</span>
                         </div>
                     </div>
@@ -401,8 +413,9 @@
     function initExtraMaps() {
         try {
             var extra1 = L.map('extraMap1').setView([-32.8122, -71.2490], 11);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '© Esri, Maxar, Earthstar Geographics',
+                maxZoom: 19
             }).addTo(extra1);
             L.control.scale({ imperial: false }).addTo(extra1);
 
@@ -427,6 +440,15 @@
                         });
                         layer.addTo(extra1);
                         
+                        // Control de opacidad para mapa3
+                        var opacitySlider1 = document.getElementById('extra1-opacity');
+                        var opacityValue1 = document.getElementById('extra1-opacity-value');
+                        opacitySlider1.addEventListener('input', function() {
+                            var opacity = this.value / 100;
+                            opacityValue1.textContent = this.value + '%';
+                            layer.setOpacity(opacity);
+                        });
+                        
                         // Add click event for popup
                         extra1.on('click', function(e) {
                             var latlng = e.latlng;
@@ -443,8 +465,9 @@
                 .catch(e => console.error('Error loading mapa3.tif:', e));
 
             var extra2 = L.map('extraMap2').setView([-32.7270, -71.2024], 13);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '© OpenStreetMap contributors © CARTO', maxZoom: 19
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '© Esri, Maxar, Earthstar Geographics',
+                maxZoom: 19
             }).addTo(extra2);
             L.control.scale({ imperial: false }).addTo(extra2);
 
@@ -460,11 +483,20 @@
                             pixelValuesToColorFn: function(values) {
                                 var val = values[0];
                                 if (val === 0 || val === null) return null;  // transparent
-                                if (val === 1) return 'rgb(128, 0, 128)';    // morado fuerte
+                                if (val === 1) return 'rgb(255, 249, 0)';    // rojo fuerte
                                 return null;
                             }
                         });
                         layer.addTo(extra2);
+                        
+                        // Control de opacidad para mapa4
+                        var opacitySlider2 = document.getElementById('extra2-opacity');
+                        var opacityValue2 = document.getElementById('extra2-opacity-value');
+                        opacitySlider2.addEventListener('input', function() {
+                            var opacity = this.value / 100;
+                            opacityValue2.textContent = this.value + '%';
+                            layer.setOpacity(opacity);
+                        });
                         
                         // Add click event for popup
                         extra2.on('click', function(e) {
