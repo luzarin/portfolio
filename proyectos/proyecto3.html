@@ -83,7 +83,7 @@
 <div class="images">
     <div class="row">
       <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto3-1.png" style="width:100%" onclick="currentSlide(1)" alt="Archivos .laz (visualizado como atributo por rampa, valor Z).">
+        <img class="demo cursor" src="../imagenes/proyecto3-1.png" style="width:100%" onclick="currentSlide(1)" alt="Herramienta en QGIS.">
       </div>
       <div class="column">
         <img class="demo cursor" src="../imagenes/proyecto3-2.png" style="width:100%" onclick="currentSlide(2)" alt="Archivos .tif de celdas DTM+buildings corregidas.">
@@ -151,7 +151,51 @@
       slides[slideIndex-1].style.display = "block";
       dots[slideIndex-1].className += " active";
       captionText.innerHTML = dots[slideIndex-1].alt;
-    }</script>
+      
+      // Agregar funcionalidad de zoom a la imagen principal
+      enableImageZoom();
+    }
+    
+    // Funcionalidad de zoom al hacer click en imagen principal
+    function enableImageZoom() {
+      let mainImages = document.querySelectorAll('.mySlides .myImg');
+      let modal = document.getElementById('myModal');
+      let modalImg = document.getElementById('img01');
+      let closeBtn = document.querySelector('.close');
+      
+      mainImages.forEach(function(img) {
+        img.style.cursor = 'pointer';
+        img.onclick = function() {
+          modal.style.display = "block";
+          modalImg.src = this.src;
+        }
+      });
+      
+      // Cerrar modal al hacer click en X
+      closeBtn.onclick = function() {
+        modal.style.display = "none";
+      }
+      
+      // Cerrar modal al hacer click fuera de la imagen
+      modal.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      
+      // Cerrar modal con tecla Escape
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' || event.key === 'Esc') {
+          modal.style.display = "none";
+        }
+      });
+    }
+    
+    // Inicializar zoom cuando la página carga
+    document.addEventListener('DOMContentLoaded', function() {
+      enableImageZoom();
+    });
+  </script>
 
 <!-- Bootstrap 5.3 bundle (unificado) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
