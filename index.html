@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Tu Nombre - Portafolio GIS</title>
+    <title>Lucas Blachet — Portafolio GIS</title>
 </head>
 <body>
     <nav class="nav">
@@ -41,7 +41,10 @@
         <p class="myP" id="about">Sobre mí</p>
     </div>
     <div class="photoback">
-        <img class="photo" src="imagenes/perfil.JPEG" alt="Tu foto">
+        <img class="photo" id="profilePhoto" src="imagenes/perfil.JPEG" alt="Foto de perfil">
+    </div>
+    <div id="photoModal" class="photo-modal" aria-hidden="true">
+        <img src="imagenes/perfil.JPEG" alt="Foto de perfil ampliada" class="photo-modal-img">
     </div>
     <div>
         <p class="aboutMe">
@@ -113,7 +116,7 @@
                         <div class="skill-bar"><div class="skill-fill"><span class="skill-pct"></span></div></div>
                     </div>
                     <div class="skill" style="--level:0.70">
-                        <div class="skill-name">HTML &amp; CSS</div>
+                        <div class="skill-name">HTML, CSS &amp; React</div>
                         <div class="skill-bar"><div class="skill-fill"><span class="skill-pct"></span></div></div>
                     </div>
                     <div class="skill" style="--level:0.95">
@@ -214,10 +217,10 @@
             <div class="col">
                 <h5 class="card-title" style="color:rgb(0, 0, 0);font-size:1.7rem">X</h5>
                 <div class="card border-light text-light bg-dark">
-                    <img src="imagenes/proyectox.png" class="card-img-top" alt="Proyecto 4">
+                    <img src="imagenes/proyecto4.png" class="card-img-top" alt="Proyecto 4">
                     <div class="card-body">
                         <h5 class="card-title">Land Cover LCCS Valle de Colchagua</h5>
-                        <p class="card-text text-justify">Descripción del proyecto 4.</p>
+                        <p class="card-text text-justify">Mapa Land Use Land Cover (LULC) siguiendo el estándar Land Classification System (LCCS, ISO 19144-2). El flujo integra preprocesamiento óptico y SAR, extracción de índices espectrales y fenológicos, reducción de speckle, estadísticos multitemporales y una pila final de ~54 bandas. El resultado es un ráster categórico a 10 m (EPSG 5361) con métricas por clase y productos auxiliares.</p>
                         <div class="learnmore">
                             <a href="proyectos/proyecto4.html" class="shrink-border" style="text-decoration: none; color: inherit; display: inline-block;">Ver Más</a>
                         </div>

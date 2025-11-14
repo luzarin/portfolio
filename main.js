@@ -33,6 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // Profile photo modal lightbox
+  const profilePhoto = document.getElementById('profilePhoto');
+  const photoModal = document.getElementById('photoModal');
+  if (profilePhoto && photoModal) {
+    profilePhoto.addEventListener('click', () => {
+      photoModal.classList.add('open');
+    });
+
+    photoModal.addEventListener('click', (e) => {
+      if (e.target === photoModal) {
+        photoModal.classList.remove('open');
+      }
+    });
+  }
+
   // project modal opener/closer handled below (delegated)
 });
 

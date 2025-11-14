@@ -87,6 +87,15 @@
     margin-left: 0;
   }
 
+  .project4-layout .text-column .project-text .project4-paragraph {
+    margin: 0.45rem 0;
+    text-align: justify;
+  }
+
+  .project4-layout .text-column .project-text .project4-paragraph:first-of-type {
+    margin-top: 0.85rem;
+  }
+
   .project4-legend {
     background: rgba(255,255,255,0.95);
     padding: 12px 16px;
@@ -142,7 +151,7 @@
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
                     <li><a href="../index.html#cv">CV</a></li>
-                    <li><a href="https://www.linkedin.com/in/tu-perfil/">LinkedIn</a></li>
+                    <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
                     <li><a href="https://github.com/luzarin">GitHub</a></li>
                 </ul>
             </div>
@@ -150,7 +159,7 @@
             <div id="mobileMenu" class="mobile-menu" style="display:none;">
               <ul>
                 <li><a href="../index.html#cv">CV</a></li>
-                <li><a href="https://www.linkedin.com/in/tu-perfil/">LinkedIn</a></li>
+                <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
                 <li><a href="https://github.com/luzarin">GitHub</a></li>
               </ul>
             </div>
@@ -167,22 +176,17 @@
     </div>
 
     <div class="text-column">
-      <p class="card-text project-text">
-        <span class="coll projdes">Resumen del Proyecto</span><br>
-  <span class="indent">El proyecto construye un mapa de cobertura y uso del suelo (LULC) para el Valle de Colchagua, basado en insumos ópticos Sentinel-2 y radar Sentinel-1, estructurado bajo la lógica del Land Cover Classification System  (LCCS; ISO 19144-2). El objetivo es generar un ráster categórico a 10 m que represente siete clases definidas por atributos observables (forma de vida, fenología, humedad, artificialidad) y respaldado por productos secundarios como métricas de área y tablas de precisión. El análisis cubre un ciclo agrícola completo (01-09-2023 a 31-08-2024) sobre un AOI (área de estudio).</span>
-  <br>
-  <span class="indent">La fase conceptual-operativa se estructura alrededor de una leyenda LCCS adaptada a Colchagua. Cada clase se fundamenta en observables RS específicos: fenología de NDVI, humedad NDWI, proporciones SAR VV/VH y rasgos estructurales derivados. El preprocesamiento integra máscaras SCL de Sentinel-2, reflectancias reescaladas, índices e indicadores fenológicos; en radar se aplican calibración a γ⁰, reducción de speckle y estadísticos multitemporales. Todo se consolida en un stack final de ~54 bandas óptico-SAR-topográficas.</span>
-  <br>
-  <span class="indent">El entrenamiento utiliza 8277 muestras etiquetadas para las siete clases, combinadas en un único conjunto y dividido 70/30 para entrenamiento y validación. La clasificación se realiza con Random Forest estratificado, incorporando estadísticos ópticos, radar y fenológicos. La validación independiente entrega OA ≈ 0.68 y Kappa ≈ 0.63, con rendimientos altos en clases urbanas y cuerpos de agua (&gt;0.9), coherentes con la separabilidad espectral estructural de la zona mediterránea.</span>
-  <br>
-  <span class="indent">El resultado es un flujo reproducible y escalable que integra óptico, SAR y topografía. El producto final se exporta como GeoTIFF de 10m de resolución (EPSG 5361), acompañado de métricas por clase, tablas de precisión y capas auxiliares que sostienen el análisis posterior.</span>
-  <br>
-        <span class="coll projdes">Más Información</span>
-        <br><br>
-        <a href="https://github.com/luzarin/LULC-LCCS-Colchagua" style="display:inline-block; margin-bottom:50px;">
+      <div class="card-text project-text">
+        <span class="coll projdes">Resumen del Proyecto</span>
+        <p class="project4-paragraph">El proyecto construye un mapa de cobertura y uso del suelo (LULC) para el Valle de Colchagua, basado en insumos ópticos Sentinel-2 y radar Sentinel-1, estructurado bajo la lógica del Land Cover Classification System (LCCS; ISO 19144-2). El objetivo es generar un ráster categórico a 10 m que represente siete clases definidas por atributos observables (forma de vida, fenología, humedad, artificialidad) y respaldado por productos secundarios como métricas de área y tablas de precisión. El análisis cubre un ciclo agrícola completo (01-09-2023 a 31-08-2024) sobre un AOI (área de estudio).</p>
+        <p class="project4-paragraph">La fase conceptual-operativa se estructura alrededor de una leyenda LCCS adaptada a Colchagua: cultivos perennes irrigados, cultivos caducifolios, bosque nativo esclerófilo, matorral/espinal, bosque caducifolio, áreas urbanas/suelo desnudo y agua permanente. Cada clase se fundamenta en observables RS específicos: fenología de NDVI, humedad NDWI, proporciones SAR VV/VH y rasgos estructurales derivados. El preprocesamiento integra máscaras SCL de Sentinel-2, reflectancias reescaladas, índices e indicadores fenológicos; en radar se aplican calibración a γ⁰, reducción de speckle y estadísticos multitemporales. Todo se consolida en un stack final de ~54 bandas óptico-SAR-topográficas.</p>
+        <p class="project4-paragraph">El entrenamiento utiliza 8277 muestras etiquetadas para las siete clases, combinadas en un único conjunto y dividido 70/30 para entrenamiento y validación. La clasificación se realiza con Random Forest estratificado, incorporando estadísticos ópticos, radar y fenológicos. La validación independiente entrega OA ≈ 0.68 y Kappa ≈ 0.63, con rendimientos altos en clases urbanas y cuerpos de agua (>0.9), coherentes con la separabilidad espectral estructural de la zona mediterránea.</p>
+        <p class="project4-paragraph">El resultado es un flujo reproducible y escalable que integra óptico, SAR y topografía para resolver la heterogeneidad del Valle de Colchagua. El producto final se exporta como GeoTIFF a 10 m (EPSG 5361), acompañado de métricas por clase, tablas de precisión y capas auxiliares que sostienen el análisis posterior.</p>
+        <span class="coll projdes" style="margin-top: 1rem;">Más Información</span>
+        <a href="https://github.com/luzarin/LULC-LCCS-Colchagua" style="display:inline-block; margin: 0.5rem 0 1.5rem;">
           <span class="logos">🔗 GitHub</span>
         </a>
-      </p>
+      </div>
     </div>
   </div>
 </div>
