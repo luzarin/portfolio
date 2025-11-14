@@ -15,7 +15,123 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>Proyecto 3</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="anonymous"/>
+  <title>Proyecto 4</title>
+
+  <style>
+  .project4-wrapper {
+    padding-top: 90px;
+    padding-bottom: 40px;
+  }
+
+  .project4-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 0 24px;
+  }
+
+  .project4-layout .map-column {
+    flex: 1 1 60%;
+    min-width: 0;
+  }
+
+  .project4-layout .map-title {
+    padding: 24px 20px 24px 4px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #222;
+    font-family: 'Noto Sans', sans-serif;
+  }
+
+  .project4-layout .map-container {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    min-height: 600px;
+  }
+
+  #leafletMap {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+  }
+
+  .project4-layout .text-column {
+    flex: 1 1 48%;
+    min-width: 0;
+    background: rgba(255,255,255,0.92);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    padding: 24px 20px 24px 0px;
+  }
+
+  .project4-layout .text-column .project-text {
+    width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+
+  .project4-layout .text-column .project-text .indent {
+    display: block;
+    text-align: justify;
+    margin: 0.75rem 0;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .project4-legend {
+    background: rgba(255,255,255,0.95);
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
+    min-width: 160px;
+    font: 13px/16px Arial, Helvetica, sans-serif;
+    color: #555;
+  }
+
+  .project4-legend .legend-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #333;
+  }
+
+  .project4-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+
+  .project4-legend .legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    border: 1px solid #999;
+    flex-shrink: 0;
+  }
+
+  @media screen and (max-width: 992px) {
+    .project4-layout {
+      flex-direction: column;
+    }
+
+    .project4-layout .map-container,
+    #leafletMap {
+      min-height: 420px;
+    }
+  }
+  </style>
 </head>
 <body>
     <nav class="nav">
@@ -41,160 +157,136 @@
         </div>
     </nav>
 
-<!-- Container for the image gallery -->
-<div class="imageContainer-large">
-    
-<div class="imageContainer">
-     <!-- Next and previous buttons
-     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-     <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
-    <!-- Full-width images with number text -->
-  <div class="mySlides">
-    <img class="myImg" src="../imagenes/proyecto4-1.png" style="width:100%">
-  </div>
-      <!-- The Modal -->
-      <div id="myModal" class="modal">
-
-        <!-- The Close Button -->
-        <span class="close">&times;</span>
-      
-        <!-- Modal Content (The Image) -->
-        <img class="modal-content" id="img01">
-      </div>
-  
-  <div class="mySlides">
-    <img class="myImg" src="../imagenes/proyecto4-2.png" style="width:100%">
-</div>
-
-<div class="mySlides">
-  <img class="myImg" src="../imagenes/proyecto4-3.png" style="width:100%">
-</div>
-
-<div class="mySlides">
-  <img class="myImg" src="../imagenes/proyecto4-4.png" style="width:100%">
-</div>
-
-    <!-- Image text -->
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-  
-    <!-- Thumbnail images -->
-<div class="images">
-    <div class="row">
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto4-1.png" style="width:100%" onclick="currentSlide(1)" alt="Herramienta en QGIS.">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto4-2.png" style="width:100%" onclick="currentSlide(2)" alt="Archivos .tif de celdas DTM+buildings corregidas.">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto4-3.png" style="width:100%" onclick="currentSlide(3)" alt="Ráster virtual del DTM+buildings final.">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="../imagenes/proyecto4-4.png" style="width:100%" onclick="currentSlide(4)" alt="Producto resultante del Ráster virtual (Renderizado en Blender).">
+<div class="project4-wrapper">
+  <div class="project4-layout">
+    <div class="map-column">
+  <div class="map-title">LCCS - Valle de Colchagua</div>
+      <div class="map-container">
+        <div id="leafletMap"></div>
       </div>
     </div>
+
+    <div class="text-column">
+      <p class="card-text project-text">
+        <span class="coll projdes">Resumen del Proyecto</span><br>
+  <span class="indent">El proyecto construye un mapa de cobertura y uso del suelo (LULC) para el Valle de Colchagua, basado en insumos ópticos Sentinel-2 y radar Sentinel-1, estructurado bajo la lógica del Land Cover Classification System  (LCCS; ISO 19144-2). El objetivo es generar un ráster categórico a 10 m que represente siete clases definidas por atributos observables (forma de vida, fenología, humedad, artificialidad) y respaldado por productos secundarios como métricas de área y tablas de precisión. El análisis cubre un ciclo agrícola completo (01-09-2023 a 31-08-2024) sobre un AOI (área de estudio).</span>
+  <br>
+  <span class="indent">La fase conceptual-operativa se estructura alrededor de una leyenda LCCS adaptada a Colchagua. Cada clase se fundamenta en observables RS específicos: fenología de NDVI, humedad NDWI, proporciones SAR VV/VH y rasgos estructurales derivados. El preprocesamiento integra máscaras SCL de Sentinel-2, reflectancias reescaladas, índices e indicadores fenológicos; en radar se aplican calibración a γ⁰, reducción de speckle y estadísticos multitemporales. Todo se consolida en un stack final de ~54 bandas óptico-SAR-topográficas.</span>
+  <br>
+  <span class="indent">El entrenamiento utiliza 8277 muestras etiquetadas para las siete clases, combinadas en un único conjunto y dividido 70/30 para entrenamiento y validación. La clasificación se realiza con Random Forest estratificado, incorporando estadísticos ópticos, radar y fenológicos. La validación independiente entrega OA ≈ 0.68 y Kappa ≈ 0.63, con rendimientos altos en clases urbanas y cuerpos de agua (&gt;0.9), coherentes con la separabilidad espectral estructural de la zona mediterránea.</span>
+  <br>
+  <span class="indent">El resultado es un flujo reproducible y escalable que integra óptico, SAR y topografía. El producto final se exporta como GeoTIFF de 10m de resolución (EPSG 5361), acompañado de métricas por clase, tablas de precisión y capas auxiliares que sostienen el análisis posterior.</span>
+  <br>
+        <span class="coll projdes">Más Información</span>
+        <br><br>
+        <a href="https://github.com/luzarin/LULC-LCCS-Colchagua" style="display:inline-block; margin-bottom:50px;">
+          <span class="logos">🔗 GitHub</span>
+        </a>
+      </p>
+    </div>
   </div>
-  
 </div>
 
-<p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Proyecto diseñado para.</span>
-    <br>
-    <span class="indent">
-      <br>
-    Parrafo.
-    <br>
-    Parrafo.
-    </span>
-    <br><br>
-    <span class="indent">
-    Parrafo.
-    </span>
-    <br><br>
-    <span class="coll projdes">Más Información</span>
-    <br><br>
-    </a>
-    <a href="https://github.com/luzarin/">
-        <span class="logos">🔗 GitHub</span>
-    </a>
-</p>
-</div>
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
 
-  <!-- JAVASCRIPT FOR SLIDESHOW -->
-  <script>let slideIndex = 1;
-    showSlides(slideIndex);
-    
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
+  <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
+  <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
+  <script src="https://unpkg.com/geoblaze@2.8.0/dist/geoblaze.min.js"></script>
+
+  <script>
+    function initLeafletMap() {
+      var map = L.map('leafletMap', {
+        zoomControl: true,
+        scrollWheelZoom: true
+      }).setView([-34.61, -71.32], 10);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors © CARTO',
+        maxZoom: 19
+      }).addTo(map);
+
+      const colorRamp = {
+        1: '#f2c74b', // C1 agrícola perenne
+        2: '#e67e22', // C2 agrícola caducifolio
+        3: '#1b5e20', // C3 bosque esclerófilo
+        4: '#b8860b', // C4 matorral/espinal
+        5: '#66bb6a', // C5 bosque caducifolio
+        6: '#9e9e9e', // C6 urbano/suelo desnudo
+        7: '#1f78b4'  // C7 agua
+      };
+
+  fetch('proyecto%204/lulc_lccs.tif')
+        .then(function(response) {
+          if (!response.ok) throw new Error('No se pudo cargar el GeoTIFF');
+          return response.arrayBuffer();
+        })
+        .then(function(arrayBuffer) {
+          return parseGeoraster(arrayBuffer);
+        })
+        .then(function(georaster) {
+          var layer = new GeoRasterLayer({
+            georaster: georaster,
+            resolution: 128,
+            opacity: 0.85,
+            pixelValuesToColorFn: function(values) {
+              var val = values[0];
+              if (val === null || val === undefined || val <= 0) return null;
+              return colorRamp[val] || '#000000';
+            }
+          });
+
+          layer.addTo(map);
+
+          try {
+            map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+          } catch (e) {
+            console.warn('No fue posible ajustar el mapa al ráster:', e);
+          }
+
+          var legend = L.control({ position: 'bottomleft' });
+          legend.onAdd = function() {
+            var div = L.DomUtil.create('div', 'project4-legend');
+            div.innerHTML = '<div class="legend-title">Leyenda LULC</div>';
+            var entries = [
+              { color: '#f2c74b', label: 'C1 Agrícola perenne' },
+              { color: '#e67e22', label: 'C2 Agrícola caducifolio' },
+              { color: '#1b5e20', label: 'C3 Bosque esclerófilo' },
+              { color: '#b8860b', label: 'C4 Matorral/Espinal' },
+              { color: '#66bb6a', label: 'C5 Bosque caducifolio' },
+              { color: '#9e9e9e', label: 'C6 Urbano/Suelo desnudo' },
+              { color: '#1f78b4', label: 'C7 Agua' }
+            ];
+
+            entries.forEach(function(entry) {
+              var item = document.createElement('div');
+              item.className = 'legend-item';
+
+              var colorBox = document.createElement('span');
+              colorBox.className = 'legend-color';
+              colorBox.style.background = entry.color;
+
+              var label = document.createElement('span');
+              label.textContent = entry.label;
+
+              item.appendChild(colorBox);
+              item.appendChild(label);
+              div.appendChild(item);
+            });
+
+            return div;
+          };
+
+          legend.addTo(map);
+        })
+        .catch(function(error) {
+          console.error('Error al cargar el ráster LULC:', error);
+        });
     }
-    
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-    
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("demo");
-      let captionText = document.getElementById("caption");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-      captionText.innerHTML = dots[slideIndex-1].alt;
-      
-      // Agregar funcionalidad de zoom a la imagen principal
-      enableImageZoom();
-    }
-    
-    // Funcionalidad de zoom al hacer click en imagen principal
-    function enableImageZoom() {
-      let mainImages = document.querySelectorAll('.mySlides .myImg');
-      let modal = document.getElementById('myModal');
-      let modalImg = document.getElementById('img01');
-      let closeBtn = document.querySelector('.close');
-      
-      mainImages.forEach(function(img) {
-        img.style.cursor = 'pointer';
-        img.onclick = function() {
-          modal.style.display = "block";
-          modalImg.src = this.src;
-        }
-      });
-      
-      // Cerrar modal al hacer click en X
-      closeBtn.onclick = function() {
-        modal.style.display = "none";
-      }
-      
-      // Cerrar modal al hacer click fuera de la imagen
-      modal.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
-      
-      // Cerrar modal con tecla Escape
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' || event.key === 'Esc') {
-          modal.style.display = "none";
-        }
-      });
-    }
-    
-    // Inicializar zoom cuando la página carga
-    document.addEventListener('DOMContentLoaded', function() {
-      enableImageZoom();
-    });
+
+    document.addEventListener('DOMContentLoaded', initLeafletMap);
   </script>
 
 <!-- Bootstrap 5.3 bundle (unificado) -->
