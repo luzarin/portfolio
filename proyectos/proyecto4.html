@@ -1,200 +1,222 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap 5.3 (unified with index) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    crossorigin="anonymous">
   <!-- link to style sheet -->
   <link rel="stylesheet" href="../style.css">
   <!-- LINK TO PROJECT PAGE STYLE SHEET -->
-    <link rel="stylesheet" href="../pag_proyecto.css">
+  <link rel="stylesheet" href="../pag_proyecto.css">
   <!-- GOOGLE fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin="anonymous"/>
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
   <title>Proyecto 4</title>
 
   <style>
-  .project4-wrapper {
-    padding-top: 90px;
-    padding-bottom: 40px;
-  }
+    .project4-wrapper {
+      padding-top: 90px;
+      padding-bottom: 40px;
+    }
 
-  .project4-layout {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    padding: 0 24px;
-  }
-
-  .project4-layout .map-column {
-    flex: 1 1 60%;
-    min-width: 0;
-  }
-
-  .project4-layout .map-title {
-    padding: 24px 20px 24px 4px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 12px;
-    color: #222;
-    font-family: 'Noto Sans', sans-serif;
-  }
-
-  .project4-layout .map-container {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    min-height: 600px;
-  }
-
-  #leafletMap {
-    width: 100%;
-    height: 100%;
-    min-height: 600px;
-  }
-
-  .project4-layout .text-column {
-    flex: 1 1 48%;
-    min-width: 0;
-    background: rgba(255,255,255,0.92);
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    padding: 24px 20px 24px 0px;
-  }
-
-  .project4-layout .text-column .project-text {
-    width: 100%;
-    margin: 0;
-    text-align: left;
-  }
-
-  .project4-layout .text-column .project-text .indent {
-    display: block;
-    text-align: justify;
-    margin: 0.75rem 0;
-    padding-left: 0;
-    margin-left: 0;
-  }
-
-  .project4-layout .text-column .project-text .project4-paragraph {
-    margin: 0.45rem 0;
-    text-align: justify;
-  }
-
-  .project4-layout .text-column .project-text .project4-paragraph:first-of-type {
-    margin-top: 0.85rem;
-  }
-
-  .project4-legend {
-    background: rgba(255,255,255,0.95);
-    padding: 12px 16px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    border: 1px solid #ccc;
-    min-width: 160px;
-    font: 13px/16px Arial, Helvetica, sans-serif;
-    color: #555;
-  }
-
-  .project4-legend .legend-title {
-    font-weight: 700;
-    margin-bottom: 8px;
-    text-align: center;
-    color: #333;
-  }
-
-  .project4-legend .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 4px;
-    font-size: 12px;
-  }
-
-  .project4-legend .legend-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 2px;
-    border: 1px solid #999;
-    flex-shrink: 0;
-  }
-
-  @media screen and (max-width: 992px) {
     .project4-layout {
-      flex-direction: column;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 0 24px;
     }
 
-    .project4-layout .map-container,
-    #leafletMap {
-      min-height: 420px;
+    .project4-layout .map-column {
+      flex: 1 1 60%;
+      min-width: 0;
     }
-  }
+
+    .project4-layout .map-title {
+      padding: 24px 20px 24px 4px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #222;
+      font-family: 'Noto Sans', sans-serif;
+    }
+
+    .project4-layout .map-container {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      min-height: 600px;
+    }
+
+    #leafletMap {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+    }
+
+    .project4-layout .text-column {
+      flex: 1 1 48%;
+      min-width: 0;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      padding: 24px 20px 24px 0px;
+    }
+
+    .project4-layout .text-column .project-text {
+      width: 100%;
+      margin: 0;
+      text-align: left;
+    }
+
+    .project4-layout .text-column .project-text .indent {
+      display: block;
+      text-align: justify;
+      margin: 0.75rem 0;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .project4-layout .text-column .project-text .project4-paragraph {
+      margin: 0.45rem 0;
+      text-align: justify;
+    }
+
+    .project4-layout .text-column .project-text .project4-paragraph:first-of-type {
+      margin-top: 0.85rem;
+    }
+
+    .project4-legend {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 16px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid #ccc;
+      min-width: 160px;
+      font: 13px/16px Arial, Helvetica, sans-serif;
+      color: #555;
+    }
+
+    .project4-legend .legend-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+      color: #333;
+    }
+
+    .project4-legend .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .project4-legend .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 2px;
+      border: 1px solid #999;
+      flex-shrink: 0;
+    }
+
+    @media screen and (max-width: 992px) {
+      .project4-layout {
+        flex-direction: column;
+      }
+
+      .project4-layout .map-container,
+      #leafletMap {
+        min-height: 420px;
+      }
+    }
   </style>
 </head>
-<body>
-    <nav class="nav">
-        <div class="container">
-            <div class="logo">
-                <a href="../index.html">Inicio</a>
-            </div>
-            <div id="mainListDiv" class="main_list">
-                <ul class="navlinks">
-                    <li><a href="../index.html#cv">CV</a></li>
-                    <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
-                    <li><a href="https://github.com/luzarin">GitHub</a></li>
-                </ul>
-            </div>
-            <button id="mobileMenuButton" class="mobile-menu-btn" aria-label="Abrir menú">☰</button>
-            <div id="mobileMenu" class="mobile-menu" style="display:none;">
-              <ul>
-                <li><a href="../index.html#cv">CV</a></li>
-                <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
-                <li><a href="https://github.com/luzarin">GitHub</a></li>
-              </ul>
-            </div>
-        </div>
-    </nav>
 
-<div class="project4-wrapper">
-  <div class="project4-layout">
-    <div class="map-column">
-  <div class="map-title">LCCS - Valle de Colchagua</div>
-      <div class="map-container">
-        <div id="leafletMap"></div>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <div class="logo">
+        <a href="../index.html">Inicio</a>
+      </div>
+      <div id="mainListDiv" class="main_list">
+        <ul class="navlinks">
+          <li><a href="Lucas-Blachet-DelSolar-CV.pdf">CV</a></li>
+          <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
+          <li><a href="https://github.com/luzarin">GitHub</a></li>
+        </ul>
+      </div>
+      <button id="mobileMenuButton" class="mobile-menu-btn" aria-label="Abrir menú">☰</button>
+      <div id="mobileMenu" class="mobile-menu" style="display:none;">
+        <ul>
+          <li><a href="Lucas-Blachet-DelSolar-CV.pdf">CV</a></li>
+          <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
+          <li><a href="https://github.com/luzarin">GitHub</a></li>
+        </ul>
       </div>
     </div>
+  </nav>
 
-    <div class="text-column">
-      <div class="card-text project-text">
-        <span class="coll projdes">Resumen del Proyecto</span>
-        <p class="project4-paragraph">El proyecto construye un mapa de cobertura y uso del suelo (LULC) para el Valle de Colchagua, basado en insumos ópticos Sentinel-2 y radar Sentinel-1, estructurado bajo la lógica del Land Cover Classification System (LCCS; ISO 19144-2). El objetivo es generar un ráster de 10m de resolución que represente siete clases definidas por atributos observables (forma de vida, fenología, humedad, artificialidad) y respaldado por productos secundarios como métricas de área y tablas de precisión. El análisis cubre un ciclo agrícola completo (01-09-2023 a 31-08-2024) sobre un AOI (área de estudio).</p>
-        <p class="project4-paragraph">La fase conceptual-operativa se estructura alrededor de una leyenda LCCS adaptada a Colchagua: cultivos perennes irrigados, cultivos caducifolios, bosque nativo esclerófilo, matorral/espinal, bosque caducifolio, áreas urbanas/suelo desnudo y agua permanente. Cada clase se fundamenta en observables RS específicos: fenología de NDVI, humedad NDWI, proporciones SAR VV/VH y rasgos estructurales derivados. El preprocesamiento integra máscaras SCL de Sentinel-2, reflectancias reescaladas, índices e indicadores fenológicos; en radar se aplican calibración a γ⁰, reducción de speckle y estadísticos multitemporales. Todo se consolida en un stack final de ~54 bandas óptico-SAR-topográficas.</p>
-        <p class="project4-paragraph">El entrenamiento utiliza 8277 muestras etiquetadas para las siete clases, combinadas en un único conjunto y dividido 70/30 para entrenamiento y validación. La clasificación se realiza con Random Forest estratificado, incorporando estadísticos ópticos, radar y fenológicos. La validación independiente entrega OA ≈ 0.68 y Kappa ≈ 0.63, con rendimientos altos en clases urbanas y cuerpos de agua (>0.9), coherentes con la separabilidad espectral estructural de la zona mediterránea.</p>
-        <p class="project4-paragraph">El resultado es un flujo reproducible y escalable que integra óptico, SAR y topografía para resolver la heterogeneidad del Valle de Colchagua. El producto final se exporta como GeoTIFF a 10 m (EPSG 5361), acompañado de métricas por clase, tablas de precisión y capas auxiliares que sostienen el análisis posterior.</p>
-  <span class="coll projdes" style="margin-top: 1.8rem; display:block;">Más Información</span>
-  <a href="https://github.com/luzarin/LULC-LCCS-Colchagua" style="display:inline-block; margin: 0.5rem 0 1.5rem;">
-          <span class="logos">🔗 GitHub</span>
-        </a>
+  <div class="project4-wrapper">
+    <div class="project4-layout">
+      <div class="map-column">
+        <div class="map-title">LCCS - Valle de Colchagua</div>
+        <div class="map-container">
+          <div id="leafletMap"></div>
+        </div>
+      </div>
+
+      <div class="text-column">
+        <div class="card-text project-text">
+          <span class="coll projdes">Resumen del Proyecto</span>
+          <p class="project4-paragraph">El proyecto construye un mapa de cobertura y uso del suelo (LULC) para el Valle
+            de Colchagua, basado en insumos ópticos Sentinel-2 y radar Sentinel-1, estructurado bajo la lógica del Land
+            Cover Classification System (LCCS; ISO 19144-2). El objetivo es generar un ráster de 10m de resolución que
+            represente siete clases definidas por atributos observables (forma de vida, fenología, humedad,
+            artificialidad) y respaldado por productos secundarios como métricas de área y tablas de precisión. El
+            análisis cubre un ciclo agrícola completo (01-09-2023 a 31-08-2024) sobre un AOI (área de estudio).</p>
+          <p class="project4-paragraph">La fase conceptual-operativa se estructura alrededor de una leyenda LCCS
+            adaptada a Colchagua: cultivos perennes irrigados, cultivos caducifolios, bosque nativo esclerófilo,
+            matorral/espinal, bosque caducifolio, áreas urbanas/suelo desnudo y agua permanente. Cada clase se
+            fundamenta en observables RS específicos: fenología de NDVI, humedad NDWI, proporciones SAR VV/VH y rasgos
+            estructurales derivados. El preprocesamiento integra máscaras SCL de Sentinel-2, reflectancias reescaladas,
+            índices e indicadores fenológicos; en radar se aplican calibración a γ⁰, reducción de speckle y estadísticos
+            multitemporales. Todo se consolida en un stack final de ~54 bandas óptico-SAR-topográficas.</p>
+          <p class="project4-paragraph">El entrenamiento utiliza 8277 muestras etiquetadas para las siete clases,
+            combinadas en un único conjunto y dividido 70/30 para entrenamiento y validación. La clasificación se
+            realiza con Random Forest estratificado, incorporando estadísticos ópticos, radar y fenológicos. La
+            validación independiente entrega OA ≈ 0.68 y Kappa ≈ 0.63, con rendimientos altos en clases urbanas y
+            cuerpos de agua (>0.9), coherentes con la separabilidad espectral estructural de la zona mediterránea.</p>
+          <p class="project4-paragraph">El resultado es un flujo reproducible y escalable que integra óptico, SAR y
+            topografía para resolver la heterogeneidad del Valle de Colchagua. El producto final se exporta como GeoTIFF
+            a 10 m (EPSG 5361), acompañado de métricas por clase, tablas de precisión y capas auxiliares que sostienen
+            el análisis posterior.</p>
+          <span class="coll projdes" style="margin-top: 1.8rem; display:block;">Más Información</span>
+          <a href="https://github.com/luzarin/LULC-LCCS-Colchagua"
+            style="display:inline-block; margin: 0.5rem 0 1.5rem;">
+            <span class="logos">🔗 GitHub</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Leaflet JavaScript -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-          crossorigin=""></script>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
   <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
@@ -222,20 +244,20 @@
         7: '#1f78b4'  // C7 agua
       };
 
-  fetch('proyecto%204/lulc_lccs.tif')
-        .then(function(response) {
+      fetch('proyecto%204/lulc_lccs.tif')
+        .then(function (response) {
           if (!response.ok) throw new Error('No se pudo cargar el GeoTIFF');
           return response.arrayBuffer();
         })
-        .then(function(arrayBuffer) {
+        .then(function (arrayBuffer) {
           return parseGeoraster(arrayBuffer);
         })
-        .then(function(georaster) {
+        .then(function (georaster) {
           var layer = new GeoRasterLayer({
             georaster: georaster,
             resolution: 128,
             opacity: 0.85,
-            pixelValuesToColorFn: function(values) {
+            pixelValuesToColorFn: function (values) {
               var val = values[0];
               if (val === null || val === undefined || val <= 0) return null;
               return colorRamp[val] || '#000000';
@@ -251,7 +273,7 @@
           }
 
           var legend = L.control({ position: 'bottomleft' });
-          legend.onAdd = function() {
+          legend.onAdd = function () {
             var div = L.DomUtil.create('div', 'project4-legend');
             div.innerHTML = '<div class="legend-title">Leyenda LULC</div>';
             var entries = [
@@ -264,7 +286,7 @@
               { color: '#1f78b4', label: 'C7 Agua' }
             ];
 
-            entries.forEach(function(entry) {
+            entries.forEach(function (entry) {
               var item = document.createElement('div');
               item.className = 'legend-item';
 
@@ -285,7 +307,7 @@
 
           legend.addTo(map);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.error('Error al cargar el ráster LULC:', error);
         });
     }
@@ -293,18 +315,20 @@
     document.addEventListener('DOMContentLoaded', initLeafletMap);
   </script>
 
-<!-- Bootstrap 5.3 bundle (unificado) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<!-- Font awesome -->
-<script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
-<!-- Script to enable mobile menu on project pages -->
-<script src="../pag_proyecto.js" defer="defer"></script>
+  <!-- Bootstrap 5.3 bundle (unificado) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+  <!-- Font awesome -->
+  <script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
+  <!-- Script to enable mobile menu on project pages -->
+  <script src="../pag_proyecto.js" defer="defer"></script>
 
-<!-- Footer -->
-<footer style="background-color: #111111; padding: 20px 0; text-align: center; margin-top: 40px;">
+  <!-- Footer -->
+  <footer style="background-color: #111111; padding: 20px 0; text-align: center; margin-top: 40px;">
     <p style="margin: 0; color: #ffffff; font-size: 0.95em;">
-        Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
+      Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
     </p>
-</footer>
+  </footer>
 </body>
+
 </html>

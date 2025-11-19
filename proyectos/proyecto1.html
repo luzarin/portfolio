@@ -1,112 +1,128 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap 5.3 (unified with index) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
-  <!-- link to style sheet -->
-  <link rel="stylesheet" href="../style.css">
-  <!-- LINK TO PROJECT PAGE STYLE SHEET -->
+    <!-- Bootstrap 5.3 (unified with index) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <!-- link to style sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- LINK TO PROJECT PAGE STYLE SHEET -->
     <link rel="stylesheet" href="../pag_proyecto.css">
-  <!-- GOOGLE fonts: Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- GOOGLE fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Leaflet CSS -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin="anonymous"/>
-  
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
+
     <title>Proyecto 1</title>
-    
+
     <style>
         /* Layout específico para página de mapas */
         .page-wrapper {
-            padding-top: 100px; /* Espacio entre navbar y mapas */
+            padding-top: 100px;
+            /* Espacio entre navbar y mapas */
             padding-bottom: 20px;
         }
-        
+
         .maps-section {
             display: flex;
             gap: 25px;
-            max-width: 1400px; /* Aumentar ancho máximo */
-            margin: 0 auto 25px auto; /* Reducir drásticamente el gap debajo */
-            padding: 0 15px; /* Reducir padding para dar más espacio a los mapas */
+            max-width: 1400px;
+            /* Aumentar ancho máximo */
+            margin: 0 auto 25px auto;
+            /* Reducir drásticamente el gap debajo */
+            padding: 0 15px;
+            /* Reducir padding para dar más espacio a los mapas */
         }
-        
+
         .map-column {
             flex: 1;
             min-width: 0;
         }
-        
+
         .map-container {
             width: 100%;
             border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             margin-top: 0.5rem;
         }
-        
+
         #leafletMap {
-            height: 650px; /* Aumentar altura */
+            height: 650px;
+            /* Aumentar altura */
             width: 100%;
         }
 
         /* Make extra maps match the main map size */
         #extraMap1,
         #extraMap2 {
-            height: 650px; /* same as #leafletMap */
+            height: 650px;
+            /* same as #leafletMap */
             width: 100%;
         }
-        
+
         .map-title {
             text-align: center;
-            font-size: 1.4rem; /* Aumentar tamaño */
+            font-size: 1.4rem;
+            /* Aumentar tamaño */
             font-weight: 600;
             margin: 0 0 1rem 0;
             color: #333;
             font-family: 'Noto Sans', sans-serif;
         }
-        
+
         /* Contenido del proyecto */
         .project-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: center; /* Centrar horizontalmente */
+            justify-content: center;
+            /* Centrar horizontalmente */
         }
-        
+
         .project-content .project-text {
             width: 100%;
-            margin: 0; /* Eliminar márgenes automáticos del CSS original */
-            text-align: center; /* Centrar el contenido */
+            margin: 0;
+            /* Eliminar márgenes automáticos del CSS original */
+            text-align: center;
+            /* Centrar el contenido */
         }
-        
+
         .project-content .project-text .indent {
-            text-align: justify; /* Justificar solo los párrafos de contenido */
+            text-align: justify;
+            /* Justificar solo los párrafos de contenido */
             display: block;
             margin: 0.5rem 0;
         }
-        
+
         /* Estilos para la leyenda */
         .legend {
             line-height: 20px;
             color: #555;
             background: white;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
             padding: 12px 16px;
             font: 13px/16px Arial, Helvetica, sans-serif;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             border: 1px solid #ccc;
-            min-width: 160px; /* Aumentar ancho mínimo */
+            min-width: 160px;
+            /* Aumentar ancho mínimo */
         }
+
         .legend i {
             width: 20px;
             height: 20px;
@@ -117,6 +133,7 @@
             border: 1px solid #999;
             border-radius: 2px;
         }
+
         .legend h6 {
             margin: 0 0 8px 0;
             font-weight: 600;
@@ -124,6 +141,7 @@
             text-align: center;
             color: #333;
         }
+
         .legend .legend-item {
             display: block;
             clear: both;
@@ -131,22 +149,22 @@
             font-size: 12px;
             line-height: 20px;
         }
-        
+
         /* Control de opacidad para Leaflet */
         .opacity-control {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 8px 10px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             border: 1px solid #ccc;
             z-index: 1000;
             font-family: 'Noto Sans', sans-serif;
             min-width: 120px;
         }
-        
+
         .opacity-control label {
             display: block;
             margin-bottom: 4px;
@@ -155,7 +173,7 @@
             color: #333;
             text-align: center;
         }
-        
+
         .opacity-slider {
             width: 100%;
             height: 6px;
@@ -165,7 +183,7 @@
             -webkit-appearance: none;
             appearance: none;
         }
-        
+
         .opacity-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -174,9 +192,9 @@
             border-radius: 50%;
             background: #e74c3c;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         .opacity-slider::-moz-range-thumb {
             width: 12px;
             height: 12px;
@@ -184,28 +202,31 @@
             background: #e74c3c;
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         .opacity-value {
             text-align: center;
             font-size: 10px;
             color: #666;
             margin-top: 2px;
         }
-        
+
         /* Responsive para móviles */
         @media (max-width: 768px) {
             .page-wrapper {
                 padding-top: 70px;
             }
+
             .maps-section {
                 flex-direction: column;
                 gap: 30px;
-                margin-bottom: 5px; /* Reducir también en móviles */
+                margin-bottom: 5px;
+                /* Reducir también en móviles */
                 padding: 0 10px;
             }
         }
+
         /* Ensure embedded iframes and extra map containers fill their column */
         .map-container iframe,
         #extraMap1,
@@ -215,6 +236,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav class="nav">
         <div class="container">
@@ -223,18 +245,18 @@
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
-                    <li><a href="../index.html#cv">CV</a></li>
+                    <li><a href="Lucas-Blachet-DelSolar-CV.pdf">CV</a></li>
                     <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
                     <li><a href="https://github.com/luzarin">GitHub</a></li>
                 </ul>
             </div>
             <button id="mobileMenuButton" class="mobile-menu-btn" aria-label="Abrir menú">☰</button>
             <div id="mobileMenu" class="mobile-menu" style="display:none;">
-              <ul>
-                <li><a href="../index.html#cv">CV</a></li>
-                <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
-                <li><a href="https://github.com/luzarin">GitHub</a></li>
-              </ul>
+                <ul>
+                    <li><a href="Lucas-Blachet-DelSolar-CV.pdf">CV</a></li>
+                    <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
+                    <li><a href="https://github.com/luzarin">GitHub</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -248,33 +270,39 @@
                 <div class="map-container" style="position: relative;">
                     <div id="leafletMap"></div>
                     <!-- Leyenda -->
-                    <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
+                    <div
+                        style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
                         <div style="margin-bottom: 4px;">
-                            <span style="display: inline-block; width: 24px; height: 2px; background: #ff0000; vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 24px; height: 2px; background: #ff0000; vertical-align: middle; margin-right: 6px;"></span>
                             <span>Cuenca</span>
                         </div>
                         <div style="margin-bottom: 4px;">
-                            <span style="display: inline-block; width: 24px; height: 1px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 24px; height: 1px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
                             <span>Strahler 1-2</span>
                         </div>
                         <div style="margin-bottom: 4px;">
-                            <span style="display: inline-block; width: 24px; height: 2px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 24px; height: 2px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
                             <span>Strahler 3-4</span>
                         </div>
                         <div>
-                            <span style="display: inline-block; width: 24px; height: 3px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 24px; height: 3px; background: #0066cc; vertical-align: middle; margin-right: 6px;"></span>
                             <span>Strahler 5+</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Columna derecha: Hypsometric interactive (embed) -->
             <div class="map-column">
                 <div class="map-title">Curva Hipsométrica</div>
                 <div class="map-container">
-                    <iframe src="proyecto 1/hypsometric_curve_interactive.html" width="100%" height="650" style="border: none; border-radius: 6px;"></iframe>
+                    <iframe src="proyecto 1/hypsometric_curve_interactive.html" width="100%" height="650"
+                        style="border: none; border-radius: 6px;"></iframe>
                 </div>
             </div>
         </div>
@@ -292,22 +320,27 @@
                         <div class="opacity-value" id="extra1-opacity-value">95%</div>
                     </div>
                     <!-- Leyenda Mapa 3 -->
-                    <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
+                    <div
+                        style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
                         <div style="margin-bottom: 4px;">
-                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 0, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 0, 0); vertical-align: middle; margin-right: 6px;"></span>
                             <span>Riego intenso</span>
                         </div>
                         <div style="margin-bottom: 4px;">
-                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 165, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 165, 0); vertical-align: middle; margin-right: 6px;"></span>
                             <span>Riego moderado</span>
                         </div>
                         <div style="margin-bottom: 4px;">
-                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 255, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 255, 0); vertical-align: middle; margin-right: 6px;"></span>
                             <span>Equilibrio</span>
                         </div>
                         <div>
-                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(0, 255, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 15px; height: 15px; background: rgb(0, 255, 0); vertical-align: middle; margin-right: 6px;"></span>
                             <span>Secano</span>
                         </div>
                     </div>
@@ -324,10 +357,12 @@
                         <div class="opacity-value" id="extra2-opacity-value">95%</div>
                     </div>
                     <!-- Leyenda Mapa 4 -->
-                    <div style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
+                    <div
+                        style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
                         <div>
-                            <span style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 249, 0); vertical-align: middle; margin-right: 6px;"></span>
+                            <span
+                                style="display: inline-block; width: 15px; height: 15px; background: rgb(255, 249, 0); vertical-align: middle; margin-right: 6px;"></span>
                             <span>Riego crítico</span>
                         </div>
                     </div>
@@ -337,18 +372,27 @@
 
         <!-- Content container for project description -->
         <div class="project-content">
-            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Proyecto de monitoreo estacional de vegetación irrigada en el valle del Aconcagua (2024), enfocado en cuantificar la dependencia del riego en cultivos y áreas productivas mediante imágenes Sentinel-2. Se compararon compuestos estacionales de verano (dic-feb) e invierno (jun-ago), calculando el ΔNDVI para representar la variación del vigor vegetal entre periodos seco y húmedo.</span>
-    <br>
-    <span class="indent">
-    A partir de percentiles estadísticos y del índice de humedad topográfica (TWI), se clasificó la superficie agrícola en cuatro niveles de dependencia hídrica: riego intenso, riego moderado, equilibrio y secano. Los resultados permiten identificar zonas críticas donde el verdor estival depende totalmente del riego y áreas con mayor eficiencia o aporte natural de humedad, aportando una herramienta reproducible para planificación hídrica en valles mediterráneos de Chile central.
-    </span>
-    <br><br>
-    <span class="coll projdes">Más Información</span>
-    <br><br>
-    <a href="https://github.com/luzarin/Monitoreo-Dependencia-Riego">
-        <span class="logos">🔗 GitHub</span>
-    </a>
-</p>
+            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span
+                    class="indent">Proyecto de monitoreo estacional de vegetación irrigada en el valle del Aconcagua
+                    (2024), enfocado en cuantificar la dependencia del riego en cultivos y áreas productivas mediante
+                    imágenes Sentinel-2. Se compararon compuestos estacionales de verano (dic-feb) e invierno (jun-ago),
+                    calculando el ΔNDVI para representar la variación del vigor vegetal entre periodos seco y
+                    húmedo.</span>
+                <br>
+                <span class="indent">
+                    A partir de percentiles estadísticos y del índice de humedad topográfica (TWI), se clasificó la
+                    superficie agrícola en cuatro niveles de dependencia hídrica: riego intenso, riego moderado,
+                    equilibrio y secano. Los resultados permiten identificar zonas críticas donde el verdor estival
+                    depende totalmente del riego y áreas con mayor eficiencia o aporte natural de humedad, aportando una
+                    herramienta reproducible para planificación hídrica en valles mediterráneos de Chile central.
+                </span>
+                <br><br>
+                <span class="coll projdes">Más Información</span>
+                <br><br>
+                <a href="https://github.com/luzarin/Monitoreo-Dependencia-Riego">
+                    <span class="logos">🔗 GitHub</span>
+                </a>
+            </p>
         </div>
     </div>
 
@@ -359,176 +403,177 @@
         </p>
     </footer>
 
-  <!-- Leaflet JavaScript -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-  
-  <!-- Georaster libraries for GeoTIFF support -->
-  <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
-  <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
-  <script src="https://unpkg.com/geoblaze@2.8.0/dist/geoblaze.min.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-  <!-- JAVASCRIPT FOR MAPS -->
-  <script>
-    var map;
--32.836073, -71.213059
-    function initLeafletMap() {
-        try {
-            map = L.map('leafletMap').setView([-32.8122, -71.2490], 11);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '© OpenStreetMap contributors © CARTO',
-                maxZoom: 19
-            }).addTo(map);
-            L.control.scale({ imperial: false }).addTo(map);
+    <!-- Georaster libraries for GeoTIFF support -->
+    <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
+    <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
+    <script src="https://unpkg.com/geoblaze@2.8.0/dist/geoblaze.min.js"></script>
 
-            // Load basin
-            fetch('proyecto 1/ae_hidro.geojson')
-                .then(function(r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
-                .then(function(data) {
-                    L.geoJSON(data, {
-                        style: { color: '#ff0000', weight: 2, fillColor: 'transparent', fillOpacity: 0 }
-                    }).addTo(map);
-                })
-                .catch(function(e) { console.error('Error loading basin:', e); });
+    <!-- JAVASCRIPT FOR MAPS -->
+    <script>
+        var map;
+        -32.836073, -71.213059
+        function initLeafletMap() {
+            try {
+                map = L.map('leafletMap').setView([-32.8122, -71.2490], 11);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '© OpenStreetMap contributors © CARTO',
+                    maxZoom: 19
+                }).addTo(map);
+                L.control.scale({ imperial: false }).addTo(map);
 
-            // Load stream network
-            fetch('proyecto 1/basin_streamnetwork.geojson')
-                .then(function(r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
-                .then(function(data) {
-                    L.geoJSON(data, {
-                        style: function(f) {
-                            var strahler = (f.properties && f.properties.Strahler) || 1;
-                            return { color: '#0066cc', weight: strahler * 0.7, opacity: 0.8 };
-                        }
-                    }).addTo(map);
-                })
-                .catch(function(e) { console.error('Error loading stream:', e); });
+                // Load basin
+                fetch('proyecto 1/ae_hidro.geojson')
+                    .then(function (r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
+                    .then(function (data) {
+                        L.geoJSON(data, {
+                            style: { color: '#ff0000', weight: 2, fillColor: 'transparent', fillOpacity: 0 }
+                        }).addTo(map);
+                    })
+                    .catch(function (e) { console.error('Error loading basin:', e); });
 
-        } catch (e) {
-            console.error('Error initializing main map:', e);
+                // Load stream network
+                fetch('proyecto 1/basin_streamnetwork.geojson')
+                    .then(function (r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
+                    .then(function (data) {
+                        L.geoJSON(data, {
+                            style: function (f) {
+                                var strahler = (f.properties && f.properties.Strahler) || 1;
+                                return { color: '#0066cc', weight: strahler * 0.7, opacity: 0.8 };
+                            }
+                        }).addTo(map);
+                    })
+                    .catch(function (e) { console.error('Error loading stream:', e); });
+
+            } catch (e) {
+                console.error('Error initializing main map:', e);
+            }
         }
-    }
 
-    function initExtraMaps() {
-        try {
-            var extra1 = L.map('extraMap1').setView([-32.8122, -71.2490], 11);
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '© Esri, Maxar, Earthstar Geographics',
-                maxZoom: 19
-            }).addTo(extra1);
-            L.control.scale({ imperial: false }).addTo(extra1);
+        function initExtraMaps() {
+            try {
+                var extra1 = L.map('extraMap1').setView([-32.8122, -71.2490], 11);
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: '© Esri, Maxar, Earthstar Geographics',
+                    maxZoom: 19
+                }).addTo(extra1);
+                L.control.scale({ imperial: false }).addTo(extra1);
 
-            // Load GeoTIFF for mapa3 with custom color scale
-            fetch('proyecto 1/mapa3.tif')
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                    parseGeoraster(arrayBuffer).then(georaster => {
-                        var layer = new GeoRasterLayer({
-                            georaster: georaster,
-                            opacity: 0.9,
-                            resolution: 256,
-                            pixelValuesToColorFn: function(values) {
-                                var val = values[0];
-                                if (val === 0 || val === null) return null; // transparent
-                                if (val === 1) return 'rgb(255, 0, 0)';      // rojo
-                                if (val === 2) return 'rgb(255, 165, 0)';    // naranjo
-                                if (val === 3) return 'rgb(255, 255, 0)';    // amarillo
-                                if (val === 4) return 'rgb(0, 255, 0)';      // verde
-                                return null;
-                            }
-                        });
-                        layer.addTo(extra1);
-                        
-                        // Control de opacidad para mapa3
-                        var opacitySlider1 = document.getElementById('extra1-opacity');
-                        var opacityValue1 = document.getElementById('extra1-opacity-value');
-                        opacitySlider1.addEventListener('input', function() {
-                            var opacity = this.value / 100;
-                            opacityValue1.textContent = this.value + '%';
-                            layer.setOpacity(opacity);
-                        });
-                        
-                        // Add click event for popup
-                        extra1.on('click', function(e) {
-                            var latlng = e.latlng;
-                            var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-                            if (values && values[0] !== null && values[0] !== undefined) {
-                                L.popup()
-                                    .setLatLng(latlng)
-                                    .setContent('Valor: ' + values[0])
-                                    .openOn(extra1);
-                            }
-                        });
-                    });
-                })
-                .catch(e => console.error('Error loading mapa3.tif:', e));
+                // Load GeoTIFF for mapa3 with custom color scale
+                fetch('proyecto 1/mapa3.tif')
+                    .then(response => response.arrayBuffer())
+                    .then(arrayBuffer => {
+                        parseGeoraster(arrayBuffer).then(georaster => {
+                            var layer = new GeoRasterLayer({
+                                georaster: georaster,
+                                opacity: 0.9,
+                                resolution: 256,
+                                pixelValuesToColorFn: function (values) {
+                                    var val = values[0];
+                                    if (val === 0 || val === null) return null; // transparent
+                                    if (val === 1) return 'rgb(255, 0, 0)';      // rojo
+                                    if (val === 2) return 'rgb(255, 165, 0)';    // naranjo
+                                    if (val === 3) return 'rgb(255, 255, 0)';    // amarillo
+                                    if (val === 4) return 'rgb(0, 255, 0)';      // verde
+                                    return null;
+                                }
+                            });
+                            layer.addTo(extra1);
 
-            var extra2 = L.map('extraMap2').setView([-32.7270, -71.2024], 13);
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: '© Esri, Maxar, Earthstar Geographics',
-                maxZoom: 19
-            }).addTo(extra2);
-            L.control.scale({ imperial: false }).addTo(extra2);
+                            // Control de opacidad para mapa3
+                            var opacitySlider1 = document.getElementById('extra1-opacity');
+                            var opacityValue1 = document.getElementById('extra1-opacity-value');
+                            opacitySlider1.addEventListener('input', function () {
+                                var opacity = this.value / 100;
+                                opacityValue1.textContent = this.value + '%';
+                                layer.setOpacity(opacity);
+                            });
 
-            // Load GeoTIFF for mapa4 with custom color scale
-            fetch('proyecto 1/mapa4.tif')
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                    parseGeoraster(arrayBuffer).then(georaster => {
-                        var layer = new GeoRasterLayer({
-                            georaster: georaster,
-                            opacity: 0.9,
-                            resolution: 256,
-                            pixelValuesToColorFn: function(values) {
-                                var val = values[0];
-                                if (val === 0 || val === null) return null;  // transparent
-                                if (val === 1) return 'rgb(255, 249, 0)';    // rojo fuerte
-                                return null;
-                            }
+                            // Add click event for popup
+                            extra1.on('click', function (e) {
+                                var latlng = e.latlng;
+                                var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+                                if (values && values[0] !== null && values[0] !== undefined) {
+                                    L.popup()
+                                        .setLatLng(latlng)
+                                        .setContent('Valor: ' + values[0])
+                                        .openOn(extra1);
+                                }
+                            });
                         });
-                        layer.addTo(extra2);
-                        
-                        // Control de opacidad para mapa4
-                        var opacitySlider2 = document.getElementById('extra2-opacity');
-                        var opacityValue2 = document.getElementById('extra2-opacity-value');
-                        opacitySlider2.addEventListener('input', function() {
-                            var opacity = this.value / 100;
-                            opacityValue2.textContent = this.value + '%';
-                            layer.setOpacity(opacity);
-                        });
-                        
-                        // Add click event for popup
-                        extra2.on('click', function(e) {
-                            var latlng = e.latlng;
-                            var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-                            if (values && values[0] !== null && values[0] !== undefined) {
-                                L.popup()
-                                    .setLatLng(latlng)
-                                    .setContent('Valor: ' + values[0])
-                                    .openOn(extra2);
-                            }
-                        });
-                    });
-                })
-                .catch(e => console.error('Error loading mapa4.tif:', e));
+                    })
+                    .catch(e => console.error('Error loading mapa3.tif:', e));
 
-        } catch (e) {
-            console.warn('Error initializing extra maps:', e);
+                var extra2 = L.map('extraMap2').setView([-32.7270, -71.2024], 13);
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: '© Esri, Maxar, Earthstar Geographics',
+                    maxZoom: 19
+                }).addTo(extra2);
+                L.control.scale({ imperial: false }).addTo(extra2);
+
+                // Load GeoTIFF for mapa4 with custom color scale
+                fetch('proyecto 1/mapa4.tif')
+                    .then(response => response.arrayBuffer())
+                    .then(arrayBuffer => {
+                        parseGeoraster(arrayBuffer).then(georaster => {
+                            var layer = new GeoRasterLayer({
+                                georaster: georaster,
+                                opacity: 0.9,
+                                resolution: 256,
+                                pixelValuesToColorFn: function (values) {
+                                    var val = values[0];
+                                    if (val === 0 || val === null) return null;  // transparent
+                                    if (val === 1) return 'rgb(255, 249, 0)';    // rojo fuerte
+                                    return null;
+                                }
+                            });
+                            layer.addTo(extra2);
+
+                            // Control de opacidad para mapa4
+                            var opacitySlider2 = document.getElementById('extra2-opacity');
+                            var opacityValue2 = document.getElementById('extra2-opacity-value');
+                            opacitySlider2.addEventListener('input', function () {
+                                var opacity = this.value / 100;
+                                opacityValue2.textContent = this.value + '%';
+                                layer.setOpacity(opacity);
+                            });
+
+                            // Add click event for popup
+                            extra2.on('click', function (e) {
+                                var latlng = e.latlng;
+                                var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+                                if (values && values[0] !== null && values[0] !== undefined) {
+                                    L.popup()
+                                        .setLatLng(latlng)
+                                        .setContent('Valor: ' + values[0])
+                                        .openOn(extra2);
+                                }
+                            });
+                        });
+                    })
+                    .catch(e => console.error('Error loading mapa4.tif:', e));
+
+            } catch (e) {
+                console.warn('Error initializing extra maps:', e);
+            }
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        initLeafletMap();
-        initExtraMaps();
-    });
-  </script>
+        document.addEventListener('DOMContentLoaded', function () {
+            initLeafletMap();
+            initExtraMaps();
+        });
+    </script>
 
-<!-- Bootstrap 5.3 bundle (unificado) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<!-- Font awesome -->
-<script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
-<!-- Script to enable mobile menu on project pages -->
-<script src="../pag_proyecto.js" defer="defer"></script>
+    <!-- Bootstrap 5.3 bundle (unificado) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
+    <!-- Script to enable mobile menu on project pages -->
+    <script src="../pag_proyecto.js" defer="defer"></script>
 </body>
+
 </html>

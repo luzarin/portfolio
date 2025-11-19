@@ -1,105 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Bootstrap 5.3 (unified with index) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
-  <!-- link to style sheet -->
-  <link rel="stylesheet" href="../style.css">
-  <!-- LINK TO PROJECT PAGE STYLE SHEET -->
+    <!-- Bootstrap 5.3 (unified with index) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    <!-- link to style sheet -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- LINK TO PROJECT PAGE STYLE SHEET -->
     <link rel="stylesheet" href="../pag_proyecto.css">
-  <!-- GOOGLE fonts: Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- GOOGLE fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Leaflet CSS -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin="anonymous"/>
-  
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
+
     <title>Proyecto 2</title>
-    
+
     <style>
         /* Layout específico para página de mapas */
         .page-wrapper {
-            padding-top: 100px; /* Espacio entre navbar y mapas */
+            padding-top: 100px;
+            /* Espacio entre navbar y mapas */
             padding-bottom: 20px;
         }
-        
+
         .maps-section {
             display: flex;
             gap: 25px;
-            max-width: 1400px; /* Aumentar ancho máximo */
-            margin: 0 auto 25px auto; /* Reducir drásticamente el gap debajo */
-            padding: 0 15px; /* Reducir padding para dar más espacio a los mapas */
+            max-width: 1400px;
+            /* Aumentar ancho máximo */
+            margin: 0 auto 25px auto;
+            /* Reducir drásticamente el gap debajo */
+            padding: 0 15px;
+            /* Reducir padding para dar más espacio a los mapas */
         }
-        
+
         .map-column {
             flex: 1;
             min-width: 0;
         }
-        
+
         .map-container {
             width: 100%;
             border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             margin-top: 0.5rem;
         }
-        
+
         #leafletMap {
-            height: 650px; /* Aumentar altura */
+            height: 650px;
+            /* Aumentar altura */
             width: 100%;
         }
-        
+
         .map-title {
             text-align: center;
-            font-size: 1.4rem; /* Aumentar tamaño */
+            font-size: 1.4rem;
+            /* Aumentar tamaño */
             font-weight: 600;
             margin: 0 0 1rem 0;
             color: #333;
             font-family: 'Noto Sans', sans-serif;
         }
-        
+
         /* Contenido del proyecto */
         .project-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: center; /* Centrar horizontalmente */
+            justify-content: center;
+            /* Centrar horizontalmente */
         }
-        
+
         .project-content .project-text {
             width: 100%;
-            margin: 0; /* Eliminar márgenes automáticos del CSS original */
-            text-align: center; /* Centrar el contenido */
+            margin: 0;
+            /* Eliminar márgenes automáticos del CSS original */
+            text-align: center;
+            /* Centrar el contenido */
         }
-        
+
         .project-content .project-text .indent {
-            text-align: justify; /* Justificar solo los párrafos de contenido */
+            text-align: justify;
+            /* Justificar solo los párrafos de contenido */
             display: block;
             margin: 0.5rem 0;
         }
-        
+
         /* Estilos para la leyenda */
         .legend {
             line-height: 20px;
             color: #555;
             background: white;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 8px;
             padding: 12px 16px;
             font: 13px/16px Arial, Helvetica, sans-serif;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             border: 1px solid #ccc;
-            min-width: 160px; /* Aumentar ancho mínimo */
+            min-width: 160px;
+            /* Aumentar ancho mínimo */
         }
+
         .legend i {
             width: 20px;
             height: 20px;
@@ -110,6 +125,7 @@
             border: 1px solid #999;
             border-radius: 2px;
         }
+
         .legend h6 {
             margin: 0 0 8px 0;
             font-weight: 600;
@@ -117,6 +133,7 @@
             text-align: center;
             color: #333;
         }
+
         .legend .legend-item {
             display: block;
             clear: both;
@@ -124,22 +141,22 @@
             font-size: 12px;
             line-height: 20px;
         }
-        
+
         /* Control de opacidad para Leaflet */
         .opacity-control {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             padding: 8px 10px;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             border: 1px solid #ccc;
             z-index: 1000;
             font-family: 'Noto Sans', sans-serif;
             min-width: 120px;
         }
-        
+
         .opacity-control label {
             display: block;
             margin-bottom: 4px;
@@ -148,7 +165,7 @@
             color: #333;
             text-align: center;
         }
-        
+
         .opacity-slider {
             width: 100%;
             height: 6px;
@@ -158,7 +175,7 @@
             -webkit-appearance: none;
             appearance: none;
         }
-        
+
         .opacity-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -167,9 +184,9 @@
             border-radius: 50%;
             background: #e74c3c;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         .opacity-slider::-moz-range-thumb {
             width: 12px;
             height: 12px;
@@ -177,30 +194,33 @@
             background: #e74c3c;
             cursor: pointer;
             border: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         .opacity-value {
             text-align: center;
             font-size: 10px;
             color: #666;
             margin-top: 2px;
         }
-        
+
         /* Responsive para móviles */
         @media (max-width: 768px) {
             .page-wrapper {
                 padding-top: 70px;
             }
+
             .maps-section {
                 flex-direction: column;
                 gap: 30px;
-                margin-bottom: 5px; /* Reducir también en móviles */
+                margin-bottom: 5px;
+                /* Reducir también en móviles */
                 padding: 0 10px;
             }
         }
     </style>
 </head>
+
 <body>
     <nav class="nav">
         <div class="container">
@@ -209,18 +229,18 @@
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
-                    <li><a href="../index.html#cv">CV</a></li>
+                    <li><a href="Lucas-Blachet-DelSolar-CV.pdf">CV</a></li>
                     <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
                     <li><a href="https://github.com/luzarin">GitHub</a></li>
                 </ul>
             </div>
             <button id="mobileMenuButton" class="mobile-menu-btn" aria-label="Abrir menú">☰</button>
             <div id="mobileMenu" class="mobile-menu" style="display:none;">
-              <ul>
-                <li><a href="../index.html#cv">CV</a></li>
-                <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
-                <li><a href="https://github.com/luzarin">GitHub</a></li>
-              </ul>
+                <ul>
+                    <li><a href="Lucas-Blachet-DelSolar-CV.pdf">CV</a></li>
+                    <li><a href="http://www.linkedin.com/in/lucas-blachet/">LinkedIn</a></li>
+                    <li><a href="https://github.com/luzarin">GitHub</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -241,30 +261,38 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Columna derecha: Mapa 3D -->
             <div class="map-column">
                 <div class="map-title">Visualización 3D</div>
                 <div class="map-container">
-                    <iframe src="proyecto 2/hexagonos_uf_3d.html" width="100%" height="650" style="border: none; border-radius: 6px;"></iframe>
+                    <iframe src="proyecto 2/hexagonos_uf_3d.html" width="100%" height="650"
+                        style="border: none; border-radius: 6px;"></iframe>
                 </div>
             </div>
         </div>
 
         <!-- Content container for project description -->
         <div class="project-content">
-            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span class="indent">Pipeline de extracción y análisis espacial de datos inmobiliarios de Toc Toc Chile. Permite definir una zona (polígono Toc Toc), el tipo de propiedad y la operación, extraer todas las publicaciones reales usando requests con headers autenticados, consolidar múltiples descargas en un único dataset sin duplicados y con una superficie unificada.</span>
-    <br>
-    <span class="indent">
-    Luego lleva esos datos a una grilla espacial para construir un mapa 3D interactivo en PyDeck donde la altura y el color representan el valor UF/m² promedio de cada celda. Sirve para análisis exploratorio de mercado, detección de zonas con sobreprecio y generación rápida de entregables web a partir de datos scrapeados.
-    </span>
-    <br><br>
-    <span class="coll projdes">Más Información</span>
-    <br><br>
-    <a href="https://github.com/luzarin/ScrapingTocToc">
-        <span class="logos">🔗 GitHub</span>
-    </a>
-</p>
+            <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span
+                    class="indent">Pipeline de extracción y análisis espacial de datos inmobiliarios de Toc Toc Chile.
+                    Permite definir una zona (polígono Toc Toc), el tipo de propiedad y la operación, extraer todas las
+                    publicaciones reales usando requests con headers autenticados, consolidar múltiples descargas en un
+                    único dataset sin duplicados y con una superficie unificada.</span>
+                <br>
+                <span class="indent">
+                    Luego lleva esos datos a una grilla espacial para construir un mapa 3D interactivo en PyDeck donde
+                    la altura y el color representan el valor UF/m² promedio de cada celda. Sirve para análisis
+                    exploratorio de mercado, detección de zonas con sobreprecio y generación rápida de entregables web a
+                    partir de datos scrapeados.
+                </span>
+                <br><br>
+                <span class="coll projdes">Más Información</span>
+                <br><br>
+                <a href="https://github.com/luzarin/ScrapingTocToc">
+                    <span class="logos">🔗 GitHub</span>
+                </a>
+            </p>
         </div>
     </div>
 
@@ -275,69 +303,68 @@
         </p>
     </footer>
 
-  <!-- Leaflet JavaScript -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-  <!-- JAVASCRIPT FOR MAPS -->
-  <script>
-    // Variables globales
-    var map;
-    var hexagonosLayer;
-    
-    // Función para obtener color basado en el valor UF/M² (usando los mismos rangos que tu mapa 3D)
-    function getColor(valor) {
-        if (valor <= 16) {
-            return '#fff5f0';  // Blanco rosado claro
-        } else if (valor <= 43) {
-            return '#fcbea5';  // Rosa salmón claro
-        } else if (valor <= 68) {
-            return '#fb7050';  // Naranja rojizo
-        } else if (valor <= 126) {
-            return '#d32020';  // Rojo intenso
-        } else {  // > 126
-            return '#67000d';  // Rojo muy oscuro
+    <!-- JAVASCRIPT FOR MAPS -->
+    <script>
+        // Variables globales
+        var map;
+        var hexagonosLayer;
+
+        // Función para obtener color basado en el valor UF/M² (usando los mismos rangos que tu mapa 3D)
+        function getColor(valor) {
+            if (valor <= 16) {
+                return '#fff5f0';  // Blanco rosado claro
+            } else if (valor <= 43) {
+                return '#fcbea5';  // Rosa salmón claro
+            } else if (valor <= 68) {
+                return '#fb7050';  // Naranja rojizo
+            } else if (valor <= 126) {
+                return '#d32020';  // Rojo intenso
+            } else {  // > 126
+                return '#67000d';  // Rojo muy oscuro
+            }
         }
-    }
-    
-    // Función para el estilo de cada hexágono
-    function style(feature) {
-        var valor = feature.properties['UF/M2 promedio'] || 0;
-        return {
-            fillColor: getColor(valor),
-            weight: 0.5,
-            opacity: 1,
-            color: 'white',
-            dashArray: '',
-            fillOpacity: 0.8
-        };
-    }
-    
-    // Función para destacar al pasar el mouse
-    function highlightFeature(e) {
-        var layer = e.target;
-        layer.setStyle({
-            weight: 3,
-            color: '#666',
-            dashArray: '',
-            fillOpacity: 0.9
-        });
-        layer.bringToFront();
-    }
-    
-    // Función para resetear el estilo
-    function resetHighlight(e) {
-        hexagonosLayer.resetStyle(e.target);
-    }
-    
-    // Función para manejar el click en hexágonos
-    function zoomToFeature(e) {
-        var layer = e.target;
-        var valor = layer.feature.properties['UF/M2 promedio'] || 0;
-        
-        // Mostrar popup con el valor
-        layer.bindPopup(`
+
+        // Función para el estilo de cada hexágono
+        function style(feature) {
+            var valor = feature.properties['UF/M2 promedio'] || 0;
+            return {
+                fillColor: getColor(valor),
+                weight: 0.5,
+                opacity: 1,
+                color: 'white',
+                dashArray: '',
+                fillOpacity: 0.8
+            };
+        }
+
+        // Función para destacar al pasar el mouse
+        function highlightFeature(e) {
+            var layer = e.target;
+            layer.setStyle({
+                weight: 3,
+                color: '#666',
+                dashArray: '',
+                fillOpacity: 0.9
+            });
+            layer.bringToFront();
+        }
+
+        // Función para resetear el estilo
+        function resetHighlight(e) {
+            hexagonosLayer.resetStyle(e.target);
+        }
+
+        // Función para manejar el click en hexágonos
+        function zoomToFeature(e) {
+            var layer = e.target;
+            var valor = layer.feature.properties['UF/M2 promedio'] || 0;
+
+            // Mostrar popup con el valor
+            layer.bindPopup(`
             <div style="text-align: center; font-family: 'Noto Sans', sans-serif;">
                 <h6 style="margin: 0 0 8px 0; color: #2c3e50;"><strong>Valor UF/M²</strong></h6>
                 <p style="font-size: 18px; color: #e74c3c; margin: 0; font-weight: 600;">
@@ -348,179 +375,181 @@
                 </p>
             </div>
         `).openPopup();
-    }
-    
-    // Función para eventos de cada feature
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlightFeature,
-            mouseout: resetHighlight,
-            click: zoomToFeature
-        });
-    }
-    
-    // Inicializar Leaflet Map
-    function initLeafletMap() {
-        // Crear el mapa centrado en el sector oriente de Santiago (desplazado hacia la derecha)
-        map = L.map('leafletMap').setView([-33.4, -70.34], 14);
-        
-        // Añadir capa base - Usando el mismo estilo que el mapa 3D (CartoDB Positron)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap contributors © CARTO',
-            subdomains: 'abcd',
-            maxZoom: 19
-        }).addTo(map);
-        
-        
-        
-        // Cargar el GeoJSON con hexágonos
-        fetch('proyecto 2/hexagonos_uf.geojson')
-            .then(response => {
-                
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                
-                
-                if (data.features && data.features.length > 0) {
-                    
-                    
-                    // Verificar si las coordenadas parecen estar en Web Mercator
-                    var firstCoord = data.features[0].geometry.coordinates[0][0][0];
-                    
-                    
-                    if (Math.abs(firstCoord[0]) > 1000000) {
-                        
-                        transformAndAddLayer(data);
-                    } else {
-                        
-                        addLayerToMap(data);
-                    }
-                } else {
-                    console.error('❌ No hay features en el GeoJSON');
-                }
-            })
-            .catch(error => {
-                console.error('💥 Error cargando hexágonos:', error);
-                // Mostrar un marcador de ejemplo si no se puede cargar el archivo
-                L.marker([-33.4, -70.45]).addTo(map)
-                    .bindPopup(`❌ Error: ${error.message}<br>Verifica que el archivo hexagonos_uf.geojson esté en la carpeta proyectos`)
-                    .openPopup();
-            });
-            
-        // Agregar leyenda
-        var legend = L.control({position: 'bottomright'});
-        
-        legend.onAdd = function (map) {
-            var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 16, 43, 68, 126],
-                labels = [];
-            
-            div.innerHTML = '<h6><strong>UF/M² Promedio</strong></h6>';
-            
-            // Crear entradas de leyenda ordenadas
-            for (var i = 0; i < grades.length; i++) {
-                var rangeText = grades[i] + (grades[i + 1] ? '–' + grades[i + 1] : '+');
-                div.innerHTML +=
-                    '<div class="legend-item">' +
-                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-                    rangeText +
-                    '</div>';
-            }
-            
-            return div;
-        };
-        
-        legend.addTo(map);
-        
-        // Control de opacidad para Leaflet
-        var opacitySlider = document.getElementById('leaflet-opacity');
-        var opacityValue = document.getElementById('leaflet-opacity-value');
-        
-        opacitySlider.addEventListener('input', function() {
-            var opacity = this.value / 100;
-            opacityValue.textContent = this.value + '%';
-            
-            if (hexagonosLayer) {
-                hexagonosLayer.setStyle({
-                    fillOpacity: opacity
-                });
-            }
-        });
-    }
-    
-    // Función para transformar coordenadas Web Mercator a geográficas
-    function transformAndAddLayer(data) {
-        
-        
-        // Función para transformar un punto de Web Mercator a lat/lng
-        function webMercatorToLatLng(x, y) {
-            var lng = x / 20037508.34 * 180;
-            var lat = y / 20037508.34 * 180;
-            lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180)) - Math.PI / 2);
-            return [lng, lat];
         }
-        
-        // Transformar todas las coordenadas
-        var transformedData = JSON.parse(JSON.stringify(data)); // Deep clone
-        
-        transformedData.features.forEach(function(feature, featureIndex) {
-            if (feature.geometry.type === 'MultiPolygon') {
-                feature.geometry.coordinates.forEach(function(polygon, polygonIndex) {
-                    polygon.forEach(function(ring, ringIndex) {
-                        ring.forEach(function(coord, coordIndex) {
-                            var transformed = webMercatorToLatLng(coord[0], coord[1]);
-                            transformedData.features[featureIndex].geometry.coordinates[polygonIndex][ringIndex][coordIndex] = transformed;
+
+        // Función para eventos de cada feature
+        function onEachFeature(feature, layer) {
+            layer.on({
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: zoomToFeature
+            });
+        }
+
+        // Inicializar Leaflet Map
+        function initLeafletMap() {
+            // Crear el mapa centrado en el sector oriente de Santiago (desplazado hacia la derecha)
+            map = L.map('leafletMap').setView([-33.4, -70.34], 14);
+
+            // Añadir capa base - Usando el mismo estilo que el mapa 3D (CartoDB Positron)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap contributors © CARTO',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+
+
+            // Cargar el GeoJSON con hexágonos
+            fetch('proyecto 2/hexagonos_uf.geojson')
+                .then(response => {
+
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+
+
+                    if (data.features && data.features.length > 0) {
+
+
+                        // Verificar si las coordenadas parecen estar en Web Mercator
+                        var firstCoord = data.features[0].geometry.coordinates[0][0][0];
+
+
+                        if (Math.abs(firstCoord[0]) > 1000000) {
+
+                            transformAndAddLayer(data);
+                        } else {
+
+                            addLayerToMap(data);
+                        }
+                    } else {
+                        console.error('❌ No hay features en el GeoJSON');
+                    }
+                })
+                .catch(error => {
+                    console.error('💥 Error cargando hexágonos:', error);
+                    // Mostrar un marcador de ejemplo si no se puede cargar el archivo
+                    L.marker([-33.4, -70.45]).addTo(map)
+                        .bindPopup(`❌ Error: ${error.message}<br>Verifica que el archivo hexagonos_uf.geojson esté en la carpeta proyectos`)
+                        .openPopup();
+                });
+
+            // Agregar leyenda
+            var legend = L.control({ position: 'bottomright' });
+
+            legend.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'info legend'),
+                    grades = [0, 16, 43, 68, 126],
+                    labels = [];
+
+                div.innerHTML = '<h6><strong>UF/M² Promedio</strong></h6>';
+
+                // Crear entradas de leyenda ordenadas
+                for (var i = 0; i < grades.length; i++) {
+                    var rangeText = grades[i] + (grades[i + 1] ? '–' + grades[i + 1] : '+');
+                    div.innerHTML +=
+                        '<div class="legend-item">' +
+                        '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                        rangeText +
+                        '</div>';
+                }
+
+                return div;
+            };
+
+            legend.addTo(map);
+
+            // Control de opacidad para Leaflet
+            var opacitySlider = document.getElementById('leaflet-opacity');
+            var opacityValue = document.getElementById('leaflet-opacity-value');
+
+            opacitySlider.addEventListener('input', function () {
+                var opacity = this.value / 100;
+                opacityValue.textContent = this.value + '%';
+
+                if (hexagonosLayer) {
+                    hexagonosLayer.setStyle({
+                        fillOpacity: opacity
+                    });
+                }
+            });
+        }
+
+        // Función para transformar coordenadas Web Mercator a geográficas
+        function transformAndAddLayer(data) {
+
+
+            // Función para transformar un punto de Web Mercator a lat/lng
+            function webMercatorToLatLng(x, y) {
+                var lng = x / 20037508.34 * 180;
+                var lat = y / 20037508.34 * 180;
+                lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180)) - Math.PI / 2);
+                return [lng, lat];
+            }
+
+            // Transformar todas las coordenadas
+            var transformedData = JSON.parse(JSON.stringify(data)); // Deep clone
+
+            transformedData.features.forEach(function (feature, featureIndex) {
+                if (feature.geometry.type === 'MultiPolygon') {
+                    feature.geometry.coordinates.forEach(function (polygon, polygonIndex) {
+                        polygon.forEach(function (ring, ringIndex) {
+                            ring.forEach(function (coord, coordIndex) {
+                                var transformed = webMercatorToLatLng(coord[0], coord[1]);
+                                transformedData.features[featureIndex].geometry.coordinates[polygonIndex][ringIndex][coordIndex] = transformed;
+                            });
                         });
                     });
-                });
-            }
-        });
-        
-        
-        
-        addLayerToMap(transformedData);
-    }
-    
-    // Función para agregar la capa al mapa
-    function addLayerToMap(data) {
-        
-        
-        // Crear la capa de hexágonos
-        hexagonosLayer = L.geoJSON(data, {
-            style: style,
-            onEachFeature: onEachFeature
-        }).addTo(map);
-        
-        
-        
-        // Obtener bounds de los datos
-        var bounds = hexagonosLayer.getBounds();
-        
-        
-        // En lugar de fitBounds, usar un centro personalizado desplazado hacia la izquierda
-        // Centrar el mapa en las coordenadas deseadas con zoom reducido
-            setTimeout(function() {
-            map.setView([-33.39, -70.53], 12); // Desplazado hacia la izquierda con zoom reducido
-        }, 100);
-        
-        
-    }
-    
-    // Inicializar mapas cuando la página esté cargada
-    document.addEventListener('DOMContentLoaded', function() {
-        initLeafletMap();
-    });
-  </script>
+                }
+            });
 
-<!-- Bootstrap 5.3 bundle (unificado) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<!-- Font awesome -->
-<script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
-<!-- Script to enable mobile menu on project pages -->
-<script src="../pag_proyecto.js" defer="defer"></script>
+
+
+            addLayerToMap(transformedData);
+        }
+
+        // Función para agregar la capa al mapa
+        function addLayerToMap(data) {
+
+
+            // Crear la capa de hexágonos
+            hexagonosLayer = L.geoJSON(data, {
+                style: style,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+
+
+
+            // Obtener bounds de los datos
+            var bounds = hexagonosLayer.getBounds();
+
+
+            // En lugar de fitBounds, usar un centro personalizado desplazado hacia la izquierda
+            // Centrar el mapa en las coordenadas deseadas con zoom reducido
+            setTimeout(function () {
+                map.setView([-33.39, -70.53], 12); // Desplazado hacia la izquierda con zoom reducido
+            }, 100);
+
+
+        }
+
+        // Inicializar mapas cuando la página esté cargada
+        document.addEventListener('DOMContentLoaded', function () {
+            initLeafletMap();
+        });
+    </script>
+
+    <!-- Bootstrap 5.3 bundle (unificado) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
+    <!-- Script to enable mobile menu on project pages -->
+    <script src="../pag_proyecto.js" defer="defer"></script>
 </body>
+
 </html>
