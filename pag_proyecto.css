@@ -213,7 +213,7 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     align-items: center;
     padding: 0;
     display: flex;
-    justify-content: space-between; /* reparten el espacio dentro del ancho fijado */
+    justify-content: center; /* centrar miniaturas */
     gap: 6px;
 }
 
@@ -577,7 +577,7 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgba(0,0,0,0.75);
 }
 

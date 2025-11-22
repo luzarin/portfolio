@@ -71,14 +71,6 @@
         <img class="myImg" src="../imagenes/proyecto6-1.jpg" style="width:100%">
       </div>
 
-      <div class="mySlides">
-        <img class="myImg" src="../imagenes/proyecto6-2.jpg" style="width:100%">
-      </div>
-
-      <div class="mySlides">
-        <img class="myImg" src="../imagenes/proyecto6-3.jpg" style="width:100%">
-      </div>
-
       <!-- Image text -->
       <div class="caption-container">
         <p id="caption"></p>
@@ -95,116 +87,167 @@
             <img class="demo cursor" src="../imagenes/proyecto6-1.jpg" style="width:100%" onclick="currentSlide(2)"
               alt="Área de interés para el catastro de propiedad minera.">
           </div>
-          <div class="column">
-            <img class="demo cursor" src="../imagenes/proyecto6-2.jpg" style="width:100%" onclick="currentSlide(3)"
-              alt="Texto.">
-          </div>
-          <div class="column">
-            <img class="demo cursor" src="../imagenes/proyecto6-3.jpg" style="width:100%" onclick="currentSlide(4)"
-              alt="Texto.">
-          </div>
         </div>
       </div>
 
     </div>
 
     <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span
-        class="indent">Proyecto diseñado para.</span>
+        class="indent">Trabajo desarrollado en el curso de Taller de Análisis Territorial de la UC, compuesto por dos TP
+        complementarios orientados al sector minero: el primero centrado en el catastro y análisis de propiedad minera
+        (exploración, explotación, pedimentos, manifestaciones y mensuras) para caracterizar el estado jurídico del
+        subsuelo y los actores titulares; y el segundo enfocado en el catastro de terrenos superficiales, actos
+        administrativos, tierras indígenas, concesiones marítimas, IPT y restricciones normativas, con el fin de evaluar
+        la viabilidad territorial de un proyecto minero–desaladora. Ambos trabajos integran recopilación de información
+        oficial, análisis espacial en SIG y construcción de una base territorial validada para apoyar decisiones de
+        inversión y planificación.</span>
       <br>
       <span class="indent">
         <br>
-        Parrafo.
-        <br>
-        Parrafo.
+        Las tareas ejecutadas consolidan capacidades en catastro minero y superficial, análisis normativo y de
+        planificación territorial, levantamiento de actores y restricciones, integración jurídica-territorial en SIG,
+        elaboración de geodatabases, síntesis espacial aplicada a proyectos, y diseño de metodologías operativas propias
+        de consultoría (planificación, presupuestos, logística de terreno y estructuración de entregables).
       </span>
-      <br><br>
-      <span class="indent">
-        Parrafo.
-      </span>
-      <br><br>
-      <span class="coll projdes">Más Información</span>
-      <br><br>
-      </a>
-      <a href="https://github.com/luzarin/">
-        <span class="logos">🔗 GitHub</span>
-      </a>
     </p>
   </div>
 
   <!-- JAVASCRIPT FOR SLIDESHOW -->
-  <script>let slideIndex = 1;
-    showSlides(slideIndex);
+  <script>
+    let slideIndex = 1;
+    let slides = [];
+    let dots = [];
+    let captionText = null;
+    let modal = null;
+    let modalImg = null;
+    let closeBtn = null;
+    let isModalOpen = false;
+    let zoomLevel = 1;
 
-    // Next/previous controls
+    function showSlides(n) {
+      if (!slides.length) return;
+      if (n > slides.length) { slideIndex = 1; }
+      if (n < 1) { slideIndex = slides.length; }
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+
+      slides[slideIndex - 1].style.display = "block";
+      if (dots[slideIndex - 1]) {
+        dots[slideIndex - 1].className += " active";
+        if (captionText) {
+          captionText.innerHTML = dots[slideIndex - 1].alt || "";
+        }
+      }
+
+      if (isModalOpen) {
+        const currentImage = slides[slideIndex - 1].querySelector('.myImg');
+        if (currentImage) {
+          modalImg.src = currentImage.src;
+          resetZoom();
+        }
+      }
+    }
+
     function plusSlides(n) {
       showSlides(slideIndex += n);
     }
 
-    // Thumbnail image controls
     function currentSlide(n) {
       showSlides(slideIndex = n);
     }
 
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("demo");
-      let captionText = document.getElementById("caption");
-      if (n > slides.length) { slideIndex = 1 }
-      if (n < 1) { slideIndex = slides.length }
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    function applyZoomTransform() {
+      if (modalImg) {
+        modalImg.style.transform = 'translate(-50%, -50%) scale(' + zoomLevel + ')';
       }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex - 1].style.display = "block";
-      dots[slideIndex - 1].className += " active";
-      captionText.innerHTML = dots[slideIndex - 1].alt;
-
-      // Agregar funcionalidad de zoom a la imagen principal
-      enableImageZoom();
     }
 
-    // Funcionalidad de zoom al hacer click en imagen principal
-    function enableImageZoom() {
-      let mainImages = document.querySelectorAll('.mySlides .myImg');
-      let modal = document.getElementById('myModal');
-      let modalImg = document.getElementById('img01');
-      let closeBtn = document.querySelector('.close');
+    function resetZoom() {
+      zoomLevel = 1;
+      applyZoomTransform();
+    }
 
-      mainImages.forEach(function (img) {
-        img.style.cursor = 'pointer';
-        img.onclick = function () {
-          modal.style.display = "block";
-          modalImg.src = this.src;
+    function openModalWithCurrentSlide() {
+      if (!modal || !modalImg) return;
+      const currentImage = slides[slideIndex - 1]?.querySelector('.myImg');
+      if (!currentImage) return;
+      modal.style.display = "block";
+      isModalOpen = true;
+      modalImg.src = currentImage.src;
+      resetZoom();
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.style.display = "none";
+      isModalOpen = false;
+      resetZoom();
+    }
+
+    function initGalleryInteractions() {
+      slides = Array.from(document.getElementsByClassName("mySlides"));
+      dots = Array.from(document.getElementsByClassName("demo"));
+      captionText = document.getElementById("caption");
+      modal = document.getElementById('myModal');
+      modalImg = document.getElementById('img01');
+      closeBtn = document.querySelector('.close');
+
+      slides.forEach(function (slide, idx) {
+        const img = slide.querySelector('.myImg');
+        if (img) {
+          img.style.cursor = 'pointer';
+          img.addEventListener('click', function () {
+            slideIndex = idx + 1;
+            showSlides(slideIndex);
+            openModalWithCurrentSlide();
+          });
         }
       });
 
-      // Cerrar modal al hacer click en X
-      closeBtn.onclick = function () {
-        modal.style.display = "none";
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
       }
 
-      // Cerrar modal al hacer click fuera de la imagen
-      modal.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
+      if (modal) {
+        modal.addEventListener('click', function (event) {
+          if (event.target === modal) {
+            closeModal();
+          }
+        });
       }
 
-      // Cerrar modal con tecla Escape
+      if (modalImg) {
+        modalImg.style.transformOrigin = 'center center';
+        applyZoomTransform();
+        modalImg.addEventListener('wheel', function (event) {
+          if (!isModalOpen) return;
+          event.preventDefault();
+          const direction = event.deltaY < 0 ? 1 : -1;
+          const step = 0.15;
+          zoomLevel = Math.min(4, Math.max(1, zoomLevel + direction * step));
+          applyZoomTransform();
+        }, { passive: false });
+      }
+
       document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' || event.key === 'Esc') {
-          modal.style.display = "none";
+          closeModal();
+        } else if (event.key === 'ArrowRight') {
+          plusSlides(1);
+        } else if (event.key === 'ArrowLeft') {
+          plusSlides(-1);
         }
       });
+
+      showSlides(slideIndex);
     }
 
-    // Inicializar zoom cuando la página carga
-    document.addEventListener('DOMContentLoaded', function () {
-      enableImageZoom();
-    });
+    document.addEventListener('DOMContentLoaded', initGalleryInteractions);
   </script>
 
   <!-- Bootstrap 5.3 bundle (unificado) -->
