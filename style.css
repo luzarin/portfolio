@@ -1,24 +1,23 @@
 :root{
   --nav-height-mobile: 56px;
-  --bg-color: #ffffff; /* fondo principal blanco */
-  --skill-box: #ffffff; /* boxes blancas */
-  --edu-box: #ffffff;   /* boxes blancas */
-  --exp-box: #ffffff;   /* boxes blancas */
-  --project-box: #ffffff; /* boxes blancas */
-  --section-title-top: 64px; /* reduced from 100px */
-  --section-content-gap: 12px; /* vertical gap below content boxes */
-  --box-shadow-card: 0 8px 24px rgba(0,0,0,0.08); /* sombra unificada */
+  --bg-color: #ffffff; /* fondo principal */
+  --skill-box: #ffffff;
+  --edu-box: #ffffff;   
+  --exp-box: #ffffff;   
+  --project-box: #ffffff; 
+  --section-title-top: 64px;
+  --section-content-gap: 12px;
+  --box-shadow-card: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 *{ box-sizing: border-box; margin:0; padding:0; font-family: 'Noto Sans', sans-serif !important; }
 html, body { overflow-x: hidden; max-width:100%; touch-action: pan-y; -ms-touch-action: pan-y }
-/* Reservar el espacio del scroll solo en el lado derecho */
 html { scrollbar-gutter: stable; }
 img, .card, .projectgrid, .experiencecol, .skill_col { max-width:100% }
 .container, .projectgrid, .experiencecol { overflow-x:hidden }
 
 body {
-  font-family: 'Noto Sans', sans-serif; /* Cambiar todo a Noto Sans */
+  font-family: 'Noto Sans', sans-serif;
   line-height: 1.6;
   color: #111; /* textos en negro */
 }
@@ -31,7 +30,7 @@ body {
     z-index: 4000;
     padding: 7.5px 0;
     transition: all 0.3s ease;
-    background: #171717; /* barra superior oscura */
+    background: #171717; /* barra superior */
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -39,11 +38,11 @@ body {
 
 .nav .container {
   display: flex;
-  justify-content: space-between; /* extremos: Inicio a la izquierda, enlaces a la derecha */
+  justify-content: space-between;
   align-items: center;
   max-width: 1200px;
-  margin: 0 auto; /* centrar el bloque dentro del ancho máximo */
-  padding: 0 0px; /* restaurar padding original */
+  margin: 0 auto;
+  padding: 0 0px;
   height: 48px;
 }
 
@@ -58,7 +57,7 @@ body {
 .navlinks a {
     font-size: 1.2em;
     font-weight: 700;
-    color: #fff; /* texto blanco en navbar oscuro */
+    color: #fff; /* texto blanco en navbar */
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -66,20 +65,19 @@ body {
     line-height: 48px;
     margin: 0;
     padding: 0;
-    font-family: 'Noto Sans', sans-serif !important; /* Forzar Noto Sans en navbar */
+    font-family: 'Noto Sans', sans-serif !important; 
 }
 
 .navlinks {
     display: flex;
     align-items: center;
-  gap: 50px; /* igual que pag_proyecto.css */
+  gap: 50px;
     height: 48px;
     list-style: none; 
     margin: 0;
     padding: 0;
 }
 
-/* Igual que en pag_proyecto.css: limpiar li y dar padding interno a los anchors */
 .navlinks li { list-style: none; margin: 0; padding: 0; }
 .navlinks li a { display: block; height: 48px; line-height: 48px; padding: 0 6px; }
 
@@ -87,10 +85,8 @@ body {
 
 .mobile-menu { display: none; }
 
-/* Ocultar navTrigger en escritorio (paridad con pag_proyecto.css) */
 .navTrigger { display: none; }
 
-/* Igualar separación interna a la de pag_proyecto.css */
 .main_list { margin-left: 40px; }
 .logo { margin-right: 40px; }
 
@@ -131,14 +127,14 @@ body {
     }
 }
 
-/* SECTIONS */
+/* SECCIONES */
 .myP {
   text-align: center;
   font-size: 2.5em;
-  color: #000; /* títulos negros */
+  color: #000; /* títulos */
   padding: var(--section-title-top) 0 0px;
   font-weight: 700;
-  font-family: 'Noto Sans', sans-serif; /* Cambiar a Noto Sans */
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .photoback {
@@ -191,7 +187,7 @@ body {
 .aboutMe {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 25px 20px 0px; /* reduced */
+  padding: 25px 20px 0px;
   font-size: 1.2em;
   line-height: 1.8;
   text-align: center;
@@ -204,7 +200,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  max-width: 1350px; /* ANCHO BOX HABILIDADES */
+  max-width: 1350px;
   margin: 0 auto;
   padding: 8px 20px 0px;
 }
@@ -244,7 +240,7 @@ body {
 
 /* EDUCACION Y EXPERIENCIA */
 .experiencecol {
-  max-width: 1350px; /* ANCHO BOX EDUCACIÓN */
+  max-width: 1350px;
   margin: 0 auto;
   padding: 8px 20px 0px;
 }
@@ -256,8 +252,8 @@ body {
 .expbox {
   background: #ffffff; /* caja blanca */
   padding: 16px 8px; 
-  border-radius: 0; /* bordes rectos */
-  border-left: none; /* sin línea celeste */
+  border-radius: 0;
+  border-left: none;
   margin-bottom: 12px;
   box-shadow: var(--box-shadow-card);
 }
@@ -270,7 +266,6 @@ body {
     margin-bottom: 15px;
 }
 
-/* Experience-specific: larger boxes and logos (desktop). Mobile rules below keep responsive behavior. */
 .experiencecol .company_logo {
   width: 100px;
   height: auto;
@@ -290,7 +285,6 @@ body {
   max-width: 350px !important; 
 }
 
-/* Remove color bar from education boxes only */
 .eduexp .expbox {
   border-left: none !important;
 }
@@ -347,7 +341,7 @@ body {
 .card {
     transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
     height: 100%;
-    border-radius: 15px; /* CURVATURA PROYECTOS */
+  border-radius: 15px;
 }
 
 .card:hover {
@@ -370,14 +364,12 @@ body {
     line-height: 1.6;
 }
 
-/* Utility: justified text for specific elements */
 .text-justify {
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
 }
 
-/* Forzar tipografía negra en las cards de proyectos (sobre text-light/bg-dark) */
 .projectgrid .card { color: #000 !important; }
 .projectgrid .card .card-title {
     color: #000 !important;
@@ -388,7 +380,7 @@ body {
     margin-bottom: 8px;
     margin-top: 0;
 }
-/* Mantener el botón "Ver Más" con tipografía blanca, incluso si el enlace hereda color */
+
 .projectgrid .card .learnmore a,
 .projectgrid .card .shrink-border { color: #fff !important; }
 
@@ -411,7 +403,6 @@ body {
     font-weight: bold;
 }
 
-/* Asegurar altura mayor y uniforme para las cards de proyecto */
 .projectgrid .card {
     min-height: 420px;      
     display: flex;
@@ -419,7 +410,6 @@ body {
   border-radius: 0;      
 }
 
-/* Forzar que la imagen mantenga proporción y la body ocupe el resto */
 .projectgrid .card-img-top {
     height: 340px;          
     object-fit: cover;
@@ -433,7 +423,6 @@ body {
     padding: 8px 15px 15px 15px;
 }
 
-/* dejar margen alrededor de las imágenes de los proyectos */
 .projectgrid .card-img-top,
 .card .card-img-top {
     display: block;
@@ -445,7 +434,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Centrar títulos de la sección de proyectos (TEMA, año) y títulos dentro de las cards */
 .projectgrid h5.card-title {
     text-align: center;
     margin-left: 0;    
@@ -456,7 +444,6 @@ body {
     justify-content: center;
 }
 
-/* Título principal dentro de la card (mantener espaciado visual) */
 .projectgrid .card .card-body .card-title {
     text-align: center;
     margin-bottom: 4px;
@@ -471,16 +458,14 @@ body {
     color: #ebd4d4;
 }
 
-/* ---------- AJUSTES MOVILES Y RESPONSIVOS ---------- */
+/* AJUSTES MÓVIL */
 
-/* general responsive images/cards */
 .card-img-top, .company_logo, img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-/* Projects: en mobile apilar verticalmente y ocupar ancho */
 @media (max-width: 768px) {
   .projectgrid .row {
     display: flex !important;
@@ -505,7 +490,6 @@ body {
     height: auto;
   }
 
-  /* NAVBAR: ocultar enlaces y mostrar botón móvil */
   .navlinks { display: none !important; }
   .mobile-menu-btn { display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.2rem; background: transparent; border: none; color: #fff; padding: 6px 10px; cursor: pointer; }
   .mobile-menu {
@@ -523,11 +507,9 @@ body {
   .mobile-menu li { padding: 8px 6px; }
   .mobile-menu a { color: #fff; text-decoration: none; display: block; }
 
-  /* centrar "Ver Más" y hacerlo cuadrado en móvil (si no está ya) */
   .learnmore { display:flex; justify-content:center; }
   .shrink-border { border-radius:12px; }
 
-  /* Modal proyecto (full screen overlay) */
   .project-modal {
     position: fixed;
     inset: 0;
@@ -555,27 +537,23 @@ body {
     cursor: pointer;
   }
 
-  /* ----- Mobile fixes: evitar overlay del navbar, agrandar inicio/menu y apilar proyectos ----- */
   body {
     padding-top: calc(var(--nav-height-mobile) + 8px); 
   }
 
-  /* título de sección menos espaciado en móvil */
   .myP {
     padding-top: calc(56px + 45px) !important; 
     margin-bottom: 8px !important;
     scroll-margin-top: 80px;
   }
-  /* Reducir un poco el espacio específicamente para "Sobre mí" en móvil */
   .myP#about { padding-top: calc(45px) !important; }
 
-  /* navbar: mayor altura y tamaños en móvil */
   .nav .container {
     height: 56px;
     padding: 0 12px;
   }
   .logo a {
-    font-size: 1.4rem;      /* "Inicio" más grande en móvil */
+    font-size: 1.4rem;
     line-height: 56px;
     height: 56px;
     display: flex;
@@ -583,21 +561,19 @@ body {
   }
   .mobile-menu-btn {
     display: inline-flex !important;
-    font-size: 1.6rem;      /* icono del menú más grande */
+    font-size: 1.6rem;
     align-items: center;
     justify-content: center;
     height: 56px;
   }
   .mobile-menu a {
-    font-size: 1.2rem;     /* items del menú más grandes */
+    font-size: 1.2rem;
     padding: 10px 12px;
-    font-weight: 700; /* negritas en menú móvil */
+    font-weight: 700;
   }
 
-  /* ocultar navlinks desktop (ya lo haces), asegurar altura */
   .navlinks { display: none !important; }
 
-  /* Proyectos: apilar correctamente (usar flujo en bloque, no flex column que estaba generando solapamiento) */
   .projectgrid .row {
     display: block !important;      
   }
@@ -609,7 +585,6 @@ body {
     margin-bottom: 20px;
   }
 
-  /* Card: margen lateral y separación para que no se peguen ni se superpongan */
   .projectgrid .card {
     width: calc(100% - 24px);
     margin: 0 12px 20px;
@@ -618,7 +593,6 @@ body {
     overflow: hidden;
   }
 
-  /* Imagen: respetar márgenes (no ocupen todo el ancho pegadas) */
   .projectgrid .card-img-top,
   .card .card-img-top {
     width: calc(100% - 24px);
@@ -630,12 +604,10 @@ body {
     display: block;
   }
 
-  /* Card body: asegurar separación interna */
   .projectgrid .card-body {
     padding: 20px;
   }
 
-  /* Fuerza apilado vertical de la sección experiencia */
   .experiencecol {
     display: flex !important;
     flex-direction: column !important;
@@ -644,7 +616,6 @@ body {
     padding: 8px 12px !important;
   }
 
-  /* Cada columna de experiencia ocupa 100% del ancho */
   .experiencecol .exp {
     flex: 0 0 auto !important;
     width: 100% !important;
@@ -654,7 +625,6 @@ body {
     box-sizing: border-box !important;
   }
 
-  /* La caja interna (expbox) no tenga altura fija y use todo el ancho */
   .experiencecol .exp .expbox {
     width: 100% !important;
     height: auto !important;
@@ -664,7 +634,6 @@ body {
     overflow: visible !important;
   }
 
-  /* Ajustes para logo/título: no desborden ni empujen la caja */
   .experiencecol .company_logo {
     max-width: 60% !important;
     width: auto !important;
@@ -673,96 +642,85 @@ body {
     display: block !important;
   }
 
-  /* Evitar que texto largo provoque overflow horizontal */
   .experiencecol .expbox,
   .experiencecol .expbox * {
     word-break: break-word;
     overflow-wrap: anywhere;
   }
 
-  /* asegurar espacio extra también en móvil */
   .projectgrid {
     padding-bottom: 125px !important;
   }
 }
 
-/* Desktop: aumentar un poco la separación para "Sobre mí" únicamente */
 @media (min-width: 769px) {
   .myP#about { padding-top: 100px; }
 }
 
-/* Desktop: asegúrate que mobile elements estén ocultos */
 @media (min-width: 769px) {
   .mobile-menu-btn, .mobile-menu, .project-modal { display: none !important; }
 }
 
-/* Theme overrides (single consolidated block) */
 body { background: var(--bg-color) !important }
 .skill_col > div { background: var(--skill-box) !important }
 .expbox { background: var(--edu-box) !important }
 .experiencecol .expbox, .expbox.exp-laboral { background: var(--exp-box) !important }
 .projectgrid .card, .card { background: var(--project-box) !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: var(--box-shadow-card); border-radius: 0 !important }
 
-/* ================= NUEVA SECCIÓN: EDUCACIÓN + HABILIDADES ================= */
+/* EDUCACIÓN + HABILIDADES */
 .edu-skill-section { padding: 8px 20px 0; margin-top: 50px }
 .edu-skill-container {
   max-width: 1350px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* columnas iguales para que la línea quede centrada en el gap */
-  gap: 48px; /* más separación respecto a la línea central */
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
   align-items: start;
   position: relative;
-  padding-top: 75px; /* más separación entre la barra horizontal y los títulos */
+  padding-top: 75px;
 }
 
-/* Línea vertical divisoria al centro (solo desktop) */
 .edu-skill-container::after {
   content: "";
   position: absolute;
   top: 75px; bottom: 0; left: 50%;
-  width: 4px; /* un poco más delgada para verse menos invasiva */
+  width: 4px;
   transform: translateX(-50%);
-  background: #2f2a72; /* tono púrpura translúcido */
+  background: #2f2a72; 
   border-radius: 3px;
 }
 
-/* Barra horizontal superior que conecta con la barra vertical central */
 .edu-skill-container::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: #2f2a72; /* mismo color que la barra central */
+  background: #2f2a72; 
   border-radius: 3px;
 }
 
-/* colchón interno para separar aún más del divisor central */
 .edu-col { padding-right: 13px }
 .skills-col { padding-left: 13px }
 
 .subheading { font-size: 2rem; font-weight: 800; color: #000000; margin: 6px 0 14px; text-align: left; font-family: 'Noto Sans', sans-serif; }
 
-/* Educación: tarjetas en timeline vertical sutil */
 .timeline { position: relative; margin-left: 0 }
 .timeline::before { display: none }
 
 .edu-card {
   position: relative;
-  margin-left: 0; /* sin línea lateral, sin desplazamiento */
+  margin-left: 0;
   background: #ffffff;
   border-radius: 0;
-  padding: 22px 18px; /* un poco más alta */
+  padding: 22px 18px;
   display: grid;
   grid-template-columns: 90px 1fr;
   gap: 16px;
   box-shadow: var(--box-shadow-card);
 }
-.edu-card + .edu-card { margin-top: 100px } /* DISTANCIA BOXES EDUCACIÓN */
-/* Eliminar círculo azul en la línea del timeline */
+.edu-card + .edu-card { margin-top: 100px }
 .edu-card::before { display: none }
 
-/* Merged education card styles */
 .edu-card.edu-merged { display: block; padding: 22px; border-radius: 0; box-shadow: var(--box-shadow-card) }
 .edu-card.edu-merged .edu-row {
   display: grid;
@@ -770,18 +728,16 @@ body { background: var(--bg-color) !important }
   gap: 16px;
   align-items: center;
 }
-.edu-card.edu-merged .edu-row + .edu-row { margin-top: 100px; padding-top: 0; border-top: none } /* DISTANCIA EDUCACIÓN  */
+.edu-card.edu-merged .edu-row + .edu-row { margin-top: 100px; padding-top: 0; border-top: none }
 
-/* Caja para Habilidades similar a Educación */
 .skills-card {
   background: #ffffff;
   border-radius: 0;
   padding: 25px;
   box-shadow: var(--box-shadow-card);
-  max-width: 97%; /* reducir ancho visual para dar más margen derecho */
+  max-width: 97%;
 }
 
-/* Estilo específico para la caja de descripción de experiencia (derecha) */
 .expbox.exp-laboral { padding: 30px; font-size: 1.25em; }
 
 .edu-logo { width: 90px; height: 90px; object-fit: contain; background: rgba(0,0,0,0.02); border-radius: 10px; padding: 6px }
@@ -791,7 +747,6 @@ body { background: var(--bg-color) !important }
 .edu-field { color: #333333; font-size: 1.05rem; }
 .edu-meta { color: #333333; font-size: 1.00rem }
 
-/* Habilidades con barras */
 .skills-list { display: grid; gap: 17.5px; width: 99%; margin-left: 0; margin-right: auto; }
 .skill-name { font-weight: 700; color: #000000; margin-bottom: 6px }
 .skill-bar { position: relative; width: 100%; height: 14px; background: #d9d9d9; border-radius: 10px; overflow: hidden }
@@ -802,22 +757,19 @@ body { background: var(--bg-color) !important }
   border-radius: 10px;
   display: flex; align-items: center; justify-content: flex-end;
   padding-right: 8px;
-  color: #fff; font-weight: 500; font-size: 0.7rem; /* TAMAÑO FONT PORCENTAJES */
+  color: #fff; font-weight: 500; font-size: 0.7rem;
   transition: width 0.8s ease;
 }
 .skill-pct { opacity: 0.95 }
 
-/* Responsive para la nueva sección */
 @media (max-width: 992px) {
   .edu-skill-container { grid-template-columns: 1fr; gap: 24px; padding-top: 50px }
-  /* Ocultar la barra vertical en móvil */
   .edu-skill-container::after { display: none }
-  /* Mostrar la barra horizontal en móvil (misma coloración) */
   .edu-skill-container::before { display: block; height: 3px; top: 0; left: 0; right: 0; background: #2f2a72; }
   .edu-col, .skills-col { padding: 0 }
 }
 
-/* ================= SECCIÓN EXPERIENCIA (alineada y con barra central) ================= */
+/* SECCIÓN EXPERIENCIA */
 .experience-section { padding: 45px 20px 0 }
 .experience-container {
   max-width: 1350px;
@@ -839,7 +791,6 @@ body { background: var(--bg-color) !important }
 }
 .exp-left { padding-right: 13px }
 .exp-right { padding-left: 13px }
-/* mismo ancho visual que la box de habilidades */
 .exp-right .expbox { max-width: 97%; margin-left: 0; text-align: justify; text-justify: inter-word; hyphens: auto; }
 
 @media (max-width: 992px) {

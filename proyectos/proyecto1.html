@@ -5,14 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap 5.3 (unified with index) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
         crossorigin="anonymous">
-    <!-- link to style sheet -->
     <link rel="stylesheet" href="../style.css">
-    <!-- LINK TO PROJECT PAGE STYLE SHEET -->
     <link rel="stylesheet" href="../pag_proyecto.css">
-    <!-- GOOGLE fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 
@@ -21,17 +17,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
 
     <title>Proyecto 1</title>
 
     <style>
-        /* Layout específico para página de mapas */
         .page-wrapper {
             padding-top: 100px;
-            /* Espacio entre navbar y mapas */
             padding-bottom: 20px;
         }
 
@@ -39,11 +32,8 @@
             display: flex;
             gap: 25px;
             max-width: 1400px;
-            /* Aumentar ancho máximo */
             margin: 0 auto 25px auto;
-            /* Reducir drásticamente el gap debajo */
             padding: 0 15px;
-            /* Reducir padding para dar más espacio a los mapas */
         }
 
         .map-column {
@@ -61,54 +51,44 @@
 
         #leafletMap {
             height: 650px;
-            /* Aumentar altura */
             width: 100%;
         }
 
-        /* Make extra maps match the main map size */
         #extraMap1,
         #extraMap2 {
             height: 650px;
-            /* same as #leafletMap */
             width: 100%;
         }
 
         .map-title {
             text-align: center;
             font-size: 1.4rem;
-            /* Aumentar tamaño */
             font-weight: 600;
             margin: 0 0 1rem 0;
             color: #333;
             font-family: 'Noto Sans', sans-serif;
         }
 
-        /* Contenido del proyecto */
         .project-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
             justify-content: center;
-            /* Centrar horizontalmente */
         }
 
         .project-content .project-text {
             width: 100%;
             margin: 0;
-            /* Eliminar márgenes automáticos del CSS original */
             text-align: center;
-            /* Centrar el contenido */
         }
 
         .project-content .project-text .indent {
             text-align: justify;
-            /* Justificar solo los párrafos de contenido */
             display: block;
             margin: 0.5rem 0;
         }
 
-        /* Estilos para la leyenda */
         .legend {
             line-height: 20px;
             color: #555;
@@ -120,7 +100,6 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             border: 1px solid #ccc;
             min-width: 160px;
-            /* Aumentar ancho mínimo */
         }
 
         .legend i {
@@ -150,7 +129,6 @@
             line-height: 20px;
         }
 
-        /* Control de opacidad para Leaflet */
         .opacity-control {
             position: absolute;
             top: 10px;
@@ -212,7 +190,6 @@
             margin-top: 2px;
         }
 
-        /* Responsive para móviles */
         @media (max-width: 768px) {
             .page-wrapper {
                 padding-top: 70px;
@@ -222,12 +199,10 @@
                 flex-direction: column;
                 gap: 30px;
                 margin-bottom: 5px;
-                /* Reducir también en móviles */
                 padding: 0 10px;
             }
         }
 
-        /* Ensure embedded iframes and extra map containers fill their column */
         .map-container iframe,
         #extraMap1,
         #extraMap2 {
@@ -262,14 +237,11 @@
     </nav>
 
     <div class="page-wrapper">
-        <!-- Container for the maps side by side -->
         <div class="maps-section">
-            <!-- Columna izquierda: Mapa de Leaflet -->
             <div class="map-column">
                 <div class="map-title">Red de drenaje de la cuenca</div>
                 <div class="map-container" style="position: relative;">
                     <div id="leafletMap"></div>
-                    <!-- Leyenda -->
                     <div
                         style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
@@ -297,7 +269,6 @@
                 </div>
             </div>
 
-            <!-- Columna derecha: Hypsometric interactive (embed) -->
             <div class="map-column">
                 <div class="map-title">Curva Hipsométrica</div>
                 <div class="map-container">
@@ -307,19 +278,16 @@
             </div>
         </div>
 
-        <!-- Segunda fila: dos mapas adicionales -->
         <div class="maps-section" style="margin-top:20px;">
             <div class="map-column">
                 <div class="map-title">Clasificación de Riego</div>
                 <div class="map-container" style="position: relative;">
                     <div id="extraMap1"></div>
-                    <!-- Control de opacidad Mapa 3 -->
                     <div class="opacity-control">
                         <label for="extra1-opacity">Cambiar Transparencia</label>
                         <input type="range" id="extra1-opacity" class="opacity-slider" min="0" max="100" value="90">
                         <div class="opacity-value" id="extra1-opacity-value">95%</div>
                     </div>
-                    <!-- Leyenda Mapa 3 -->
                     <div
                         style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
@@ -350,13 +318,11 @@
                 <div class="map-title">Riego Crítico</div>
                 <div class="map-container" style="position: relative;">
                     <div id="extraMap2"></div>
-                    <!-- Control de opacidad Mapa 4 -->
                     <div class="opacity-control">
                         <label for="extra2-opacity">Cambiar Transparencia</label>
                         <input type="range" id="extra2-opacity" class="opacity-slider" min="0" max="100" value="90">
                         <div class="opacity-value" id="extra2-opacity-value">95%</div>
                     </div>
-                    <!-- Leyenda Mapa 4 -->
                     <div
                         style="position: absolute; top: 90px; left: 10px; background: rgba(255,255,255,0.9); padding: 10px 12px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-size: 12px; z-index: 1000;">
                         <div style="margin-bottom: 6px; font-weight: 600;">Leyenda</div>
@@ -370,7 +336,6 @@
             </div>
         </div>
 
-        <!-- Content container for project description -->
         <div class="project-content">
             <p class="card-text project-text"><span class="coll projdes">Resumen del Proyecto</span><br><span
                     class="indent">Proyecto de monitoreo estacional de vegetación irrigada en el valle del Aconcagua
@@ -396,23 +361,22 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer style="background-color: #111111; padding: 20px 0; text-align: center; margin-top: 40px;">
         <p style="margin: 0; color: #ffffff; font-size: 0.95em;">
             Creado por Lucas Blachet Del Solar | Email: lucas.blachet@uc.cl
         </p>
     </footer>
 
-    <!-- Leaflet JavaScript -->
+    <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <!-- Georaster libraries for GeoTIFF support -->
+    <!-- Librerias Georaster -->
     <script src="https://unpkg.com/georaster@1.6.0/dist/georaster.browser.bundle.min.js"></script>
     <script src="https://unpkg.com/georaster-layer-for-leaflet@3.10.0/dist/georaster-layer-for-leaflet.min.js"></script>
     <script src="https://unpkg.com/geoblaze@2.8.0/dist/geoblaze.min.js"></script>
 
-    <!-- JAVASCRIPT FOR MAPS -->
+    <!-- JS -->
     <script>
         var map;
         -32.836073, -71.213059
@@ -425,7 +389,7 @@
                 }).addTo(map);
                 L.control.scale({ imperial: false }).addTo(map);
 
-                // Load basin
+                // cargar basin
                 fetch('proyecto 1/ae_hidro.geojson')
                     .then(function (r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
                     .then(function (data) {
@@ -435,7 +399,7 @@
                     })
                     .catch(function (e) { console.error('Error loading basin:', e); });
 
-                // Load stream network
+                // cargar stream network
                 fetch('proyecto 1/basin_streamnetwork.geojson')
                     .then(function (r) { if (!r.ok) throw new Error(r.statusText); return r.json(); })
                     .then(function (data) {
@@ -462,7 +426,6 @@
                 }).addTo(extra1);
                 L.control.scale({ imperial: false }).addTo(extra1);
 
-                // Load GeoTIFF for mapa3 with custom color scale
                 fetch('proyecto 1/mapa3.tif')
                     .then(response => response.arrayBuffer())
                     .then(arrayBuffer => {
@@ -492,7 +455,6 @@
                                 layer.setOpacity(opacity);
                             });
 
-                            // Add click event for popup
                             extra1.on('click', function (e) {
                                 var latlng = e.latlng;
                                 var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
@@ -514,7 +476,6 @@
                 }).addTo(extra2);
                 L.control.scale({ imperial: false }).addTo(extra2);
 
-                // Load GeoTIFF for mapa4 with custom color scale
                 fetch('proyecto 1/mapa4.tif')
                     .then(response => response.arrayBuffer())
                     .then(arrayBuffer => {
@@ -532,7 +493,7 @@
                             });
                             layer.addTo(extra2);
 
-                            // Control de opacidad para mapa4
+                            // Control de opacidad para mapa 4
                             var opacitySlider2 = document.getElementById('extra2-opacity');
                             var opacityValue2 = document.getElementById('extra2-opacity-value');
                             opacitySlider2.addEventListener('input', function () {
@@ -541,7 +502,6 @@
                                 layer.setOpacity(opacity);
                             });
 
-                            // Add click event for popup
                             extra2.on('click', function (e) {
                                 var latlng = e.latlng;
                                 var values = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
@@ -567,12 +527,9 @@
         });
     </script>
 
-    <!-- Bootstrap 5.3 bundle (unificado) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-    <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/8edb919db8.js" crossorigin="anonymous"></script>
-    <!-- Script to enable mobile menu on project pages -->
     <script src="../pag_proyecto.js" defer="defer"></script>
 </body>
 

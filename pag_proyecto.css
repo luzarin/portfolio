@@ -1,44 +1,42 @@
 * {
     box-sizing: border-box;
-    font-family: "Noto Sans", sans-serif !important; /* Forzar Noto Sans en todo */
+    font-family: "Noto Sans", sans-serif !important;
 }
 
 body, html{
     margin:0;
 
-    /* permitir scroll vertical normal en móviles para evitar "doble scroll" y saltos */
     height:auto;
     overflow: hidden auto;
-    overscroll-behavior-y: none; /* evitar cadenas de desplazamiento raras en contenedores internos */
+    overscroll-behavior-y: none; 
 }
 
-/* Tipografía global para páginas de proyecto */
-body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
+body { font-family: "Noto Sans", sans-serif; } 
 
 .nav{
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 4000;
-    padding: 7.5px 0; /* mantener padding fijo para evitar saltos al hacer affix */
+    padding: 7.5px 0; 
     transition: all 0.3s ease;
     background: #171717; /* COLOR BOX BARRA SUPERIOR */
     box-shadow: 0 2px 10px rgb(0 0 0 / 30%);
 }
 
-/* NAVBAR: reglas añadidas para igualar spacing/posición con index (style.css) */
+/* NAVBAR */
 .nav.affix {
     background: rgb(21 24 27);
-    padding: 7.5px 0; /* mismo padding que .nav para evitar cambio de altura */
+    padding: 7.5px 0;
 }
 
 .nav .container {
     display: flex;
-    justify-content: space-between; /* Esto separa los extremos */
+    justify-content: space-between; 
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto; /* evitar doble altura visual en la barra */
-    padding: 0; /* restaurar padding original */
+    margin: 0 auto;
+    padding: 0;
     height: 48px;
 }
 
@@ -61,20 +59,19 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     line-height: 48px;
     margin: 0;
     padding: 0;
-    font-family: "Noto Sans", sans-serif !important; /* Forzar Noto Sans en navbar */
+    font-family: "Noto Sans", sans-serif !important; 
 }
 
 .navlinks {
     display: flex;
     align-items: center;
-    gap: 50px; /* controla la distancia entre Inicio, CV, LinkedIn, GitHub */
+    gap: 50px; /* distancia ítems Header */
     height: 48px;
     list-style: none; 
     margin: 0;
     padding: 0;
 }
 
-/* asegurar que los items no añadan padding/márgenes inesperados */
 .navlinks li {
     list-style: none;
     margin: 0;
@@ -82,10 +79,10 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
 }
 
 .navlinks li a {
-    display: block; /* ocupar la altura definida y facilitar el centrado vertical */
+    display: block; 
     height: 48px;
     line-height: 48px;
-    padding: 0 6px; /* pequeño padding horizontal si se desea */
+    padding: 0 6px; 
 }
 
 .navlinks a:hover {
@@ -94,20 +91,19 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
 
 .mobile-menu { display: none; }
 
-/* Ocultar navTrigger (el span de 3 barras) en pantallas de escritorio para evitar desalineos */
 .navTrigger {
     display: none;
 }
 
 .main_list {
-    margin-left: 40px; /* Ajusta para centrar/posicionar a la derecha del logo */
+    margin-left: 40px; 
 }
 
 .logo {
-    margin-right: 40px; /* Ajusta para separar logo del resto del menú */
+    margin-right: 40px; 
 }
 
-/* Paridad con index.html - asegurar que el navbar móvil esté bien posicionado */
+/* posición navbar móvil */
 @media (width >= 769px) {
     .nav .container { 
         max-width: 1200px !important; 
@@ -143,25 +139,21 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     }
 }
 
-/* El contenedor principal ocupa la altura restante y centra el contenido */
 .imageContainer-large{
     width:100%;
     display:flex;
     justify-content: center;
 
-    /* usar la altura disponible teniendo en cuenta la navbar - ajuste sutil */
     min-height: calc(100vh - 80px);
     max-height: 100vh;
-    align-items: start; /* alinear al inicio para que thumbnails queden debajo de la main image */
-    gap: 3rem;               /* gap intermedio */
-    padding: 5rem 1.5rem 1rem;      /* padding intermedio */     /* margen lateral */ /* padding inferior menor */
+    align-items: start; 
+    gap: 3rem;             
+    padding: 5rem 1.5rem 1rem;    
     box-sizing: border-box;
-    margin-bottom: 0;       /* quitar margin-bottom grande */
+    margin-bottom: 0;    
 }
 
-/* reducir ancho de la imagen principal para que no ocupe toda la pantalla */
 :root {
-    /* ancho objetivo para la imagen principal y la fila de miniaturas - tamaño original */
     --main-image-w: 360px;
 }
 
@@ -170,15 +162,14 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     width:100%;
     height:auto;
     max-height: none;
-    max-width: var(--main-image-w); /* <-- achicar aquí */
+    max-width: var(--main-image-w); 
     margin-top: 1.5rem;
-    padding-top: 1rem; /* MARGEN SUPERIOR IMAGEN GRANDE - restaurado */
+    padding-top: 1rem; 
     padding-left: 0;
     padding-right: 0;
     box-sizing: border-box;
 }
 
-/* Mantener las slides visibles y con un max-height relativo */
 .mySlides {
     display: none;
     margin-top:0;
@@ -187,52 +178,47 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
 .mySlides img {
     width:100%;
     height:auto;
-    max-height: calc(100vh - 200px); /* límite más generoso */
-    object-fit: cover; /* restaurar cover */
+    max-height: calc(100vh - 200px); 
+    object-fit: cover; 
     display: block;
     border-radius: 6px;
 
-    /* opcional: limitar ancho por si se usa fuera del contenedor */
     max-width: var(--main-image-w);
 }
 
-/* Espacio entre miniaturas y borde */
 .images{
     width:100%;
-    max-width: var(--main-image-w); /* <-- asegura ancho igual que la imagen principal */
-    margin: 10px auto 0;           /* <-- centro horizontal */
+    max-width: var(--main-image-w); 
+    margin: 10px auto 0;          
     display:block;
     box-sizing: border-box;
-    padding: 0; /* quitar padding lateral si existía */
+    padding: 0; 
 }
 
-/* Row: quitar márgenes negativos que movían elementos fuera del flujo */
 .row{
     margin:0;
     text-align: center;
     align-items: center;
     padding: 0;
     display: flex;
-    justify-content: center; /* centrar miniaturas */
+    justify-content: center;
     gap: 6px;
 }
 
-/* Column: mantener proporción y asegurar object-fit */
 .column {
     flex: 1 1 0;
-    max-width: calc((var(--main-image-w) - 18px) / 4); /* ajustar por gaps */
+    max-width: calc((var(--main-image-w) - 18px) / 4);
     box-sizing: border-box;
 }
 
 .column img {
     width: 100%;
-    height: 90px;          /* <-- tamaño intermedio para miniaturas */
+    height: 90px;         
     object-fit: cover;
     display: block;
     border-radius: 4px;
 }
 
-/* Caption más pequeño y compacto DESCRIPCIÓN IMAGEN */
 .caption-container {
     margin-top: 10px;
     text-align: center;
@@ -248,46 +234,40 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     box-sizing: border-box;
 }
 
-/* Responsive: reducir tamaño de miniaturas y main-image en pantallas pequeñas */
+/* Responsive */
 @media screen and (width <=800px) {
-    :root { --main-image-w: 90vw; } /* main image ocupa 90% en móvil */
-    .column img { height: 68px; }   /* miniaturas más pequeñas en móvil */
+    :root { --main-image-w: 90vw; } 
+    .column img { height: 68px; }   
     .row { gap: 6px; }
 
-    /* Asegurar espacio bajo navbar fijo solo en páginas de proyecto */
     body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
 
-    /* Asegurar llegar hasta el final en iOS (barra de Safari) */
     body { padding-bottom: max(24px, env(safe-area-inset-bottom)) !important; }
 
-    /* Alinear altura del contenedor del navbar con el padding superior del body */
     .nav .container { height: 56px; padding: 0 65px; }
     .logo a { font-size: 1.4rem; line-height: 56px; height: 56px; display: flex; align-items: center; }
     .mobile-menu-btn { height: 56px; }
 
-    /* Apilar: imágenes primero, luego texto */
     .imageContainer-large {
         min-height: auto;
-        display: block; /* apilar imágenes antes del texto */
-        text-align: center; /* centrar contenido */
-        padding-top: 0; /* el espacio superior lo aporta body { padding-top: 56px } */
+        display: block; 
+        text-align: center; 
+        padding-top: 0; 
         padding-bottom: 2rem;
     }
 
-    /* Centrar la imagen grande dentro del contenedor */
     .imageContainer{
         width: 92%;
         max-width: 520px;
-        margin: 12px auto 6px; /* centro horizontal */
-        padding-top: 0.75rem; /* un poco de espacio arriba */
+        margin: 12px auto 6px; 
+        padding-top: 0.75rem; 
     }
     .imageContainer img { display: block; margin: 0 auto; }
 
-    /* Miniaturas centradas en fila */
     .images { display:flex; justify-content:center; gap:8px; max-width:92%; margin: 8px auto 0; }
     .column { width: 22%; max-width: 22%; }
 
-    /* Menu móvil: mostrar botón y menú (coherente con style.css) */
+    /* Menu móvil */
     .navlinks { display: none !important; }
     .mobile-menu-btn { display: inline-flex !important; align-items: center; justify-content: center; font-size: 1.2rem; background: transparent; border: none; color: #fff; padding: 6px 10px; cursor: pointer; }
     .mobile-menu { position: fixed; top: 56px; right: 12px; background: rgb(33 48 63 / 98%); border-radius: 8px; box-shadow: 0 8px 30px rgb(0 0 0 / 50%); padding: 10px; z-index: 2000; min-width: 160px; }
@@ -295,105 +275,96 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     .mobile-menu li { padding: 8px 6px; }
     .mobile-menu a { color: #fff; text-decoration: none; display: block; }
 
-    /* Texto: reducir tamaños y ajustar márgenes para que encaje en pantalla */
     .project-text{
         width: 94%;
         max-width: 900px;
         padding-top: 0.75rem;
         font-size: clamp(0.85rem, 2.6vw, 1rem);
-        margin-top: 50px; /* más separación de las miniaturas */
+        margin-top: 50px; 
         padding-left: 12px;
         padding-right: 12px;
         text-align: left;
-        min-width: 0; /* permitir que el texto se ajuste en pantallas pequeñas */
+        min-width: 0; 
         box-sizing: border-box;
         overflow-wrap: anywhere;
     }
 
-    /* Título dentro del project-text (ej. .coll.projdes) más pequeño y con separación */
     .project-text .coll {
         display: block;
         font-size: clamp(1.1rem, 4.5vw, 1.6rem);
         margin: 8px 0 12px;
-        text-align: center; /* centrar el título en móvil */
+        text-align: center; 
         line-height: 1.15;
-        font-family: "Noto Sans", sans-serif; /* Añadir Noto Sans */
+        font-family: "Noto Sans", sans-serif; 
     }
 
-    /* Asegurar que el resto del contenido dentro del bloque tenga flujo normal y no provoque overflow */
     .project-text, .project-text * {
         word-break: break-word;
         overflow-wrap: anywhere;
     }
 }
 
-/* push the project text a bit to the right so it visually separates from the images */
 .project-text{
     margin: 0;
     position: relative;
-    width:750px; /* tamaño intermedio */
+    width:750px; 
     height:auto;
     color:#000;
-    padding:22px 22px 10px; /* padding intermedio */
-    font-size: 1.05rem; /* tamaño intermedio */
-    max-height: calc(100vh - 120px); /* límite más generoso */
+    padding:22px 22px 10px;
+    font-size: 1.05rem; 
+    max-height: calc(100vh - 120px); 
     max-width:950px;
     min-width:380px;
-    margin-top:75px; /* margen intermedio */
+    margin-top:75px; 
     margin-right:4%;
     text-align: justify;
-    margin-left: 1.5rem;      /* margen intermedio */
-    overflow-y: auto; /* permitir scroll interno solo si es necesario */
+    margin-left: 1.5rem;      
+    overflow-y: auto; 
     box-sizing: border-box;
 }
 
 .indent{
-    padding-left: 2em; /* restaurar indentación original */
-    margin-right:20px; /* restaurar margen derecho */
+    padding-left: 2em; 
+    margin-right:20px; 
 }
 
-/* Final consolidated mobile rules (override earlier desktop rules) */
 @media screen and (width <=800px) {
     :root { --main-image-w: 90vw; }
 
-    /* Ensure page can scroll on mobile - forzar scroll */
     body, html { 
         height: auto !important; 
         overflow: hidden auto !important;
         max-height: none !important;
     }
 
-    /* Asegurar espacio bajo navbar fijo solo aquí (override del global) */
     body { padding-top: calc(var(--nav-height-mobile, 56px) + 8px) !important; }
     
-    /* Paridad con index.html - navbar móvil correctamente posicionado */
     .nav .container {
-        padding: 0 12px !important; /* Usar padding de style.css */
+        padding: 0 12px !important;
         justify-content: space-between !important;
-        height: 56px !important; /* Altura exacta de style.css */
+        height: 56px !important; 
     }
     
     .logo, .main_list {
-        margin: 0 !important; /* Eliminar márgenes en móvil */
+        margin: 0 !important; 
     }
     
-    /* Tamaños de fuente exactos de style.css */
     .logo a {
-        font-size: 1.4rem !important;      /* "Inicio" más grande en móvil */
+        font-size: 1.4rem !important;    
         line-height: 56px !important;
         height: 56px !important;
         display: flex !important;
         align-items: center !important;
     }
     
-    /* Mobile menu show/hide */
+    /* Móvil menú show/hide */
     .navlinks { display: none !important; }
 
     .mobile-menu-btn { 
         display: inline-flex !important; 
         align-items: center; 
         justify-content: center; 
-        font-size: 1.6rem !important;      /* icono del menú más grande - igual que style.css */
+        font-size: 1.6rem !important;    
         background: transparent; 
         border: none; 
         color: #fff; 
@@ -409,17 +380,13 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
         color: #fff; 
         text-decoration: none; 
         display: block; 
-        font-size: 1.2rem !important;     /* items del menú más grandes - igual que style.css */
+        font-size: 1.2rem !important;     
         padding: 10px 12px !important;
-        font-weight: 700 !important; /* negritas en menú móvil */
+        font-weight: 700 !important; 
     }
 
-    /* Evitar que el UI inferior del navegador tape el final (aún menor espacio) */
     body { padding-bottom: max(6px, env(safe-area-inset-bottom)) !important; }
 
-    /* Layout: images first, centered */
-
-    /* gallery spacing: remove extra top padding to avoid double navbar space */
     .imageContainer-large { 
         display: block !important; 
         text-align: center !important; 
@@ -432,33 +399,23 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     .imageContainer { width: 92% !important; max-width: 520px !important; margin: 12px auto !important; padding-top: 0.75rem !important; margin-bottom: 12px !important; }
     .imageContainer img { display: block; margin: 0 auto; }
 
-    /* increase gap under thumbnails to separate title */
     .images { display:flex !important; justify-content:center; gap:8px; max-width:92%; margin: 8px auto 28px; }
     .column { width: 22%; max-width: 22%; }
 
-    /* Text block: ensure it wraps and fits the viewport */
-
-    /* body top space is handled by index/style; don't add more here */
-
-    /* Center the container so links/title are centered; paragraphs remain left-aligned inside */
     .project-text { width: 94% !important; max-width: 940px !important; padding: 12px 12px 8px !important; font-size: clamp(0.85rem, 2.6vw, 1rem) !important; margin: 20px auto 8px !important; text-align: center !important; min-width: 0 !important; box-sizing: border-box !important; overflow-wrap: anywhere !important; height: auto !important; max-height: none !important; }
 
-    /* reduce gap below title so links are closer */
     .project-text .coll { display: block; font-size: clamp(1.1rem, 4.2vw, 1.5rem) !important; margin: 2px 0 4px !important; text-align: center !important; line-height: 1.15 !important; font-family: "Noto Sans", sans-serif !important; }
 
-    /* Paragraph blocks: keep left-aligned but constrained so they don't touch edges */
     .project-text .indent { display:block; text-align: left !important; margin: 6px auto 0 !important; max-width: 92%; padding-left: 0.5rem; padding-right: 0.5rem; }
 
-    /* Links: center and tighten vertical spacing. Nudge them slightly up to counter existing <br><br> */
     .project-text a, .project-text .logos { display: inline-block; margin: 0 8px; vertical-align: middle; transform: translateY(-6px); }
 
     .project-text, .project-text * { word-break: break-word !important; overflow-wrap: anywhere !important; }
 
-    /* Reduce large desktop-only min-width that can force overflow */
     .project-text { min-width: 0 !important; }
 }
 
-/* Tooltip styling */
+/* style Tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -493,16 +450,11 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     border-radius: 25px; 
 }
 
-/* ===== Overrides: colores de texto para la página de proyecto ===== */
-
-/* Títulos dentro del bloque de texto (p. ej., "Resumen del Proyecto", "Más Información") */
 .project-text .coll { color:#000 !important; font-family: "Noto Sans", sans-serif !important; }
 
-/* Enlaces (StoryMap, Reporte Completo, GitHub): negros y sin subrayado */
 .project-text a { color:#000 !important; text-decoration:none !important; border-bottom:none !important; }
 .project-text a:hover, .project-text a:focus { color:#000 !important; text-decoration:none !important; }
 
-/* Si usas la clase .logos para esos links, fuerza color negro también */
 .project-text .logos { color:#000 !important; }
 
 .close:hover,
@@ -546,7 +498,6 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     border-radius: 25px; 
 }
 
-/* Caption container - descripci�n de im�genes */
 .caption-container {
     text-align: center;
     background-color: #f1f1f1;
@@ -567,7 +518,6 @@ body { font-family: "Noto Sans", sans-serif; } /* Cambiar todo a Noto Sans */
     padding: 0;
 }
 
-/* Modal para zoom de imagen */
 .modal {
     display: none;
     position: fixed;
