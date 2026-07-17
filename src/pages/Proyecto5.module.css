@@ -1,0 +1,26 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.maps {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.text {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.text p {
+  text-align: justify;
+}
+
+@media (width <= 1000px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

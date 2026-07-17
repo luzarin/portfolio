@@ -49,11 +49,15 @@ export function GeoRasterLayer({
       .then((georaster) => {
         if (cancelled) return
         georasterRef.current = georaster
+        const noData = (georaster as { noDataValue?: number }).noDataValue
         const layer = new GeoRasterLeaflet({
           georaster,
           opacity: initialOpacity ?? 0.9,
           resolution,
-          pixelValuesToColorFn: (v) => callbacks.current.pixelValuesToColorFn(v),
+          pixelValuesToColorFn: (v) => {
+            if (noData !== undefined && v[0] === noData) return null
+            return callbacks.current.pixelValuesToColorFn(v)
+          },
         })
         layer.addTo(map)
         layerRef.current = layer

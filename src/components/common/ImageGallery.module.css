@@ -1,0 +1,70 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.figure figcaption {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.zoomBtn {
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.zoomBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.zoomBtn img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  background: rgb(10 12 15 / 85%);
+  padding: var(--space-4);
+}
+
+.modalFigure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+  max-width: min(92vw, 1100px);
+}
+
+.modalFigure img {
+  max-height: 82vh;
+  width: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.modalFigure figcaption {
+  color: var(--color-text-inverse);
+  text-align: center;
+  font-size: 0.95rem;
+}
