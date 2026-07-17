@@ -59,6 +59,25 @@ main {
   min-height: 60vh;
 }
 
+.sectionTitle {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  position: relative;
+  padding-left: var(--space-3);
+}
+
+.sectionTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.18em;
+  bottom: 0.18em;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(var(--color-accent), var(--color-accent-strong));
+}
+
 .container {
   max-width: var(--container-max);
   margin-inline: auto;

@@ -1,0 +1,14 @@
+.eduSkills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-6);
+  align-items: start;
+}
+
+@media (width <= 900px) {
+  .eduSkills {
+    grid-template-columns: 1fr;
+  }
+}

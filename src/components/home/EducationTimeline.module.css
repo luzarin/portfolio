@@ -1,0 +1,47 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.logoLink {
+  display: block;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.school {
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+.degree {
+  color: var(--color-accent-strong);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.field {
+  font-size: 0.98rem;
+}
+
+.meta {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-top: var(--space-1);
+}
