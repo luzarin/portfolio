@@ -54,6 +54,11 @@ button {
   outline-offset: 2px;
 }
 
+main {
+  padding-top: var(--nav-height);
+  min-height: 60vh;
+}
+
 .container {
   max-width: var(--container-max);
   margin-inline: auto;

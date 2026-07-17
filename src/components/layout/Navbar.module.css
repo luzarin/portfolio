@@ -1,0 +1,103 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1100;
+  height: var(--nav-height);
+  background: rgb(20 23 28 / 85%);
+  backdrop-filter: blur(8px);
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.affix {
+  background: var(--color-surface-dark);
+  box-shadow: 0 2px 12px rgb(0 0 0 / 35%);
+}
+
+.inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.logo:hover {
+  color: #fff;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+}
+
+.links a {
+  color: var(--color-text-inverse-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: var(--color-text-inverse);
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--color-text-inverse);
+  font-size: 1.4rem;
+  padding: var(--space-1) var(--space-2);
+}
+
+.mobileMenu {
+  position: absolute;
+  top: var(--nav-height);
+  right: 0;
+  min-width: 180px;
+  background: var(--color-surface-dark);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2) 0;
+}
+
+.mobileMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobileLink {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mobileLink:hover {
+  background: var(--color-surface-dark-2);
+}
+
+@media (width <= 768px) {
+  .links {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+}
