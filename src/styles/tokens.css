@@ -1,0 +1,43 @@
+/* Design tokens — contrato de nombres usado por todos los CSS Modules */
+:root {
+  /* Color */
+  --color-bg: #f4f6f8;
+  --color-surface: #fff;
+  --color-surface-dark: #14171c;
+  --color-surface-dark-2: #1d2129;
+  --color-text: #1b1f26;
+  --color-text-muted: #5c6572;
+  --color-text-inverse: #f5f6f7;
+  --color-text-inverse-muted: #aab2bd;
+  --color-accent: #0e7490;
+  --color-accent-strong: #155e75;
+  --color-accent-soft: rgb(14 116 144 / 12%);
+  --color-border: #d9dee5;
+
+  /* Tipografía */
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Noto Sans', system-ui, sans-serif;
+
+  /* Espaciado */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+
+  /* Radios y sombras */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --shadow-card: 0 4px 16px rgb(15 23 32 / 8%);
+  --shadow-card-hover: 0 10px 28px rgb(15 23 32 / 14%);
+
+  /* Layout */
+  --nav-height: 64px;
+  --container-max: 1200px;
+
+  /* Retícula cartográfica de fondo */
+  --graticule-line: rgb(20 23 28 / 4.5%);
+  --graticule-size: 48px;
+}
