@@ -2,6 +2,8 @@
   position: absolute;
   right: var(--space-3);
   bottom: var(--space-4);
+  max-height: 60%;
+  overflow-y: auto;
   z-index: 1000;
   min-width: 160px;
   background: rgb(255 255 255 / 95%);
@@ -12,6 +14,11 @@
   font-size: 13px;
   line-height: 1.5;
   color: #444;
+}
+
+.left {
+  right: auto;
+  left: var(--space-3);
 }
 
 .title {

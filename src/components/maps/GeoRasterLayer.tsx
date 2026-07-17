@@ -13,6 +13,8 @@ type Props = {
   resolution?: number
   /** Si se pasa, un click en el mapa muestra popup con el valor del pixel. */
   identifyLabel?: (value: number) => string
+  /** Ajusta la vista al extent del raster al cargar. */
+  fitBounds?: boolean
   onLoad?: () => void
   onError?: (err: unknown) => void
 }
@@ -23,6 +25,7 @@ export function GeoRasterLayer({
   opacity = 0.9,
   resolution = 256,
   identifyLabel,
+  fitBounds = false,
   onLoad,
   onError,
 }: Props) {
@@ -54,6 +57,13 @@ export function GeoRasterLayer({
         })
         layer.addTo(map)
         layerRef.current = layer
+        if (fitBounds) {
+          try {
+            map.fitBounds(layer.getBounds(), { padding: [20, 20] })
+          } catch (e) {
+            console.warn('No fue posible ajustar el mapa al raster:', e)
+          }
+        }
         callbacks.current.onLoad?.()
       })
       .catch((err) => {

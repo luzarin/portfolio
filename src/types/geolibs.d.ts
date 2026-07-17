@@ -14,6 +14,7 @@ declare module 'georaster-layer-for-leaflet' {
       pixelValuesToColorFn?: (values: number[]) => string | null
     })
     setOpacity(opacity: number): this
+    getBounds(): L.LatLngBounds
   }
 }
 

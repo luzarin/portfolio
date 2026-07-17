@@ -5,7 +5,7 @@ import L from 'leaflet'
 type Props = {
   url: string
   style?: L.PathOptions | L.StyleFunction
-  onEachFeature?: (feature: GeoJSON.Feature, layer: L.Layer) => void
+  onEachFeature?: (feature: GeoJSON.Feature, layer: L.Layer, map: L.Map) => void
   /** 0..1; cambia el fillOpacity de toda la capa de forma reactiva. */
   fillOpacity?: number
   onLoad?: (data: GeoJSON.FeatureCollection) => void
@@ -31,7 +31,9 @@ export function GeoJsonLayer({ url, style, onEachFeature, fillOpacity, onLoad, o
         if (cancelled) return
         const layer = L.geoJSON(data, {
           style: callbacks.current.style,
-          onEachFeature: callbacks.current.onEachFeature,
+          onEachFeature: callbacks.current.onEachFeature
+            ? (f, l) => callbacks.current.onEachFeature!(f, l, map)
+            : undefined,
         })
         layer.addTo(map)
         layerRef.current = layer
