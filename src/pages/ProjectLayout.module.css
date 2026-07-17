@@ -1,0 +1,30 @@
+.page {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  color: var(--color-accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+.title {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin-bottom: var(--space-5);
+  max-width: 60ch;
+}
+
+.error {
+  background: rgb(220 38 38 / 6%);
+  border: 1px solid rgb(220 38 38 / 25%);
+  color: #7f1d1d;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}

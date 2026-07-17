@@ -36,3 +36,10 @@
   opacity: 0.85;
   background: var(--swatch);
 }
+
+.line {
+  width: 24px;
+  height: var(--line-h);
+  flex: none;
+  background: var(--swatch);
+}

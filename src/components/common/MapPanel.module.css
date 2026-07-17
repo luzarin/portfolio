@@ -1,0 +1,28 @@
+.panel {
+  min-width: 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: var(--space-3);
+}
+
+.body {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1050;
+  display: grid;
+  place-items: center;
+  background: rgb(244 246 248 / 65%);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+}
+
+.control {
+  margin-top: var(--space-3);
+}

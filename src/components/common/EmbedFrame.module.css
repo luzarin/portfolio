@@ -1,0 +1,8 @@
+.frame {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  display: block;
+  background: var(--color-surface);
+}
