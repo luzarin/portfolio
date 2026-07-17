@@ -18,7 +18,7 @@ Problemas: navbar/footer/menú duplicados en las 7 páginas, datos de proyectos 
 |---|---|
 | Framework | React 19 |
 | Lenguaje | TypeScript 5 |
-| Build | Vite 6 |
+| Build | Vite (mayor estable actual, ≥ 6) |
 | Routing | React Router 7 (BrowserRouter) |
 | Estilos | Sin Bootstrap. CSS Modules + design tokens (custom properties) |
 | Rediseño | Moderado, con skill frontend-design; sin cambios radicales; misma estructura de secciones |
@@ -49,7 +49,7 @@ Problemas: navbar/footer/menú duplicados en las 7 páginas, datos de proyectos 
     │   ├── layout/             Navbar, MobileMenu, Footer
     │   ├── home/               About, SkillBars, EducationTimeline, ExperienceCard, ProjectsGrid, ProjectCard
     │   ├── maps/               LeafletMap, GeoRasterLayer, OpacityControl, MapLegend
-    │   └── common/             EmbedFrame, ImageGallery, TextBlock, ErrorBoundary
+    │   └── common/             EmbedFrame, ImageGallery, MapPanel, Spinner, ErrorBoundary
     ├── pages/                  HomePage, Proyecto1 … Proyecto6 (lazy)
     ├── data/                   projects.ts, skills.ts, education.ts, experience.ts
     ├── styles/                 tokens.css, global.css
@@ -110,3 +110,4 @@ Los HTML/CSS/JS legacy y las carpetas `proyectos/`, `imagenes/` de la raíz se e
 - **georaster en bundle:** estas libs asumen globals en algunos builds; si el import ESM falla, se cargan como side-effect imports o desde `public/` como último recurso (documentar en el plan).
 - **Peso de assets:** la migración no los agranda (mismos archivos); la optimización de imágenes es best-effort sin cambiar contenido visual.
 - **URLs viejas** (`/proyectos/proyecto1.html`) dejarán de existir; aceptado (portafolio personal, sin SEO crítico).
+- **Hallazgo:** `imagenes/proyecto5.png` está referenciada en el index pero no existe en el repo (card rota en el sitio en vivo). La migración lo corrige: `cardImage` es opcional con placeholder, y se intentará capturar una imagen real del mapa del proyecto 5.
