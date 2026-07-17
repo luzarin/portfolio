@@ -7,6 +7,10 @@
   align-items: start;
 }
 
+.gridSpacer {
+  margin-top: var(--space-6);
+}
+
 @media (width <= 900px) {
   .eduSkills {
     grid-template-columns: 1fr;

@@ -2,6 +2,7 @@ import { About } from '../components/home/About'
 import { SkillBars } from '../components/home/SkillBars'
 import { EducationTimeline } from '../components/home/EducationTimeline'
 import { ExperienceCard } from '../components/home/ExperienceCard'
+import { ProjectsGrid } from '../components/home/ProjectsGrid'
 import styles from './HomePage.module.css'
 
 export default function HomePage() {
@@ -19,6 +20,9 @@ export default function HomePage() {
         </div>
       </section>
       <ExperienceCard />
+      <div className={styles.gridSpacer}>
+        <ProjectsGrid />
+      </div>
     </>
   )
 }
