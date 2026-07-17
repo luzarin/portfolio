@@ -1,0 +1,38 @@
+.legend {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-4);
+  z-index: 1000;
+  min-width: 160px;
+  background: rgb(255 255 255 / 95%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2) var(--space-3);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.title {
+  margin: 0 0 var(--space-1);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 1px solid #999;
+  border-radius: 3px;
+  opacity: 0.85;
+  background: var(--swatch);
+}

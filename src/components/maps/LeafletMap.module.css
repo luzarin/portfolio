@@ -1,0 +1,12 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.map {
+  height: var(--map-h);
+  width: 100%;
+}
