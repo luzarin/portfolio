@@ -1,0 +1,120 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.text {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.text p {
+  text-align: justify;
+}
+
+/* Selector de año (segmented control) */
+.years {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.year,
+.yearActive {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.year:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.yearActive {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+}
+
+.year:focus-visible,
+.yearActive:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 2px;
+}
+
+/* Separa el botón "comparar" del grupo de años */
+.compareSep {
+  margin-left: var(--space-2);
+}
+
+/* Aviso metodológico */
+.badge {
+  justify-self: start;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-accent-strong);
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+}
+
+/* Tabla de cambio */
+.change {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.change li {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-sm);
+  align-self: center;
+}
+
+.vals {
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.up {
+  color: #2f9e44;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.down {
+  color: #c0392b;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (width <= 1000px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

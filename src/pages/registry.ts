@@ -9,4 +9,5 @@ export const projectPages: Record<string, LazyExoticComponent<ComponentType>> = 
   'lulc-colchagua': lazy(() => import('./Proyecto4')),
   'lst-uhi-rm': lazy(() => import('./Proyecto5')),
   'catastro-minero': lazy(() => import('./Proyecto6')),
+  'dependencia-riego-elqui': lazy(() => import('./Proyecto7')),
 }

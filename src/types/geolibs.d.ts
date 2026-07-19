@@ -15,6 +15,7 @@ declare module 'georaster-layer-for-leaflet' {
     })
     setOpacity(opacity: number): this
     getBounds(): L.LatLngBounds
+    getContainer(): HTMLElement | null
   }
 }
 

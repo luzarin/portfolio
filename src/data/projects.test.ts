@@ -1,8 +1,8 @@
 import { projects, getProject } from './projects'
 
-test('hay 6 proyectos con slugs unicos', () => {
-  expect(projects).toHaveLength(6)
-  expect(new Set(projects.map((p) => p.slug)).size).toBe(6)
+test('hay 7 proyectos con slugs unicos', () => {
+  expect(projects).toHaveLength(7)
+  expect(new Set(projects.map((p) => p.slug)).size).toBe(7)
 })
 
 test('getProject resuelve y rechaza slugs', () => {
