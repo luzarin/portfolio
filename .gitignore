@@ -24,3 +24,17 @@ dist-ssr
 *.sw?
 
 .claude/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secretos y entorno
+.env
+.env.*
+
+# Tooling
+.impeccable/
+coverage/
