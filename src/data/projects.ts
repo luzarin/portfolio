@@ -2,11 +2,11 @@ import type { ProjectMeta } from '../types/project'
 
 export const projects: ProjectMeta[] = [
   {
-    slug: 'aconcagua-ndvi-twi',
-    title: 'Monitoreo estacional de vegetación irrigada vs no irrigada en el Valle de Aconcagua',
+    slug: 'dependencia-riego-elqui',
+    title: 'Dependencia del riego en el Valle de Elqui — serie temporal (2020–2025)',
     summary:
-      'Proyecto de Monitoreo estacional de vegetación irrigada en el valle del Aconcagua en el año 2024: análisis de dependencia hídrica mediante ΔNDVI y Topographic Wetness Index (TWI) con imágenes Sentinel-2.',
-    cardImage: 'imagenes/proyecto1.jpg',
+      'Pipeline reutilizable y cloud-native (Sentinel-2 STAC + COG) que estima la dependencia hídrica inferida mediante ΔNDVI estacional, pendiente y TWI, con auto-configuración por AOI. Aplicado como serie multianual sobre el valle de Elqui: bajo la megasequía, el secano retrocede ~12 % mientras el riego se sostiene. Mapa de clasificación interactivo por año y comparador 2020 vs 2025.',
+    cardImage: 'imagenes/proyecto7.png',
   },
   {
     slug: 'precios-inmobiliarios-3d',
@@ -42,13 +42,6 @@ export const projects: ProjectMeta[] = [
     summary:
       'Proyecto de análisis territorial aplicado al sector minero que combina el catastro de derechos mineros con el levantamiento de la capa superficial para evaluar la instalación de una desaladora y su tubería en Antofagasta. Incluye revisión de concesiones, propiedad fiscal y particular, actos administrativos, territorios indígenas, concesiones marítimas e IPT, junto con cronograma, presupuesto y planificación de terreno, todo integrado en una geodatabase para identificar restricciones y actores clave del territorio.',
     cardImage: 'imagenes/proyecto6.jpg',
-  },
-  {
-    slug: 'dependencia-riego-elqui',
-    title: 'Dependencia del riego en el Valle de Elqui — serie temporal (2020–2025)',
-    summary:
-      'Pipeline reutilizable y cloud-native (Sentinel-2 STAC + COG) que estima la dependencia hídrica inferida mediante ΔNDVI estacional, pendiente y TWI, con auto-configuración por AOI. Aplicado como serie multianual sobre el valle de Elqui: bajo la megasequía, el secano retrocede ~12 % mientras el riego se sostiene. Mapa de clasificación interactivo por año y comparador 2020 vs 2025.',
-    cardImage: 'imagenes/proyecto7.png',
   },
 ]
 
