@@ -1,4 +1,5 @@
 import { experience } from '../../data/experience'
+import { asset } from '../../lib/asset'
 import styles from './ExperienceCard.module.css'
 
 export function ExperienceCard() {
@@ -11,13 +12,12 @@ export function ExperienceCard() {
         <article key={exp.company + exp.period} className={styles.card}>
           <div className={styles.left}>
             <a href={exp.url} target="_blank" rel="noopener noreferrer">
-              <img className={styles.logo} src={exp.logo} alt={`Logo ${exp.company}`} loading="lazy" />
+              <img className={styles.logo} src={exp.logo.startsWith('http') ? exp.logo : asset(exp.logo)} alt={`Logo ${exp.company}`} loading="lazy" />
             </a>
             <h3 className={styles.company}>{exp.company}</h3>
             <div className={styles.role}>{exp.role}</div>
             <div className={styles.meta}>{exp.period}</div>
             <div className={styles.meta}>{exp.place}</div>
-            <div className={styles.tools}>{exp.tools}</div>
           </div>
           <ul className={styles.bullets}>
             {exp.bullets.map((b) => (

@@ -33,10 +33,10 @@
 }
 
 .bio {
-  max-width: 68ch;
   display: grid;
   gap: var(--space-3);
-  font-size: 1.06rem;
+  font-size: 1.1rem;
+  text-align: justify;
 }
 
 .modal {
