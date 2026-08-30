@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { ProjectLayout } from './ProjectLayout'
 import { MapPanel } from '../components/common/MapPanel'
 import { LeafletMap } from '../components/maps/LeafletMap'
-import { GeoRasterLayer } from '../components/maps/GeoRasterLayer'
 import { CompareRasters } from '../components/maps/CompareRasters'
+import { RasterImageOverlay } from '../components/maps/RasterImageOverlay'
 import { MapLegend } from '../components/maps/MapLegend'
 import { asset } from '../lib/asset'
 import styles from './Proyecto7.module.css'
@@ -12,12 +12,6 @@ const YEARS = [2020, 2021, 2022, 2023, 2024, 2025] as const
 type Year = (typeof YEARS)[number]
 
 const COLORS: Record<number, string> = { 1: '#d73027', 2: '#fc8d59', 3: '#fee090', 4: '#4575b4' }
-
-const classColor = (values: number[]): string | null => {
-  const v = values[0]
-  if (v === null || v === undefined || v <= 0) return null
-  return COLORS[v] ?? null
-}
 
 const LABELS: Record<number, string> = {
   1: 'Riego intenso',
@@ -30,8 +24,6 @@ const LEGEND_ITEMS = Object.entries(COLORS).map(([k, color]) => ({
   color,
   label: `${k} · ${LABELS[Number(k)]}`,
 }))
-
-const identifyLabel = (value: number): string => LABELS[value] ?? `Clase ${value}`
 
 // Bounds WGS84 del ráster (mismas para todos los años) para los overlays de comparación.
 const ELQUI_BOUNDS: [number, number][] = [
@@ -51,7 +43,6 @@ const ha = (n: number): string => n.toLocaleString('es-CL')
 export default function Proyecto7() {
   const [mode, setMode] = useState<Year | 'compare'>(2025)
   const [loading, setLoading] = useState(true)
-  const [fitted, setFitted] = useState(false)
 
   const select = (m: Year | 'compare') => {
     if (m !== mode) {
@@ -67,7 +58,7 @@ export default function Proyecto7() {
           title={
             mode === 'compare'
               ? 'Comparación de clasificación · 2020 vs 2025'
-              : `Clasificación de dependencia hídrica — ${mode}`
+              : `Clasificación de dependencia hídrica en ${mode}`
           }
           loading={loading}
           control={
@@ -94,7 +85,13 @@ export default function Proyecto7() {
             </div>
           }
         >
-          <LeafletMap center={[-30.05, -70.67]} zoom={11} baseLayer="carto-light" height={720}>
+          <LeafletMap
+            center={[-30.04, -70.68]}
+            zoom={11}
+            baseLayer="esri-imagery"
+            height={720}
+            scalePosition="bottomright"
+          >
             {mode === 'compare' ? (
               <CompareRasters
                 urlLeft={asset('datos/proyecto-7/clasificacion_2020.png')}
@@ -107,17 +104,12 @@ export default function Proyecto7() {
                 onError={() => setLoading(false)}
               />
             ) : (
-              <GeoRasterLayer
-                url={asset(`datos/proyecto-7/clasificacion_${mode}.tif`)}
-                pixelValuesToColorFn={classColor}
-                identifyLabel={identifyLabel}
+              <RasterImageOverlay
+                key={mode}
+                url={asset(`datos/proyecto-7/clasificacion_${mode}.png`)}
+                bounds={ELQUI_BOUNDS}
                 opacity={0.8}
-                resolution={256}
-                fitBounds={!fitted}
-                onLoad={() => {
-                  setLoading(false)
-                  setFitted(true)
-                }}
+                onLoad={() => setLoading(false)}
                 onError={() => setLoading(false)}
               />
             )}
@@ -131,17 +123,28 @@ export default function Proyecto7() {
             Pipeline reutilizable y cloud-native que estima la <strong>dependencia hídrica
             inferida</strong> de la superficie agrícola a partir de la respuesta espectral estacional
             (ΔNDVI de Sentinel-2) y las condiciones topográficas (pendiente y Topographic Wetness
-            Index, TWI). La señal central es ΔNDVI = NDVI(verano seco) − NDVI(invierno húmedo):
-            positivo indica verdor sostenido por riego; negativo, respuesta natural a la lluvia
-            invernal (secano). El TWI distingue el riego de la humedad topográfica natural.
+            Index, TWI). La señal central es ΔNDVI = NDVI(verano seco) − NDVI(invierno húmedo), donde
+            positivo indica verdor sostenido por riego y negativo, una respuesta natural a la lluvia
+            invernal (secano), mientras que TWI distingue el riego de la humedad topográfica natural.
           </p>
-          <p className={styles.badge}>Dependencia hídrica inferida — no es consumo de agua</p>
           <p>
-            El sistema es AOI-agnóstico y auto-configurable: deriva las ventanas seco/húmedo del
-            hemisferio y el CRS de la zona, consume Sentinel-2 L2A y el DEM Copernicus vía STAC + COG,
+            El pipeline es AOI-agnóstico y auto-configurable, ya que deriva las ventanas seco/húmedo del
+            hemisferio y el CRS de la zona; consume Sentinel-2 L2A y DEM de Copernicus vía STAC + COG,
             y exporta GeoTIFF/GeoPackage/GeoParquet junto a un catálogo STAC de las salidas. Aquí se
             aplica como <strong>serie temporal 2020–2025</strong> sobre el valle de Elqui (Coquimbo),
-            en plena megasequía. Usa el selector de año sobre el mapa para ver la evolución.
+            en plena megasequía.
+          </p>
+          <p>
+            El pipeline se construyó como un paquete Python modular (<code>src/riego/</code>), donde cada
+            etapa (AOI, ventana temporal, composición espectral, terreno, máscara, clasificación,
+            exportación) es una función independiente, orquestada por un único archivo
+            de configuración. La ingesta usa STAC (Planetary Computer/Earth Search) para identificar
+            las escenas y las lee como COG, sin descargar la imagen completa. La serie 2020–2025
+            corre con un orquestador robusto que gestiona el almacenamiento en caché por año y maneja 
+            reintentos ante fallos temporales de la API, evitando el reprocesamiento innecesario. En el 
+            frontend, cada clasificación se expone como un overlay georreferenciado sobre Leaflet, 
+            mientras que el comparador utiliza ese mismo mecanismo junto con <em>clip-path</em> de
+            CSS para activar el slider entre 2020 y 2025.
           </p>
 
           <h2>Cambio 2020 → 2025</h2>
@@ -161,11 +164,13 @@ export default function Proyecto7() {
             ))}
           </ul>
           <p>
-            Sobre una superficie vegetada estable (~5.000 ha), el <strong>secano cae ~12 %</strong> y
-            el equilibrio crece <strong>~36 %</strong>: la vegetación dependiente de la lluvia invernal
-            retrocede bajo la sequía y parte de la superficie se estabiliza (perenne o riego continuo),
-            mientras el riego se sostiene. La clasificación por percentiles es relativa al AOI, por lo
-            que expresa un indicador relativo, no una medición absoluta de agua.
+            Sobre una superficie vegetada estable de ~5.000 ha, el <strong>secano cae ~12%</strong> mientras 
+            que la categoría de <strong>equilibrio crece ~36%</strong>. Este comportamiento
+            refleja cómo la vegetación dependiente de la lluvia invernal retrocede bajo el impacto de
+            la sequía, forzando a que parte de la superficie se estabilice (cobertura perenne o riego continuo)
+            mientras el riego tradicional se sostiene. Cabe destacar que la clasificación por percentiles 
+            es interna al AOI, por lo que actúa como un indicador relativo y no como una medición absoluta de
+            agua en el suelo.
           </p>
 
           <h2>Más Información</h2>

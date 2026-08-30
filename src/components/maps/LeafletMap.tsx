@@ -11,7 +11,11 @@ const BASE_LAYERS = {
   },
   'esri-imagery': {
     url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attribution: '&copy; Esri, Maxar, Earthstar Geographics',
+    attribution: '&copy; Esri, Maxar',
+  },
+  's2-cloudless': {
+    url: 'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/g/{z}/{y}/{x}.jpg',
+    attribution: 'Sentinel-2 cloudless by <a href="https://s2maps.eu">EOX</a>',
   },
   osm: {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -26,6 +30,8 @@ type Props = {
   /** Alto del mapa en px (default 650). */
   height?: number
   scrollWheelZoom?: boolean
+  /** Posición del control de escala (default 'bottomleft'). */
+  scalePosition?: 'bottomleft' | 'bottomright' | 'topleft' | 'topright'
   children?: ReactNode
 }
 
@@ -35,6 +41,7 @@ export function LeafletMap({
   baseLayer = 'carto-light',
   height = 650,
   scrollWheelZoom = true,
+  scalePosition = 'bottomleft',
   children,
 }: Props) {
   const base = BASE_LAYERS[baseLayer]
@@ -47,7 +54,7 @@ export function LeafletMap({
         className={styles.map}
       >
         <TileLayer url={base.url} attribution={base.attribution} maxZoom={19} />
-        <ScaleControl imperial={false} />
+        <ScaleControl imperial={false} position={scalePosition} />
         {children}
       </MapContainer>
     </div>
