@@ -2,6 +2,16 @@ import type { Experience } from '../types/project'
 
 export const experience: Experience[] = [
   {
+    company: 'Agrosat Internacional',
+    role: 'Pendiente',
+    period: 'enero 2026 - actualidad',
+    place: 'Santiago, Chile',
+    tools: '',
+    logo: 'imagenes/agrosat.png',
+    url: 'https://www.agrosat.cl/',
+    bullets: ['Contenido pendiente por completar.'],
+  },
+  {
     company: 'Instituto Geográfico Militar',
     role: 'Práctica Profesional',
     period: 'junio 2025 - agosto 2025',
