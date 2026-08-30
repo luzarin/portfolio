@@ -24,6 +24,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* El globo de fondo (home) reemplaza la retícula mientras está montado. */
+body.has-globe {
+  background-image: none;
+}
+
 h1,
 h2,
 h3,
@@ -57,25 +62,25 @@ button {
 main {
   padding-top: var(--nav-height);
   min-height: 60vh;
+  counter-reset: section;
 }
 
 .sectionTitle {
+  counter-increment: section;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
   font-size: clamp(1.6rem, 3vw, 2.1rem);
   font-weight: 700;
-  margin-bottom: var(--space-4);
-  position: relative;
-  padding-left: var(--space-3);
+  margin: 0 0 var(--space-4);
 }
 
 .sectionTitle::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.18em;
-  bottom: 0.18em;
-  width: 4px;
-  border-radius: 2px;
-  background: linear-gradient(var(--color-accent), var(--color-accent-strong));
+  content: counter(section, decimal-leading-zero);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-accent-strong);
+  font-variant-numeric: tabular-nums;
 }
 
 .container {

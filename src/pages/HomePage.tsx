@@ -3,11 +3,13 @@ import { SkillBars } from '../components/home/SkillBars'
 import { EducationTimeline } from '../components/home/EducationTimeline'
 import { ExperienceCard } from '../components/home/ExperienceCard'
 import { ProjectsGrid } from '../components/home/ProjectsGrid'
+import { GlobeBackground } from '../components/home/GlobeBackground'
 import styles from './HomePage.module.css'
 
 export default function HomePage() {
   return (
     <>
+      <GlobeBackground />
       <About />
       <section className={`container ${styles.eduSkills}`} id="cv" aria-label="Educación y habilidades">
         <div>
